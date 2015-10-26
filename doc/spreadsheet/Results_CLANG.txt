@@ -1,0 +1,165 @@
+****************************************************************
+**                                                            **
+**         B O O S T :: S O R T :: P A R A L L E L            **
+**                                                            **
+**               F A S T  B E N C H M A R K                   **
+**                                                            **
+****************************************************************
+
+Arquitectura:          x86_64
+modo(s) de operación de las CPUs:32-bit, 64-bit
+Orden de bytes:        Little Endian
+CPU(s):                4
+On-line CPU(s) list:   0-3
+Hilo(s) de procesamiento por núcleo:1
+Núcleo(s) por «socket»:4
+Socket(s):             1
+Modo(s) NUMA:          1
+ID de fabricante:      GenuineIntel
+Familia de CPU:        6
+Modelo:                15
+Model name:            Intel(R) Core(TM)2 Quad CPU    Q6600  @ 2.40GHz
+Revisión:             11
+CPU MHz:               2333.000
+CPU max MHz:           2333,0000
+CPU min MHz:           2000,0000
+BogoMIPS:              5994.42
+Virtualización:       VT-x
+Caché L1d:            32K
+Caché L1i:            32K
+Caché L2:             4096K
+NUMA node0 CPU(s):     0-3
+
+  25000000 uint64_t elements already sorted
+=================================================
+std::sort                    : 1.0941 secs
+Boost introsort              : 0.0529428 secs
+std::stable_sort             : 2.1866 secs
+Boost smart_merge_sort       : 0.0423492 secs
+Timsort                      : 0.0356432 secs
+TBB parallel_sort            : 0.0240104 secs
+Boost parallel introsort     : 0.0421518 secs
+Boost parallel stable sort   : 0.0420177 secs
+Boost sample sort            : 0.0420532 secs
+TBB parallel stable sort     : 0.911401 secs
+Boost spreadsort             : 0.0314757 secs
+
+  25000000 uint64_t elements randomly filled
+=================================================
+std::sort                    : 3.66814 secs
+Boost introsort              : 3.18462 secs
+std::stable_sort             : 4.67357 secs
+Boost smart_merge_sort       : 3.32927 secs
+Timsort                      : 6.69748 secs
+TBB parallel_sort            : 1.03659 secs
+Boost parallel introsort     : 1.00399 secs
+Boost parallel stable sort   : 1.32943 secs
+Boost sample sort            : 1.21544 secs
+TBB parallel stable sort     : 1.19105 secs
+Boost spreadsort             : 2.36326 secs
+
+  2000000 strings randomly filled
+===============================================
+std::sort                    : 2.9736 secs
+Boost introsort              : 3.1197 secs
+std::stable_sort             : 3.50006 secs
+Boost smart_merge_sort       : 2.86029 secs
+Timsort                      : 7.25655 secs
+TBB parallel_sort            : 0.934076 secs
+Boost parallel introsort     : 0.966426 secs
+Boost parallel stable sort   : 1.10829 secs
+Boost sample sort            : 0.863849 secs
+TBB parallel stable sort     : 0.807647 secs
+Boost spreadsort             : 0.966518 secs
+
+25000000 elements of size 8 randomly filled 
+=============================================
+std::sort                    : 3.63226 secs
+Boost introsort              : 3.39122 secs
+std::stable_sort             : 4.72085 secs
+Boost smart_merge_sort       : 3.15448 secs
+Timsort                      : 7.22081 secs
+TBB parallel_sort            : 1.02819 secs
+Boost parallel introsort     : 0.988403 secs
+Boost parallel stable sort   : 1.31353 secs
+Boost sample sort            : 1.25893 secs
+TBB parallel stable sort     : 1.26317 secs
+
+12500000 elements of size 16 randomly filled 
+=============================================
+std::sort                    : 2.05611 secs
+Boost introsort              : 2.00035 secs
+std::stable_sort             : 2.89169 secs
+Boost smart_merge_sort       : 2.12235 secs
+Timsort                      : 4.11947 secs
+TBB parallel_sort            : 0.721099 secs
+Boost parallel introsort     : 0.706921 secs
+Boost parallel stable sort   : 1.17268 secs
+Boost sample sort            : 1.12601 secs
+TBB parallel stable sort     : 1.10516 secs
+
+6250000 elements of size 32 randomly filled 
+=============================================
+std::sort                    : 1.40594 secs
+Boost introsort              : 1.44499 secs
+std::stable_sort             : 2.44813 secs
+Boost smart_merge_sort       : 1.72967 secs
+Timsort                      : 2.95276 secs
+TBB parallel_sort            : 0.581559 secs
+Boost parallel introsort     : 0.610845 secs
+Boost parallel stable sort   : 1.13006 secs
+Boost sample sort            : 1.08435 secs
+TBB parallel stable sort     : 1.02466 secs
+
+3125000 elements of size 64 randomly filled 
+=============================================
+std::sort                    : 1.14911 secs
+Boost introsort              : 1.19114 secs
+std::stable_sort             : 2.16297 secs
+Boost smart_merge_sort       : 1.57623 secs
+Timsort                      : 2.41926 secs
+TBB parallel_sort            : 0.509189 secs
+Boost parallel introsort     : 0.526023 secs
+Boost parallel stable sort   : 1.09951 secs
+Boost sample sort            : 1.06166 secs
+TBB parallel stable sort     : 0.984511 secs
+
+1562500 elements of size 128 randomly filled 
+=============================================
+std::sort                    : 1.17736 secs
+Boost introsort              : 1.30157 secs
+std::stable_sort             : 2.27391 secs
+Boost smart_merge_sort       : 1.68271 secs
+Timsort                      : 2.74012 secs
+TBB parallel_sort            : 0.484702 secs
+Boost parallel introsort     : 0.5086 secs
+Boost parallel stable sort   : 0.91987 secs
+Boost sample sort            : 0.906696 secs
+TBB parallel stable sort     : 0.960864 secs
+
+781250 elements of size 256 randomly filled 
+=============================================
+std::sort                    : 1.48013 secs
+Boost introsort              : 1.51206 secs
+std::stable_sort             : 2.30381 secs
+Boost smart_merge_sort       : 1.46731 secs
+Timsort                      : 2.44136 secs
+TBB parallel_sort            : 0.53926 secs
+Boost parallel introsort     : 0.59558 secs
+Boost parallel stable sort   : 0.638768 secs
+Boost sample sort            : 0.623375 secs
+TBB parallel stable sort     : 0.996968 secs
+
+390625 elements of size 512 randomly filled 
+=============================================
+std::sort                    : 1.4707 secs
+Boost introsort              : 1.49664 secs
+std::stable_sort             : 2.36802 secs
+Boost smart_merge_sort       : 1.18257 secs
+Timsort                      : 2.45623 secs
+TBB parallel_sort            : 0.534374 secs
+Boost parallel introsort     : 0.554956 secs
+Boost parallel stable sort   : 0.489735 secs
+Boost sample sort            : 0.481278 secs
+TBB parallel stable sort     : 1.01325 secs
+
