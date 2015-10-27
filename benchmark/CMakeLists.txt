@@ -24,6 +24,10 @@ if (SORT_HAS_HPX)
   set(BENCHMARK_LIBRARIES ${BENCHMARK_LIBRARIES} ${TBB_LIBRARIES})
 endif()
 
+if (SORT_HAS_GNU)
+  add_definitions(-DSORT_HAS_GCC_PARALLEL)
+endif()
+
 #------------------------------------------------------------------------------
 # Benchmark
 #------------------------------------------------------------------------------
