@@ -16,24 +16,44 @@
 ///
 /// @remarks
 //-----------------------------------------------------------------------------
-#include <hpx/hpx.hpp>
-#include <hpx/hpx_init.hpp>
+#ifdef SORT_HAS_PPL
+// microsoft headers 
+#endif
+
+#ifdef SORT_HAS_HPX
+// include <hpx/parallel/algorithms/sort.hpp>
+# include <hpx/parallel/sort/sort.hpp>
+# include <hpx/parallel/sort/tools/time_measure.hpp>
+#endif
+
+#ifdef SORT_HAS_GCC_PARALLEL
+# include <parallel/basic_iterator.h>
+# include <parallel/features.h>
+# include <parallel/parallel.h>
+# include <parallel/algorithm>
+# include <omp.h>
+#endif
+
+#ifdef SORT_HAS_TBB
+# include "tbb/tbb_stddef.h"
+# include "tbb/task_scheduler_init.h"
+# include "tbb/parallel_sort.h"
+# include <parallel_stable_sort/tbb-lowlevel/parallel_stable_sort.h>
+#endif
+
+// standard library
 #include <stdlib.h>
 #include <iostream>
 #include <algorithm>
 #include <random>
 #include <vector>
 #include <hpx/parallel/sort/tools/file_vector.hpp>
+
+// TimSort
 #include "cpp-TimSort-master/timsort.hpp"
 
-#include "tbb/tbb_stddef.h"
-#include "tbb/task_scheduler_init.h"
-#include "tbb/parallel_sort.h"
-#include "parallel_stable_sort/tbb-lowlevel/parallel_stable_sort.h"
-
+// Boost sort
 #include <boost/sort/spreadsort/spreadsort.hpp>
-#include <hpx/parallel/sort/sort.hpp>
-#include <hpx/parallel/sort/tools/time_measure.hpp>
 #include "int_array.hpp"
 
 #define NELEM 25000000
@@ -58,28 +78,45 @@ template <class IA>
 void Generator (uint64_t N );
 
 template <class IA>
-int Prueba  ( std::vector <IA> & A);
+int Prueba  ( const std::vector <IA> & B);
 
 template <class IA>
-int Prueba_spreadsort  ( std::vector <IA> & B );
+int Prueba_spreadsort  ( const std::vector <IA> & B );
 
-int mymain (void );
-
-int main(int argc, char* argv[])
-{
-    std::vector<std::string> cfg;
-    cfg.push_back("hpx.os_threads=4");
-
-    // Initialize and run HPX.
-    return hpx::init(argc, argv, cfg);
+template <class IA>
+int verify(const std::vector <IA> &A) {
+    if (A.size()==0) return 1;
+    //
+    IA temp = *(A.begin());
+    for (typename std::vector<IA>::const_iterator it=A.begin(); it!=A.end(); ++it) {
+        if ((*it)<temp) return 0;
+        temp = (*it);
+    }
+    return 1;
 }
-int hpx_main(boost::program_options::variables_map&)
-{	{	mymain() ;
-    };
-    // Initiate shutdown of the runtime systems on all localities.
-    return hpx::finalize();
-};
-int mymain (void )
+#define VERIFY(A) \
+  if (!verify(A)) { \
+    std::cout << "Verify sort failed\n"; \
+  }
+
+// we need a callback for the HPX runtime to call for this benchmark
+// as we start stop the HPX runtime for each test.
+#ifdef SORT_HAS_HPX
+template <class IA>
+int Prueba_hpx ( const std::vector <IA> & B );
+
+template <class IA>
+int hpx_test(std::vector<IA> &A, int argc, char ** argv)
+{
+    return Prueba_hpx<IA>(A);
+}
+// we need these for the init function
+int    hpx_argc = 0;
+char **hpx_argv = NULL;
+
+#endif
+
+int main (int argc, char *argv[] )
 {   //------------------------------ Inicio ----------------------------------
     cout<<"****************************************************************\n";
     cout<<"**                                                            **\n";
@@ -92,9 +129,13 @@ int mymain (void )
     std::cout.flush();
     system ( "lscpu");
     std::cout.flush();
-    cout<<"Number of threads :"<<(hpx::get_os_thread_count())<<std::endl;
     cout<<"\n";
-    std::cout.flush();
+
+#ifdef SORT_HAS_HPX
+    hpx_argc = argc;
+    hpx_argv = argv;
+#endif
+
     //------------------------------------------------------------------------
     // Execution with different object format
     //------------------------------------------------------------------------
@@ -124,6 +165,7 @@ void Generator_sorted(void )
     Prueba_spreadsort( A);
     cout<<std::endl ;
 }
+
 void Generator_uint64(void )
 {   //---------------------------- begin--------------------------------------
     vector<uint64_t> A  ;
@@ -139,6 +181,7 @@ void Generator_uint64(void )
     Prueba_spreadsort( A);
     cout<<std::endl ;
 }
+
 void Generator_string(void)
 {   //------------------------------- begin ----------------------------------
     cout<<"  "<< NMAXSTRING<<" strings randomly filled\n" ;
@@ -154,7 +197,6 @@ void Generator_string(void)
     Prueba_spreadsort( A);
     cout<<std::endl ;
 };
-
 
 template <class IA>
 void Generator (uint64_t N )
@@ -174,124 +216,184 @@ void Generator (uint64_t N )
     Prueba(A) ;
     cout<<std::endl ;
 };
+
+// when hpx::init() is called, the hpx_main function is called
+// we set a calback to the actual hpx test each time and call it from here
+// when the hpx tests complete, hpx::finalize is called which shuts down the
+// hpx worker threads and ensures other tests are not affected
+#ifdef SORT_HAS_HPX
+
 template <class IA>
-int Prueba  ( std::vector <IA> & B )
-{   //---------------------------- Inicio --------------------------------
-	double duracion ;
-	time_point start, finish;
-	std::vector <IA> A ( B);
+int Prueba_hpx ( const std::vector <IA> & B )
+{
+    double duracion ;
+    time_point start, finish;
+    std::vector <IA> A;
     std::less<IA>  comp ;
-
-	//--------------------------------------------------------------------
-	A = B ;
-    cout<<"GCC std::sort                : ";
-    start= now() ;
-    std::sort (A.begin() , A.end(), comp  );
-    finish = now() ;
-    duracion = subtract_time(finish ,start) ;
-    cout<<duracion<<" secs\n";
-
-
-    //cout<<"---------------- HPX sort --------------\n";
+ 
     A = B ;
+    //cout<<"---------------- HPX sort --------------\n";
     cout<<"HPX sort                     : ";
-    start= now() ;
+    start = now() ;
     hpx_sort::sort (hpx::parallel::v1::seq, A.begin() , A.end(), comp );
     finish = now() ;
     duracion = subtract_time(finish ,start) ;
     cout<<duracion<<" secs\n";
-
-
-    A = B ;
-    cout<<"GCC std::stable_sort         : ";
-    start= now() ;
-    std::stable_sort (A.begin() , A.end() , comp );
-    finish = now() ;
-    duracion = subtract_time(finish ,start) ;
-    cout<<duracion<<" secs\n";
+    VERIFY(A);
 
     A = B ;
     //cout<<"--------------------- HPX stable sort ---------------\n";
-    cout<<"HPX  stable_sort             : ";
-    start= now() ;
+    cout<<"HPX stable_sort              : ";
+    start = now() ;
     hpx_sort::stable_sort (hpx::parallel::v1::seq,A.begin() , A.end(), comp  );
     finish = now() ;
     duracion = subtract_time(finish ,start) ;
     cout<<duracion<<" secs\n";
-
-    A = B ;
-    //cout<<"--------------------- timsort ----------------------------\n";
-    cout<<"Timsort                      : ";
-    start= now() ;
-    gfx::timsort (A.begin() , A.end(), comp  );
-    finish = now() ;
-    duracion = subtract_time(finish ,start) ;
-    cout<<duracion<<" secs\n";
-
-    A = B ;
-    //------------------- tbb::parallel_sort -----------------------------
-    cout<<"TBB parallel_sort            : ";
-    start= now() ;
-    tbb::parallel_sort (A.begin() , A.end(), comp  );
-    finish = now() ;
-    duracion = subtract_time(finish ,start) ;
-    cout<<duracion<<" secs\n";
+    VERIFY(A);
 
     A = B ;
     //---------------------  HPX parallel_sort -------------------
     cout<<"HPX parallel_sort            : ";
-    start= now() ;
+    start = now() ;
     //bs_algo::indirect_parallel_sort (A.begin() , A.end() );
     hpx_sort::sort (hpx::parallel::v1::par, A.begin() , A.end(), comp );
     finish = now() ;
     duracion = subtract_time(finish ,start) ;
     cout<<duracion<<" secs\n";
-
+    VERIFY(A);
+    
     A = B ;
     //---------------------  HPX parallel_stable_sort ------------
     cout<<"HPX parallel stable sort     : ";
-    start= now() ;
+    start = now() ;
     hpx_sort::stable_sort (hpx::parallel::v1::par,A.begin() , A.end() , comp);
     finish = now() ;
     duracion = subtract_time(finish ,start) ;
     cout<<duracion<<" secs\n";
+    VERIFY(A);
 
     A = B ;
     //--------------------- HPX sample_sort ---------------------
     cout<<"HPX sample sort              : ";
-    start= now() ;
+    start = now() ;
     //bs_algo::indirect_sample_sort (A.begin() , A.end() ,NThread() );
     hpx_sort::sample_sort (hpx::parallel::v1::par,A.begin() , A.end(), comp );
     finish = now() ;
     duracion = subtract_time(finish ,start) ;
     cout<<duracion<<" secs\n";
+    VERIFY(A);
 
-    A = B ;
-    //--------------------- tbb lowlevel parallel_stable_sort ------------
-    cout<<"TBB parallel stable sort     : ";
-    start= now() ;
-    pss::parallel_stable_sort (A.begin() , A.end(),comp );
-    finish = now() ;
-    duracion = subtract_time(finish ,start) ;
-    cout<<duracion<<" secs\n";
+    // terminate the HPX runtime
+    return hpx::finalize();
+}
+#endif
 
-    return 0 ;
-};
 template <class IA>
-int Prueba_spreadsort  ( std::vector <IA> & B )
-{   //---------------------------- Inicio --------------------------------
+int Prueba  ( const std::vector <IA> & B )
+{   //---------------------------- begin --------------------------------
 	double duracion ;
 	time_point start, finish;
 	std::vector <IA> A ( B);
-    //std::less<IA>  comp ;
+    std::less<IA>  comp ;
+
+    A = B ;
+    cout<<"std::sort                    : ";
+    start = now() ;
+    std::sort (A.begin() , A.end(), comp );
+    finish = now() ;
+    duracion = subtract_time(finish ,start) ;
+    cout<<duracion<<" secs\n";
+    VERIFY(A);
+
+    A = B ;
+    cout<<"std::stable_sort             : ";
+    start = now() ;
+    std::stable_sort (A.begin() , A.end(), comp );
+    finish = now() ;
+    duracion = subtract_time(finish ,start) ;
+    cout<<duracion<<" secs\n";
+    VERIFY(A);
+
+    A = B ;
+    //cout<<"--------------------- timsort ----------------------------\n";
+    cout<<"Timsort                      : ";
+    start = now() ;
+    gfx::timsort (A.begin() , A.end(), comp);
+    finish = now() ;
+    duracion = subtract_time(finish ,start) ;
+    cout<<duracion<<" secs\n";
+    VERIFY(A);
+
+#ifdef SORT_HAS_TBB
+    A = B ;
+    //------------------- tbb::parallel_sort -----------------------------
+    cout<<"TBB parallel sort            : ";
+    start = now() ;
+    tbb::parallel_sort (A.begin() , A.end(), comp );
+    finish = now() ;
+    duracion = subtract_time(finish ,start) ;
+    cout<<duracion<<" secs\n";
+    VERIFY(A);
+
+    //--------------------- tbb lowlevel parallel_stable_sort ------------
+    A = B ;
+    cout<<"TBB parallel stable sort     : ";
+    start = now() ;
+    pss::parallel_stable_sort (A.begin() , A.end(), comp );
+    finish = now() ;
+    duracion = subtract_time(finish ,start) ;
+    cout<<duracion<<" secs\n";
+    VERIFY(A);
+#endif
+
+#ifdef SORT_HAS_GCC_PARALLEL
+    A = B;
+    cout<<"GCC parallel sort            : ";
+    start = now() ;
+    __gnu_parallel::sort (A.begin() , A.end(), comp );
+    finish = now() ;
+    duracion = subtract_time(finish ,start) ;
+    cout<<duracion<<" secs\n";
+    VERIFY(A);
+#endif
+
+#ifdef SORT_HAS_GCC_PARALLEL
+    A = B ;
+    cout<<"GCC parallel stable sort     : ";
+    start = now() ;
+    __gnu_parallel::stable_sort (A.begin() , A.end(), comp );
+    finish = now() ;
+    duracion = subtract_time(finish ,start) ;
+    cout<<duracion<<" secs\n";
+    VERIFY(A);
+
+#endif
+
+#ifdef SORT_HAS_HPX
+    A = B ;
+    using hpx::util::placeholders::_1;
+    using hpx::util::placeholders::_2;
+    hpx::util::function_nonser<int(int, char**)> callback = hpx::util::bind(&hpx_test<IA>, A, _1, _2);
+    hpx::init(callback, "dummyname", hpx_argc, hpx_argv, hpx::runtime_mode_default );
+#endif
+
+    return 0 ;
+};
+
+template <class IA>
+int Prueba_spreadsort  ( const std::vector <IA> & B )
+{   //---------------------------- begin --------------------------------
+	double duracion ;
+	time_point start, finish;
+	std::vector <IA> A ( B);
 
 	//--------------------------------------------------------------------
 	A = B ;
     cout<<"Boost spreadsort             : ";
-    start= now() ;
+    start = now() ;
     boost::sort::spreadsort::spreadsort (A.begin() , A.end()  );
     finish = now() ;
     duracion = subtract_time(finish ,start) ;
     cout<<duracion<<" secs\n";
-    return 0 ;
+    return 0;
 };
