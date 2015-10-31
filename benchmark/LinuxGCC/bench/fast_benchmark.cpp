@@ -1,3 +1,4 @@
+
 //----------------------------------------------------------------------------
 /// @file fast_benchmark.cpp
 /// @brief Benchmark of several sort methods with different uint64_t numbers
@@ -21,7 +22,7 @@
 #endif
 
 #ifdef SORT_HAS_HPX
-// include <hpx/parallel/algorithms/sort.hpp>
+# include <hpx/parallel/algorithms/sort.hpp>
 # include <hpx/parallel/sort/sort.hpp>
 # include <hpx/parallel/sort/tools/time_measure.hpp>
 #endif
@@ -47,7 +48,7 @@
 #include <algorithm>
 #include <random>
 #include <vector>
-#include <hpx/parallel/sort/tools/file_vector.hpp>
+#include "hpx/parallel/sort/tools/file_vector.hpp"
 
 // TimSort
 #include "cpp-TimSort-master/timsort.hpp"
@@ -257,6 +258,16 @@ int Prueba_hpx ( const std::vector <IA> & B )
     start = now() ;
     //bs_algo::indirect_parallel_sort (A.begin() , A.end() );
     hpx_sort::sort (hpx::parallel::v1::par, A.begin() , A.end(), comp );
+    finish = now() ;
+    duracion = subtract_time(finish ,start) ;
+    cout<<duracion<<" secs\n";
+    VERIFY(A);
+
+    A = B ;
+    //cout<<"---------------- HPX sort --------------\n";
+    cout<<"HPX + std sort               : ";
+    start = now() ;
+    hpx::parallel::algorithms::parallel_sort (/*hpx::parallel::v1::seq, */A.begin() , A.end(), comp );
     finish = now() ;
     duracion = subtract_time(finish ,start) ;
     cout<<duracion<<" secs\n";
