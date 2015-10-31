@@ -88,7 +88,6 @@ endif()
 # include dirs
 #------------------------------------------------------------------------------
 include_directories(
-  ${CMAKE_CURRENT_SOURCE_DIR}/include
   ${CMAKE_CURRENT_SOURCE_DIR}/src
   ${Boost_INCLUDE_DIRS}
 )
