@@ -25,7 +25,7 @@ namespace hpx
 {
 namespace parallel
 {
-namespace sort
+namespace _sort
 {
 namespace util
 {
@@ -181,7 +181,7 @@ inline iter1_t half_merge_back ( iter1_t buf1   , iter1_t end_buf1 ,
 //
 //****************************************************************************
 };//    End namespace util
-};//    End namespace sort
+};//    End namespace _sort
 };//    End namespace parallel
 };//    End namespace hpx
 //****************************************************************************

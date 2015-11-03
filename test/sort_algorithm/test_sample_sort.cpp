@@ -21,9 +21,9 @@
 #include <hpx/parallel/sort/algorithm/sample_sort.hpp>
 
 
-namespace hpx_algo = hpx::parallel::sort::algorithm;
-namespace hpx_tools = hpx::parallel::sort::tools;
-namespace hpx_util = hpx::parallel::sort::util ;
+namespace hpx_algo = hpx::parallel::_sort::algorithm;
+namespace hpx_tools = hpx::parallel::_sort::tools;
+namespace hpx_util = hpx::parallel::_sort::util ;
 using hpx_tools::NThread ;
 using hpx_util::range ;
 typedef typename std::vector<uint64_t>::iterator iter_t ;

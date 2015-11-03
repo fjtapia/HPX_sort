@@ -18,7 +18,7 @@ namespace hpx
 {
 namespace parallel
 {
-namespace sort
+namespace _sort
 {
 namespace algorithm
 {
@@ -59,7 +59,7 @@ struct token_level
 //
 //****************************************************************************
 };//    End namespace algorithm
-};//    End namespace sort
+};//    End namespace _sort
 };//    End namespace parallel
 };//    End namespace hpx
 //****************************************************************************

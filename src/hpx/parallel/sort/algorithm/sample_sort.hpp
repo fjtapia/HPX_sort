@@ -34,12 +34,12 @@ namespace hpx
 {
 namespace parallel
 {
-namespace sort
+namespace _sort
 {
 namespace algorithm
 {
 
-namespace su = sort::util ;
+namespace su = _sort::util ;
 using tools::NThread ;
 using tools::NThread_HW ;
 using tools::atomic_add ;
@@ -478,7 +478,7 @@ void indirect_sample_sort ( iter_t first, iter_t last,
 //
 //****************************************************************************
 };//    End namespace algorithm
-};//    End namespace sort
+};//    End namespace _sort
 };//    End namespace parallel
 };//    End namespace hpx
 //****************************************************************************

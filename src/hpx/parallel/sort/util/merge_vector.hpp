@@ -25,7 +25,7 @@ namespace hpx
 {
 namespace parallel
 {
-namespace sort
+namespace _sort
 {
 namespace util
 {
@@ -198,7 +198,7 @@ range<iter2_t> merge_vector4 ( range<iter1_t> Rin,
 //
 //****************************************************************************
 };//    End namespace util
-};//    End namespace sort
+};//    End namespace _sort
 };//    End namespace parallel
 };//    End namespace hpx
 //****************************************************************************

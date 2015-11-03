@@ -25,7 +25,7 @@ namespace hpx
 {
 namespace parallel
 {
-namespace sort
+namespace _sort
 {
 namespace tools
 {
@@ -80,7 +80,7 @@ struct less_ptr_no_null
 };
 //****************************************************************************
 };//    End namespace tools
-};//    End namespace sort
+};//    End namespace _sort
 };//    End namespace parallel
 };//    End namespace hpx
 //****************************************************************************

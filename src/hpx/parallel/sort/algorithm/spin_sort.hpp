@@ -29,14 +29,14 @@ namespace hpx
 {
 namespace parallel
 {
-namespace sort
+namespace _sort
 {
 namespace algorithm
 {
 //****************************************************************************
 //                 NAMESPACES AND USING SENTENCES
 //****************************************************************************
-namespace su = sort::util ;
+namespace su = _sort::util ;
 using su::range ;
 using tools::NBits ;
 using tools::less_ptr_no_null ;
@@ -307,7 +307,7 @@ void indirect_spin_sort ( iter_t first, iter_t last, compare comp = compare() )
 //
 //****************************************************************************
 };//    End namespace algorithm
-};//    End namespace sort
+};//    End namespace _sort
 };//    End namespace parallel
 };//    End namespace hpx
 //****************************************************************************

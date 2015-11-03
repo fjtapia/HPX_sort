@@ -25,7 +25,7 @@ namespace hpx
 {
 namespace parallel
 {
-namespace sort
+namespace _sort
 {
 namespace util
 {
@@ -253,7 +253,7 @@ range<iter1_t> uninit_full_merge4 ( range<iter1_t> dest,  range<iter2_t> R[4],
 //
 //****************************************************************************
 };//    End namespace util
-};//    End namespace sort
+};//    End namespace _sort
 };//    End namespace parallel
 };//    End namespace hpx
 //****************************************************************************

@@ -20,10 +20,10 @@
 #include <vector>
 #include <algorithm>
 
-using hpx::parallel::sort::algorithm::spin_sort ;
-using hpx::parallel::sort::algorithm::spin_sort_tag ;
-using hpx::parallel::sort::algorithm::indirect_spin_sort ;
-using hpx::parallel::sort::util::range ;
+using hpx::parallel::_sort::algorithm::spin_sort ;
+using hpx::parallel::_sort::algorithm::spin_sort_tag ;
+using hpx::parallel::_sort::algorithm::indirect_spin_sort ;
+using hpx::parallel::_sort::util::range ;
 
 void prueba2 ();
 void prueba3 ();

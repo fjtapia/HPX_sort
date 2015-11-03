@@ -23,7 +23,7 @@ namespace hpx
 {
 namespace parallel
 {
-namespace sort
+namespace _sort
 {
 namespace tools
 {
@@ -142,7 +142,7 @@ static CONSTEXPR const uint32_t TMSB [256] =
 //****************************************************************************
 };//    End namespace mtprog
 };//    End namespace tools
-};//    End namespace sort
+};//    End namespace _sort
 };//    End namespace parallel
 };//    End namespace hpx
 //****************************************************************************

@@ -19,7 +19,7 @@
 #include <hpx/parallel/sort/algorithm/heap_sort.hpp>
 #include <vector>
 
-namespace bs_algo = hpx::parallel::sort::algorithm ;
+namespace bs_algo = hpx::parallel::_sort::algorithm ;
 using namespace std ;
 
 void prueba2 ()

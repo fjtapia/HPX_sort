@@ -23,7 +23,7 @@ namespace hpx
 {
 namespace parallel
 {
-namespace sort
+namespace _sort
 {
 namespace tools
 {
@@ -81,7 +81,7 @@ static const size_type MAX = Conf<NByte>::MAX ;
 
 //****************************************************************************
 };//    End namespace tools
-};//    End namespace sort
+};//    End namespace _sort
 };//    End namespace parallel
 };//    End namespace hpx
 //****************************************************************************

@@ -21,7 +21,7 @@
 using std::cout ;
 using std::endl;
 
-using namespace sort::util;
+using namespace _sort::util;
 
 typedef typename std::vector<uint32_t>::iterator iter_t ;
 std::vector<uint32_t> A ;

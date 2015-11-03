@@ -20,7 +20,7 @@
 #include <vector>
 #include <algorithm>
 
-using namespace hpx::parallel::sort::util  ;
+using namespace hpx::parallel::_sort::util  ;
 
 template <class iter_t >
 std::ostream & operator << ( std::ostream & out , range<iter_t>  R)

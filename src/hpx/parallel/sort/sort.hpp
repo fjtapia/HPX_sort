@@ -20,15 +20,15 @@ namespace hpx
 {
 namespace parallel
 {
-namespace sort
+namespace _sort
 {
 //****************************************************************************
 //             USING AND DEFINITIONS
 //****************************************************************************
-namespace hpx_algo 	= hpx::parallel::sort::algorithm ;
-namespace hpx_util 	= hpx::parallel::sort::util ;
-namespace hpx_tools = hpx::parallel::sort::tools ;
-namespace hpx_sort 	= hpx::parallel::sort ;
+namespace hpx_algo 	= hpx::parallel::_sort::algorithm ;
+namespace hpx_util 	= hpx::parallel::_sort::util ;
+namespace hpx_tools = hpx::parallel::_sort::tools ;
+namespace hpx_sort 	= hpx::parallel::_sort ;
 
 using hpx_tools::iter_value ;
 //----------------------------------------------------------------------------
@@ -149,7 +149,7 @@ void stable_sort (	hpx::parallel::sequential_execution_policy ,
 };
 //
 //****************************************************************************
-};//    End namespace sort
+};//    End namespace _sort
 };//    End namespace parallel
 };//    End namespace hpx
 //****************************************************************************

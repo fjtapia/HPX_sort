@@ -26,13 +26,13 @@ namespace hpx
 {
 namespace parallel
 {
-namespace sort
+namespace _sort
 {
 namespace algorithm
 {
-namespace bspu = hpx::parallel::sort::util;
-using hpx::parallel::sort::tools::NThread ;
-using hpx::parallel::sort::tools::NThread_HW ;
+namespace bspu = hpx::parallel::_sort::util;
+using hpx::parallel::_sort::tools::NThread ;
+using hpx::parallel::_sort::tools::NThread_HW ;
 //
 ///---------------------------------------------------------------------------
 /// @struct parallel_stable_sort_tag
@@ -208,7 +208,7 @@ void indirect_parallel_stable_sort ( iter_t first, iter_t last,
 //
 //****************************************************************************
 };//    End namespace algorithm
-};//    End namespace sort
+};//    End namespace _sort
 };//    End namespace parallel
 };//    End namespace hpx
 //****************************************************************************

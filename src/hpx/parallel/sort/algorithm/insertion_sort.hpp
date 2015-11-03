@@ -25,11 +25,11 @@ namespace hpx
 {
 namespace parallel
 {
-namespace sort
+namespace _sort
 {
 namespace algorithm
 {
-using  hpx::parallel::sort::tools::iter_value;
+using  hpx::parallel::_sort::tools::iter_value;
 //-----------------------------------------------------------------------------
 //  function : insertion_sort
 /// @brief : Insertion sort algorithm
@@ -60,7 +60,7 @@ inline void insertion_sort (iter_t first, iter_t last, compare comp=compare())
 //
 //****************************************************************************
 };//    End namespace algorithm
-};//    End namespace sort
+};//    End namespace _sort
 };//    End namespace parallel
 };//    End namespace hpx
 //****************************************************************************

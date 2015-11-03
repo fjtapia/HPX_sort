@@ -22,7 +22,7 @@
 
 
 
-using namespace hpx::parallel::sort::algorithm;
+using namespace hpx::parallel::_sort::algorithm;
 using namespace std ;
 
 void test01(void)

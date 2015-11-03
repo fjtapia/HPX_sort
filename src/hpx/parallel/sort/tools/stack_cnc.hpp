@@ -21,7 +21,7 @@ namespace hpx
 {
 namespace parallel
 {
-namespace sort
+namespace _sort
 {
 namespace tools
 {
@@ -424,7 +424,7 @@ size_type pop_copy_back ( std::vector<value_type,Allocator2> & V1,
 
 //***************************************************************************
 };// end namespace tools
-};// end namespace sort
+};// end namespace _sort
 };// end namespace parallel
 };// end namespace hpx
 //***************************************************************************

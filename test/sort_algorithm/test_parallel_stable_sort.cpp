@@ -23,7 +23,7 @@
 #include <algorithm>
 
 using namespace std ;
-namespace bsort = hpx::parallel::sort::algorithm ;
+namespace bsort = hpx::parallel::_sort::algorithm ;
 
 
 typedef typename std::vector<uint64_t>::iterator iter_t ;

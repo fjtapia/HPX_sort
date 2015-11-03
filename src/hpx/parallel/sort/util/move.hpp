@@ -25,7 +25,7 @@ namespace hpx
 {
 namespace parallel
 {
-namespace sort
+namespace _sort
 {
 namespace util
 {
@@ -472,7 +472,7 @@ void merge_vector4 ( iter1_t first1, iter2_t first2,
 //
 //****************************************************************************
 };//    End namespace util
-};//    End namespace sort
+};//    End namespace _sort
 };//    End namespace parallel
 };//    End namespace hpx
 //****************************************************************************

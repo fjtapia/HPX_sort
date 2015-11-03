@@ -27,7 +27,7 @@ namespace hpx
 {
 namespace parallel
 {
-namespace sort
+namespace _sort
 {
 namespace tools
 {
@@ -65,7 +65,7 @@ inline void atomic_write ( std::atomic<T> &C, T2 N1)
 
 //****************************************************************************
 };//    End namespace tools
-};//    End namespace sort
+};//    End namespace _sort
 };//    End namespace parallel
 };//    End namespace hpx
 //****************************************************************************

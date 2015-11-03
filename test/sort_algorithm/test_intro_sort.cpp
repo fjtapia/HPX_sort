@@ -17,7 +17,7 @@
 #include <algorithm>
 #include "hpx/parallel/sort/algorithm/intro_sort.hpp"
 
-using namespace hpx::parallel::sort::algorithm ;
+using namespace hpx::parallel::_sort::algorithm ;
 using namespace std ;
 std::vector<uint64_t> A ,B;
 

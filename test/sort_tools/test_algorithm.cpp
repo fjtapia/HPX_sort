@@ -23,7 +23,7 @@
 #include <hpx/parallel/sort/tools/algorithm.hpp>
 #define NELEM 1000000
 
-using namespace hpx::parallel::sort::tools;
+using namespace hpx::parallel::_sort::tools;
 
 void prueba32 ( void)
 {   //------------------------------- begin ----------------------------

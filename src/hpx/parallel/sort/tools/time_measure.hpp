@@ -20,7 +20,7 @@ namespace hpx
 {
 namespace parallel
 {
-namespace sort
+namespace _sort
 {
 namespace tools
 {
@@ -57,7 +57,7 @@ double subtract_time  ( const time_point & t1 , const time_point &t2)
 
 //****************************************************************************
 };//    End namespace tools
-};//    End namespace sort
+};//    End namespace _sort
 };//    End namespace parallel
 };//    End namespace hpx
 //****************************************************************************

@@ -18,7 +18,7 @@
 #include <vector>
 #include <algorithm>
 
-using namespace sort::util  ;
+using namespace _sort::util  ;
 
 template <class iter_t >
 std::ostream & operator << ( std::ostream & out , range<iter_t>  R)
