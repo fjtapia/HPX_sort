@@ -60,9 +60,9 @@
 #define NELEM 25000000
 #define NMAXSTRING 2000000
 using namespace std ;
-namespace hpx_util  = hpx::parallel::sort::util ;
-namespace hpx_tools = hpx::parallel::sort::tools ;
-namespace hpx_sort  = hpx::parallel::sort ;
+namespace hpx_util  = hpx::parallel::_sort::util ;
+namespace hpx_tools = hpx::parallel::_sort::tools ;
+namespace hpx_sort  = hpx::parallel::_sort ;
 
 using hpx_tools::time_point ;
 using hpx_tools::now;
@@ -265,14 +265,24 @@ int Prueba_hpx ( const std::vector <IA> & B )
 
     A = B ;
     //cout<<"---------------- HPX sort --------------\n";
-    cout<<"HPX + std sort               : ";
+    cout<<"HPX (seq) std sort           : ";
     start = now() ;
-    hpx::parallel::algorithms::parallel_sort (/*hpx::parallel::v1::seq, */A.begin() , A.end(), comp );
+    hpx::parallel::sort(hpx::parallel::v1::seq, A.begin() , A.end(), comp );
     finish = now() ;
     duracion = subtract_time(finish ,start) ;
     cout<<duracion<<" secs\n";
     VERIFY(A);
     
+    A = B ;
+    //cout<<"---------------- HPX sort --------------\n";
+    cout<<"HPX (par) std sort           : ";
+    start = now() ;
+    hpx::parallel::sort(hpx::parallel::v1::par, A.begin() , A.end(), comp );
+    finish = now() ;
+    duracion = subtract_time(finish ,start) ;
+    cout<<duracion<<" secs\n";
+    VERIFY(A);
+
     A = B ;
     //---------------------  HPX parallel_stable_sort ------------
     cout<<"HPX parallel stable sort     : ";
