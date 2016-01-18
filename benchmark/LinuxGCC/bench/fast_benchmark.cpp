@@ -57,6 +57,9 @@
 #include <boost/sort/spreadsort/spreadsort.hpp>
 #include "int_array.hpp"
 
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/uniform_real_distribution.hpp>
+
 #define NELEM 25000000
 #define NMAXSTRING 2000000
 using namespace std ;
@@ -74,6 +77,20 @@ using hpx_tools::NThread ;
 void Generator_sorted(void );
 void Generator_uint64(void );
 void Generator_string(void) ;
+
+// --------------------------------------------------------------------
+// Fill a vector with random numbers in the range [lower, upper]
+template <typename T>
+void rnd_fill(std::vector<T> &V, const T lower, const T upper, const T seed)
+{
+    // use the default random engine and an uniform distribution
+    boost::random::mt19937 eng(static_cast<unsigned int>(seed));
+    boost::random::uniform_real_distribution<double> distr(lower, upper);
+
+    for (auto &elem : V) {
+        elem = static_cast<T>(distr(eng));
+    }
+}
 
 template <class IA>
 void Generator (uint64_t N );
@@ -140,6 +157,7 @@ int main (int argc, char *argv[] )
     //------------------------------------------------------------------------
     // Execution with different object format
     //------------------------------------------------------------------------
+/*
     Generator_sorted() ;
     Generator_uint64() ;
     Generator_string () ;
@@ -148,8 +166,13 @@ int main (int argc, char *argv[] )
     Generator< int_array<4> >   ( NELEM>>2);
     Generator< int_array<8> >   ( NELEM>>3);
     Generator< int_array<16> >  ( NELEM>>4);
-    Generator< int_array<32> >  ( NELEM>>5);
-    Generator< int_array<64> >  ( NELEM>>6);
+    */
+
+    for (int i=4096; i<1073741824; i<<=1) {
+
+        Generator<int32_t>(i);
+    }
+//    Generator< int_array<64> >  ( NELEM>>6);
     return 0 ;
 }
 
@@ -202,18 +225,19 @@ void Generator_string(void)
 template <class IA>
 void Generator (uint64_t N )
 {   //------------------------------- begin ----------------------------------
-    hpx_tools::uint64_file_generator gen ( "input.bin");
-    vector<IA> A ;
-   	A.reserve ( N);
-   	IA Aux(0);
+    // hpx_tools::uint64_file_generator gen ( "input.bin");
+    vector<IA> A(N,0) ;
+    rnd_fill(A, -131072, 131072, 12345);
+
+    IA Aux(0);
 
     //------------------------ Inicio -----------------------------
     cout<<N<<" elements of size "<<sizeof (IA)<<" randomly filled \n";
     cout<<"=============================================\n";
-    gen.reset() ;
-    A.clear();
-    for ( uint32_t i = 0 ; i < N ; i ++)
-        A.emplace_back(IA::generate(Aux,gen)) ;
+//    gen.reset() ;
+//    A.clear();
+//    for ( uint32_t i = 0 ; i < N ; i ++)
+//        A.emplace_back(IA::generate(Aux,gen)) ;
     Prueba(A) ;
     cout<<std::endl ;
 };
