@@ -3,42 +3,28 @@
   <head>
     <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
     <meta name="generator" content="HTML Tidy for Windows (vers 1st November 2003), see www.w3.org" />
-    <title>Boost C++ Libraries</title>
-    <link rel="icon" href="http://www.boost.org/favicon.ico" type="image/ico" />
-    <link rel="stylesheet" type="text/css" href="http://www.boost.org/style-v2/section-welcome.css" />
+    <title>HPX Parallel Sort</title>
     <link href="files/code.css" type="text/css" rel="stylesheet" />
-    <!--[if IE 7]> <style type="text/css"> body { behavior: url(http://www.boost.org/style-v2/csshover3.htc); } </style> <![endif]-->
-    <meta name="google-site-verification" content="mpr2HgFpodnbF_8fv4qXd9roIClVwtX3C-Kd3F6r61w" />
   </head>
-  <!-- Note: Editing website content is documented at:http://www.boost.org/development/website_updating.html-->
   <!--***************************************************************************************** -->
   <!--                                        B O D Y                                           -->
   <!--***************************************************************************************** -->
   <body>
-    <div id="heading">
-      <div class="heading-inner">
-        <h1 class="heading-title"> <a href="http://www.boost.org/"> <img src="http://www.boost.org//gfx/space.png"
-              alt="Boost C++ Libraries" class="heading-logo" /> <span class="heading-boost">Boost</span>
-            <span class="heading-cpplibraries">C++ Libraries</span> <img src="img/preliminary.gif"
-              alt="Preliminary" style="width: 300px; height: 80px;" /> </a></h1>
-        <p class="heading-quote"> <q>...one of the most highly regarded and
-            expertly designed C++ library projects in the world.</q> <span class="heading-attribution">—
-            <a href="http://www.gotw.ca/" class="external">Herb Sutter</a> and <a
-              href="http://en.wikipedia.org/wiki/Andrei_Alexandrescu" class="external">Andrei
-              Alexandrescu</a>, <a href="http://safari.awprofessional.com/?XmlId=0321113586"
-              class="external">C++ Coding Standards</a></span></p>
-      </div>
-    </div>
     <div class="cuerpo_central"> <br />
-      <div class="cuerpo_texto"> <br />
+      <div class="cuerpo_texto">
+        <h1 class="heading-title"><img src="files/hpx.png" alt="" title="HPX title" />  
+          </h1> <br />
         <span style="font-size: 32pt;"> <span style="font-weight: bold; color: black;">
-            <a href="index.html">The sort::parallel Library</a> </span></span><br />
+          </span><span style="color: black;"><a href="index.html">The HPX
+              Parallel Sort Library</a> </span></span><br />
         <div>
           <div class="author">
-            <h3 class="author"><br />
-              <span class="firstname"></span></h3>
-            <h3 style="font-style: italic;" class="author"><span class="firstname">Francisco
-                Jose Tapia</span>   Copyright © 2015 Francisco Jose Tapia</h3>
+            <h2><span style="font-weight: normal; font-style: italic;"><a href="https://github.com/fjtapia/HPX_sort"
+                  target="_blank">( https://github.com/fjtapia/HPX_sort )</a></span></h2>
+            <h3 class="author"> <span class="firstname"></span></h3>
+            <h3 style="font-style: italic;" class="author"><span style="font-weight: normal;"><span
+                  class="firstname">Francisco Jose Tapia</span>   Copyright ©
+                2016 Francisco Jose Tapia</span></h3>
           </div>
         </div>
         <div>
@@ -59,24 +45,13 @@
           <div style="margin-left: 40px;">
             <div style="margin-left: 40px;"><a href="index.html#Introduction">1.-
                 Introduction</a><br />
-              <div style="margin-left: 40px;"><a href="index.html#thread">1.1.-
-                  Thread specification </a><br />
-                <a href="index.html#programming">1.2.- Programming</a><br />
-                <a href="index.html#examples">1.3.- Examples</a> </div>
             </div>
             <div style="margin-left: 40px;"><br />
-              <a href="index.html#algorithms">2.- Sorting algorithms</a> <br />
-              <div style="margin-left: 40px;"><a href="index.html#introsort">2.1.-
-                  introsort</a><br />
-                <a href="index.html#parallel_introsort">2.2.- parallel_introsort
-                </a><br />
-                <a href="index.html#smart_merge_sort">2.3.- smart_merge_sort</a><br />
-                <a href="index.html#parallel_stable_sort">2.4.-
-                  parallel_stable_sort</a><br />
-                <a href="index.html#sample_sort">2.5.- sample_sort</a><br />
-                <br />
+              <a href="index.html#algorithms">2.- </a><a href="file:///home/francisco/Projects/Sort/Hpx_dev/doc/index.html#thread">
+                Creating Index ( less_ptr_no_null) </a>
+              <div style="margin-left: 40px;"><br />
               </div>
-                3<a href="benchmark.html#benchmarks">.- Benchmarks</a> <br />
+              3<a href="benchmark.html#benchmarks">.- Benchmarks</a> <br />
               <div style="margin-left: 40px;"> <a href="benchmark.html#linux">3.1.-
                   Linux 64 bits GCC 4.9.</a><br />
               </div>
@@ -110,89 +85,158 @@
         <br />
         <p><a name="Introduction"></a> <span style="font-size: 18pt;font-weight: bold; color: black;">1.-
             Introduction</span></p>
-        <p> </p>
-        <p>The sort::parallel library, had been designed for to be included in
-          the Boost Sort Library, created by Steven Ross. Actually this library
-          have the SpreadSort algorithms designed and implemented by Steven
-          Ross.</p>
+        <p> The<a target="_blank" title=" HPX Parallel Sort" href="https://github.com/fjtapia/HPX_sort">
+            HPX parallel sort</a>, had been designed for to be included in the <a
+            href="https://github.com/STEllAR-GROUP/hpx" data-original-href="https://github.com/STEllAR-GROUP/hpx">HPX
+            Library</a></p>
+        <p>HPX is a general purpose C++ runtime system for parallel and
+          distributed applications of any scale. The goal of HPX is to create a
+          high quality, freely available, open source implementation of the
+          ParalleX model for conventional systems, such as classic Linux based
+          Beowulf clusters or multi-socket highly parallel SMP nodes.</p>
+        <p>This library provide the sorting algorithms in a single thread and
+          parallel versions for that Library.</p>
+        <p>The algorithms <strong>use an comparison object</strong>, in the
+          same way than the sort algorithms of the standard library. If you
+          don't define it, by default is std::less object, using internally the
+          operator &lt; for to do the comparison.</p>
+        <p>The algorithms are <strong>exception safe</strong>, it means, the
+          exceptions generated by the algorithms guarantee the integrity of the
+          objects to sort , but not their relative order. If the exception is
+          generated inside the objects (in the move or in the copy constructor..
+          ) the results can be unpredictable. </p>
+        <p>For to select the single thread and the parallel version, these
+          algorithms use the execution policy, as described in the <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n4071.htm"
+            data-original-href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n4071.htm">Working
+            Draft, Technical Specification for C++ Extensions for Parallelism</a>
+          . If you want a simplified version you can find in <a href="http://en.cppreference.com/w/cpp/experimental/parallelism"
+            data-original-href="http://en.cppreference.com/w/cpp/experimental/parallelism">cpp
+            reference</a>.</p>
+        <p>For the single thread version, pass as first parameter <code><span style="font: 10pt Monospace;"><span
+                class="style11">hpx</span><span class="style10">::</span><span class="style11">parallel</span><span
+                class="style10">::</span><span class="style11">v1</span><span class="style10">::</span><span
+                class="style11">seq ,</span></span></code>and for the parallel
+          version <code><span class="style5" style="font: 9pt Monospace;"><span
+                class="style5"><code><span style="font: 10pt Monospace;"><span class="style11">hpx</span><span
+                      class="style10">::</span><span class="style11">parallel</span><span
+                      class="style10">::</span><span class="style11">v1</span><span
+                      class="style10">::</span><span class="style11">par</span><span
+                      class="style10"></span></span></code></span></span></code></p>
+        <div class="caja_codigo">
+          <pre><code><span class="style5" style="font: 9pt Monospace;"><span class="style5"><br /></span></span></code><br /><code><span
+style="font: 10pt Monospace;"><span class="style2">//----------------------------------------------------------------------------
+</span><span class="style15">// Non stable sort single thread<br /></span></span></code><code><span
+style="font: 10pt Monospace;"><span class="style15"><code><span style="font: 10pt Monospace;"><span
+class="style2">//-----------------------------------------------------------------------------</span></span></code><br /></span></span></code><code><span
+style="font: 10pt Monospace;"><span class="style15"><code><span style="font: 10pt Monospace;"><span
+class="style11">hpx::parallel::sort</span><span class="style10">::</span><span class="style16">sort </span><span
+class="style10">(</span><span class="style11">hpx</span><span class="style10">::</span><span
+class="style11">parallel</span><span class="style10">::</span><span class="style11">v1</span><span
+class="style10">::</span><span class="style11">seq</span><span class="style10">, </span><span
+class="style11">A</span><span class="style10">.</span><span class="style16">begin</span><span
+class="style10">() , </span><span class="style11">A</span><span class="style10">.</span><span
+class="style16">end</span><span class="style10">(), </span><span class="style11">comp </span><span
+class="style10">);</span></span></code><br /><br /></span></span></code><code><span
+style="font: 10pt Monospace;"><span class="style15"><code><span style="font: 10pt Monospace;"><span
+class="style2">//----------------------------------------------------------------------------
+</span><span class="style15">// Non stable sort, parallel<br /></span></span></code><code><span
+style="font: 10pt Monospace;"><span class="style15"><code><span style="font: 10pt Monospace;"><span
+class="style2">//-----------------------------------------------------------------------------</span></span></code><br /></span></span></code></span></span></code><code><span
+style="font: 10pt Monospace;"><span class="style15"><code><span class="style5" style="font: 9pt Monospace;"><span
+class="style5"><code><span style="font: 10pt Monospace;"><span class="style11">hpx::parallel::sort</span><span
+class="style10">::</span><span class="style16">sort </span><span class="style10">(</span><span
+class="style11">hpx</span><span class="style10">::</span><span class="style11">parallel</span><span
+class="style10">::</span><span class="style11">v1</span><span class="style10">::</span><span
+class="style11">par</span><span class="style10">, </span><span class="style11">A</span><span
+class="style10">.</span><span class="style16">begin</span><span class="style10">() , </span><span
+class="style11">A</span><span class="style10">.</span><span class="style16">end</span><span
+class="style10">(), </span><span class="style11">comp </span><span class="style10">);</span></span></code></span></span></code><br /><br /></span></span></code><code><span
+style="font: 10pt Monospace;"><span class="style15"><code><span style="font: 10pt Monospace;"><span
+class="style2">//----------------------------------------------------------------------------
+</span><span class="style15">// Stable sort single thread<br /></span></span></code><code><span
+style="font: 10pt Monospace;"><span class="style15"><code><span style="font: 10pt Monospace;"><span
+class="style2">//-----------------------------------------------------------------------------</span></span></code></span></span></code><br /></span></span></code><code><span
+style="font: 10pt Monospace;"><span class="style15"><code><span class="style5" style="font: 9pt Monospace;"><span
+class="style10"><code><span style="font: 10pt Monospace;"><span class="style11">hpx::parallel::sort</span><span
+class="style10">::</span><span class="style16">stable_sort </span><span class="style10">(</span><span
+class="style11">hpx</span><span class="style10">::</span><span class="style11">parallel</span><span
+class="style10">::</span><span class="style11">v1</span><span class="style10">::</span><span
+class="style11">seq</span><span class="style10">,</span><span class="style11">A</span><span
+class="style10">.</span><span class="style16">begin</span><span class="style10">() , </span><span
+class="style11">A</span><span class="style10">.</span><span class="style16">end</span><span
+class="style10">(), </span><span class="style11">comp  </span><span class="style10">);</span></span></code></span></span></code><br /><br /></span></span></code><code><span
+style="font: 10pt Monospace;"><span class="style15"><code><span style="font: 10pt Monospace;"><span
+class="style15"><code><span style="font: 10pt Monospace;"><span class="style2">//----------------------------------------------------------------------------
+</span><span class="style15">// Stable sort, parallel<br /></span></span></code><code><span
+style="font: 10pt Monospace;"><span class="style15"><code><span style="font: 10pt Monospace;"><span
+class="style2">//-----------------------------------------------------------------------------</span></span></code></span></span></code></span></span></code><br /></span></span></code><code><span
+style="font: 10pt Monospace;"><span class="style15"><code><span class="style5" style="font: 9pt Monospace;"><span
+class="style10"><code><span style="font: 10pt Monospace;"><span class="style11">hpx::parallel::sort</span><span
+class="style10">::</span><span class="style16">stable_sort </span><span class="style10">(</span><span
+class="style11">hpx</span><span class="style10">::</span><span class="style11">parallel</span><span
+class="style10">::</span><span class="style11">v1</span><span class="style10">::</span><span
+class="style11">par</span><span class="style10">,</span><span class="style11">A</span><span
+class="style10">.</span><span class="style16">begin</span><span class="style10">() , </span><span
+class="style11">A</span><span class="style10">.</span><span class="style16">end</span><span
+class="style10">() , </span><span class="style11">comp</span><span class="style10">);</span></span></code></span></span></code><br /><br /></span></span></code><code><span
+style="font: 10pt Monospace;"><span class="style15"><code><span style="font: 10pt Monospace;"><span
+class="style15"><code><span style="font: 10pt Monospace;"><span class="style15"><code><span
+style="font: 10pt Monospace;"><span class="style2">//----------------------------------------------------------------------------
+</span><span class="style15">// Sample sort, stable sort, parallel faster than stable sort parallel, but need<br />// more memory<br /></span></span></code><code><span
+style="font: 10pt Monospace;"><span class="style15"><code><span style="font: 10pt Monospace;"><span
+class="style2">//-----------------------------------------------------------------------------</span></span></code></span></span></code></span></span></code></span></span></code><br /></span></span></code><code><span
+style="font: 10pt Monospace;"><span class="style11">hpx::parallel::sort</span><span
+class="style10">::</span><span class="style11">sample_sort </span><span class="style10">(</span><span
+class="style11">hpx</span><span class="style10">::</span><span class="style11">parallel</span><span
+class="style10">::</span><span class="style11">v1</span><span class="style10">::</span><span
+class="style11">par</span><span class="style10">,</span><span class="style11">A</span><span
+class="style10">.</span><span class="style16">begin</span><span class="style10">() , </span><span
+class="style11">A</span><span class="style10">.</span><span class="style16">end</span><span
+class="style10">(), </span><span class="style11">comp </span><span class="style10">);<br /><br /></span></span></code></pre>
+          <span class="style9"> </span> </div>
         <p><br />
         </p>
-        In this Parallel library, you can find stable and not stable sort
-        algorithms, in a single thread and parallel version, with similar
-        performance than the provided by other libraries as TBB, Cilk, OpenMP or
-        Microsoft PPL. <br />
-        <br />
-        The intention is to create algorithms only with the utilities provided
-        by C++11, without any other library. Any compiler C++11  compliant can
-        compile and run these algorithms. It's pending of the final review, due
-        this can suffer some changes until the final version and definitive
-        approval in the Boost Library.
-        <p><br />
-        </p>
-        <p>The algorithms use an comparison object, in the same way than the
-          sort algorithms of the standard library. If you don't define it, by
-          default is std::less&lt;object&gt;, using internally the operator &lt;
-          for to do the comparison.</p>
-        <p><br />
-        </p>
-        The algorithms are exception safe, it means,  the exceptions generated
-        by the algorithms guarantee the integrity of the objects to sort , but
-        not their relative order. If the exception is generated inside the
-        objects (in the move or in the copy constructor.. ) the results can be
-        unpredictable.
-        <p><br />
-        </p>
-        <p>This library is include only. Don't need to link with any static or
-          dynamic library. Don't have  dependence of any other boost files,
-          variables or libraries or any other external libraries. For to use,
-          only need a to include the files of the boost/sort/parallel folder,
-          any more.</p>
-        <p><br />
-        </p>
+        <p><strong>This library is include only</strong>. Don't need to link
+          with any static or dynamic library. Don't have dependence of any other
+          files, variables or libraries or any other external libraries. For to
+          use, only need a to include the files of the boost/sort/parallel
+          folder, any more.</p>
         <p>This table provide you a brief description of the sort algorithms of
           the library.</p>
-        <p><br />
-        </p>
-        <table border="1" style="width: 794px; height: 233px;">
+        <table>
+          <thead>
+            <tr>
+              <th>Algorithm</th>
+              <th>Parallel</th>
+              <th>Stable</th>
+              <th>Additional memory</th>
+              <th>Best, average, and worst case</th>
+            </tr>
+          </thead>
           <tbody>
             <tr>
-              <td style="width: 246.867px;"><span style="font-weight: bold;">Algorithm<br />
-                </span></td>
-              <td style="width: 112.217px;"><span style="font-weight: bold;">Parallel<br />
-                </span></td>
-              <td style="width: 90.15px;"><span style="font-weight: bold;"> Stable<br />
-                </span></td>
-              <td><span style="font-weight: bold;">Additional <br />
-                  memory<br />
-                </span></td>
-              <td style="width: 198.817px;"><span style="font-weight: bold;">Best,
-                  average,<br />
-                  and worst case<br />
-                </span></td>
-            </tr>
-            <tr>
-              <td>introsort</td>
+              <td>sort</td>
               <td>no</td>
               <td>no</td>
               <td>Log N</td>
               <td>NLogN, NLogN, NLogN</td>
             </tr>
             <tr>
-              <td>parallel_introsort</td>
-              <td>yes</td>
+              <td>stable_sort</td>
               <td>no</td>
-              <td style="width: 106.817px;">Log N</td>
+              <td>yes</td>
+              <td>N / 2</td>
               <td>NLogN, NLogN, NLogN</td>
             </tr>
             <tr>
-              <td>smart_merge_sort</td>
-              <td>no</td>
+              <td>sort</td>
               <td>yes</td>
-              <td>N / 2 </td>
+              <td>no</td>
+              <td>1024*NThreads</td>
               <td>NLogN, NLogN, NLogN</td>
             </tr>
             <tr>
-              <td>parallel_stable_sort</td>
+              <td>stable_sort</td>
               <td>yes</td>
               <td>yes</td>
               <td>N / 2</td>
@@ -207,506 +251,368 @@
             </tr>
           </tbody>
         </table>
-        <p><br />
+        <p>In this Parallel library, you can find <strong>stable and not stable
+            sort</strong> algorithms, in a <strong>single thread and parallel</strong>
+          version.</p>
+        This version have a <strong>new non stable parallel_sort algorithm</strong>
+        <em>( internally named Block Indirect)</em>, created for processors
+        connected with <strong>shared memory</strong>.
+        <p>In the parallel sorting algorithms, we can find algorithms <strong>fast
+            with a small number of threads</strong>, but with a great number of
+          HW threads , show their lacks</p>
+        <ul>
+          <li>Intel Threading Building Blocks (TBB)</li>
+          <li>Microsoft PPL Parallel Sort).</li>
+        </ul>
+        <p>And others not so fast with small number of HW threads, and <strong>fast
+            with many threads</strong>. These algorithms use an additional
+          memory of the same size than the data.</p>
+        <ul>
+          <li>GCC Parallel Sort (based on OpenMP)</li>
+          <li>Microsoft PPL Parallel Buffered Sort</li>
+        </ul>
+        <p>This generate an <strong>undesirable duality</strong>. With a small
+          number of threads use one algorithm, and with a big number use other.
+          Due this, the SW designed for a small machine is inadequate for a big
+          machine and vice versa. But the main problem, for the algorithms for a
+          big number of HW threads is the memory used, usually of the same size
+          than the data.</p>
+        <p>This <strong>new parallel sort algorithm</strong> permit <strong>eliminate
+            the duality</strong>. With <strong>many threads</strong>, have
+          similar performance than GCC Parallel Sort, and with <strong>a few
+            threads</strong> have similar performance than TBB, with the <strong>additional
+            advantage</strong> of the <strong>small memory consumption</strong>.</p>
+        <p>The algorithm use as <strong>auxiliary memory a 1024 elements</strong>
+          for each thread. The <span style="font-weight: bold;">worst case</span>
+          for the algorithm is when have <span style="font-weight: bold;">very
+            big element</span>s and <span style="font-weight: bold;">many
+            threads</span>. With big elements (512 bytes), and 32 threads, The
+          memory measured was:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Algorithm</th>
+              <th>Memory used in MB</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>GCC Parallel Sort (OpenMP)</td>
+              <td>1565 MB</td>
+            </tr>
+            <tr>
+              <td>Threading Building Blocks (TBB)</td>
+              <td>783 MB</td>
+            </tr>
+            <tr>
+              <td>Block Indirect Sort</td>
+              <td>814 MB</td>
+            </tr>
+          </tbody>
+        </table>
+        <em><br />
+          This <strong>new parallel_sort algorithm had been created and
+            implemented specifically for this library</strong> by the author.</em><br />
+        <p> <em>If you are interested in a <span style="font-weight: bold;">brief
+              description</span> of the algorithm, you can find in the next link</em>
+          <a href="../block_indirect_sort_brief_en.pdf" target="_blank" data-original-href="../block_indirect_sort_brief_en.pdf">
+            Block Indirect Sort Brief </a> <br />
+          <em>If you are interested in a <span style="font-weight: bold;">detailed
+              description</span> of the algorithm, you can find in the next link</em>
+          <a target="_blank" href="../block_indirect_sort_en.pdf" data-original-href="../block_indirect_sort_en.pdf">
+            Block Indirect Sort </a><br />
         </p>
         <br />
-        <p><a name="thread"></a> <span style="font-size: 18pt;font-weight: bold; color: black;">1.1.-
-            Thread specification in the parallel algorithms </span></p>
-        <p><br />
-        </p>
-        <p><font face="Arimo, sans-serif">The parallel algorithms have a
-            parameter (NThread) indicating the number of thread to use in the
-            sorting process. By default value is the number of HW threads of the
-            machine where the program is running.</font></p>
-        <p><font face="Arimo, sans-serif"><br />
-          </font> </p>
-        <p style="margin-bottom: 0cm; line-height: 100%"><font face="Arimo, sans-serif">The
-idea
-            is a positive integer, always greater than zero, and a static
-            variable ( NThread_HW ) with the value of the HW threads of the
-            machine where the program is running.</font></p>
-        <p style="margin-bottom: 0cm; line-height: 100%"><br />
-        </p>
-        <p style="margin-bottom: 0cm; line-height: 100%"><font face="Arimo, sans-serif">This
-            class is in the </font>namespace boost::sort::parallel </p>
-        <p>  </p>
-        <div class="caja_codigo">
-          <pre><code><span class="style5" style="font: 9pt Monospace;"><span class="style5"><br /></span></span></code><code><span
-style="font: 9pt Monospace;"><span class="style5">static const uint32_t </span><span
-class="style11">NThread_HW </span><span class="style10">= </span><span class="style16">std</span><span
-class="style10">::</span><span class="style11">thread</span><span class="style10">::</span><span
-class="style11">hardware_concurrency</span><span class="style10">();
-</span><span class="style5">class </span><span class="style11">NThread
+        <p><a name="thread"></a> <span style="font-size: 18pt;font-weight: bold; color: black;">2.-
+            Creating index ( </span><span style="font-size: 18pt;font-weight: bold; color: black;"><span
+              style="font-size: 16pt;font-weight: bold; color: black;">
+              less_ptr_no_null </span>)<br />
+          </span></p>
+        <br />
+        Sometimes, we don't want   sort the data, but we want create en index,
+        which is  a collection of iterators or pointers , sorted by the value
+        pointed by them.<br />
+        <br />
+        For to create a index, we have a special comparison object
+        less_ptr_no_null , defined in the hpx/parallel/sort/sort.hpp file in the
+        nanmespace hpx::parallel::sort namespace, which permit call to the sort
+        functions with the pointers to the iterators and itself as comparison
+        object<br />
+        <br />
+        <br />
+        <div class="caja_codigo"> <br />
+          <br />
+          <pre><code><span style="font: 9pt Monospace;"><span class="style2">//---------------------------------------------------------------------------
+</span><span class="style15">/// </span><span class="style17">@class </span><span
+class="style15">less_ptr_no_null
+///
+/// </span><span class="style17">@remarks </span><span class="style15">this is the comparison object for pointers. Receive a object
+///          for to compare the objects pointed. The pointers can't be nullptr
+</span><span class="style2">//---------------------------------------------------------------------------
+</span><span class="style5">template    </span><span class="style10">&lt;   </span><span
+class="style5">class </span><span class="style11">iter_t </span><span class="style10">,
+                </span><span class="style5">class </span><span class="style11">comp_t
+                </span><span class="style10">=</span><span class="style16">std</span><span
+class="style10">::</span><span class="style16">less</span><span class="style10">&lt;</span><span
+class="style5">typename </span><span class="style16">iterator_traits</span><span
+class="style10">&lt;</span><span class="style11">iter_t</span><span class="style10">&gt;::</span><span
+class="style16">value_type</span><span class="style10">&gt; &gt;
+</span><span class="style5">struct </span><span class="style11">less_ptr_no_null
+</span><span class="style10">{   </span><span class="style2">//----------------------------- Variables -----------------------
+    </span><span class="style11">comp_t comp </span><span class="style10">;
+    </span><span class="style2">//----------------------------- Functions ----------------------
+    </span><span class="style5">inline </span><span class="style11">less_ptr_no_null </span><span
+class="style10">( </span><span class="style11">comp_t C1 </span><span class="style10">= </span><span
+class="style11">comp_t</span><span class="style10">()):</span><span class="style11">comp</span><span
+class="style10">(</span><span class="style11">C1</span><span class="style10">){};<br />   <br />    </span><span
+class="style5">inline bool operator </span><span class="style10">()( </span><span
+class="style11">iter_t  T1</span><span class="style10">,  </span><span class="style11">iter_t  T2 </span><span
+class="style10">) </span><span class="style5">const
+    </span><span class="style10">{   </span><span class="style2"></span><span class="style5">return  </span><span
+class="style11">comp</span><span class="style10">(*</span><span class="style11">T1 </span><span
+class="style10">,*</span><span class="style11">T2</span><span class="style10">);
+    };
+};</span></span></code></pre>
+          <br />
+          <br />
+          <span class="style9"> </span> </div>
+        <br />
+        <img align="justify" src="file:///home/francisco/Projects/Sort/Boost_dev/doc/img/paso3.png"
+          alt="" /><br />
+        With an example, you will understand. We have a registers sorted by the
+        num field , but create an index for to have the elements sorted by name,
+        and other for to have sorted by weight. Create the less_ptr_no_null
+        comparison objects, and sort the index. After all , print the results<br />
+        <br />
+        <br />
+        <div class="caja_codigo"> <br />
+          <pre><code><span style="font: 9pt Monospace;"><span class="style9">#include &lt;hpx/hpx.hpp&gt;
+#include &lt;hpx/hpx_init.hpp&gt;
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;iterator&gt;
+#include &lt;cassert&gt;
+
+#include &lt;hpx/parallel/sort/sort.hpp&gt;
+
+</span><span class="style5">using namespace </span><span class="style16">std </span><span
+class="style10">;
+</span><span class="style5">namespace </span><span class="style11">hpx_sort </span><span
+class="style10">= </span><span class="style11">hpx</span><span class="style10">::</span><span
+class="style11">parallel</span><span class="style10">::</span><span class="style16">sort </span><span
+class="style10">;
+</span><span class="style5">using </span><span class="style11">hpx_sort</span><span
+class="style10">::</span><span class="style11">less_ptr_no_null </span><span class="style10">;
+
+</span><span class="style5">struct </span><span class="style11">member
 </span><span class="style10">{   </span><span class="style5">uint32_t </span><span
-class="style11">num_th </span><span class="style10">;
-
-</span><span class="style5">public</span><span class="style10">:
-    </span><span class="style11">NThread </span><span class="style10">( </span><span
-class="style5">void</span><span class="style10">): </span><span class="style11">num_th </span><span
-class="style10">( </span><span class="style11">NThread_HW</span><span class="style10">){};
-    </span><span class="style11">NThread </span><span class="style10">( </span><span
-class="style5">const </span><span class="style11">NThread </span><span class="style10">&amp; </span><span
-class="style11">Number</span><span class="style10">):</span><span class="style11">num_th </span><span
-class="style10">( </span><span class="style11">Number</span><span class="style10">.</span><span
-class="style11">num_th</span><span class="style10">){};
-    </span><span class="style11">NThread </span><span class="style10">( </span><span
-class="style5">uint32_t </span><span class="style11">Nmb </span><span class="style10">):</span><span
-class="style11">num_th </span><span class="style10">((</span><span class="style11">Nmb</span><span
-class="style10">&lt; </span><span class="style4">2</span><span class="style10">)?</span><span
-class="style4">1</span><span class="style10">:</span><span class="style11">Nmb </span><span
-class="style10">){};
-
-    </span><span class="style5">uint32_t operator </span><span class="style10">() ( </span><span
-class="style5">void</span><span class="style10">)</span><span class="style5">const </span><span
-class="style10">{ </span><span class="style5">return </span><span class="style11">num_th</span><span
-class="style10">;};
-
-    </span><span class="style11">NThread </span><span class="style10">&amp; </span><span
-class="style5">operator </span><span class="style10">= (</span><span class="style5">const </span><span
-class="style11">NThread </span><span class="style10">&amp; </span><span class="style11">Number</span><span
-class="style10">)
-    {   </span><span class="style11">num_th </span><span class="style10">= </span><span
-class="style11">Number</span><span class="style10">.</span><span class="style11">num_th </span><span
+class="style11">num </span><span class="style10">;
+    </span><span class="style16">std</span><span class="style10">::</span><span
+class="style16">string </span><span class="style11">name</span><span class="style10">;
+    </span><span class="style5">float </span><span class="style11">weight</span><span
 class="style10">;
-        </span><span class="style5">return </span><span class="style10">*</span><span
-class="style5">this </span><span class="style10">;
+};
+</span><span class="style5">typedef typename </span><span class="style16">vector</span><span
+class="style10">&lt;</span><span class="style11">member</span><span class="style10">&gt;::</span><span
+class="style16">iterator </span><span class="style11">iter_t </span><span class="style10">;
+
+</span><span class="style5">struct </span><span class="style11">cmp_num
+</span><span class="style10">{   </span><span class="style5">bool operator</span><span
+class="style10">() ( </span><span class="style5">const </span><span class="style11">member </span><span
+class="style10">&amp;</span><span class="style11">m1</span><span class="style10">, </span><span
+class="style5">const </span><span class="style11">member </span><span class="style10">&amp;</span><span
+class="style11">m2</span><span class="style10">) </span><span class="style5">const
+    </span><span class="style10">{   </span><span class="style5">return </span><span
+class="style10">( </span><span class="style11">m1</span><span class="style10">.</span><span
+class="style11">num </span><span class="style10">&lt; </span><span class="style11">m2</span><span
+class="style10">.</span><span class="style11">num</span><span class="style10">); };
+};
+
+</span><span class="style5">struct </span><span class="style11">cmp_name
+</span><span class="style10">{   </span><span class="style5">bool operator</span><span
+class="style10">() ( </span><span class="style5">const </span><span class="style11">member </span><span
+class="style10">&amp;</span><span class="style11">m1</span><span class="style10">, </span><span
+class="style5">const </span><span class="style11">member </span><span class="style10">&amp;</span><span
+class="style11">m2</span><span class="style10">)</span><span class="style5">const
+    </span><span class="style10">{   </span><span class="style5">return </span><span
+class="style10">( </span><span class="style11">m1</span><span class="style10">.</span><span
+class="style11">name </span><span class="style10">&lt; </span><span class="style11">m2</span><span
+class="style10">.</span><span class="style11">name</span><span class="style10">); };
+};
+
+</span><span class="style5">struct </span><span class="style11">cmp_weight
+</span><span class="style10">{   </span><span class="style5">bool operator</span><span
+class="style10">() ( </span><span class="style5">const </span><span class="style11">member </span><span
+class="style10">&amp;</span><span class="style11">m1</span><span class="style10">, </span><span
+class="style5">const </span><span class="style11">member </span><span class="style10">&amp;</span><span
+class="style11">m2</span><span class="style10">) </span><span class="style5">const
+    </span><span class="style10">{   </span><span class="style5">return </span><span
+class="style10">( </span><span class="style11">m1</span><span class="style10">.</span><span
+class="style11">weight </span><span class="style10">&lt; </span><span class="style11">m2</span><span
+class="style10">.</span><span class="style11">weight</span><span class="style10">); };
+};
+
+</span><span class="style11">ostream </span><span class="style10">&amp; </span><span
+class="style5">operator </span><span class="style10">&lt;&lt; ( </span><span class="style11">ostream </span><span
+class="style10">&amp; </span><span class="style11">out</span><span class="style10">, </span><span
+class="style5">const </span><span class="style11">member </span><span class="style10">&amp;</span><span
+class="style11">m</span><span class="style10">)
+{   </span><span class="style11">out</span><span class="style10">&lt;&lt;</span><span
+class="style11">m</span><span class="style10">.</span><span class="style11">num</span><span
+class="style10">&lt;&lt;</span><span class="style6">" - "</span><span class="style10">&lt;&lt;</span><span
+class="style11">m</span><span class="style10">.</span><span class="style11">name</span><span
+class="style10">&lt;&lt;</span><span class="style6">" - "</span><span class="style10">&lt;&lt;</span><span
+class="style11">m</span><span class="style10">.</span><span class="style11">weight</span><span
+class="style10">&lt;&lt;</span><span class="style16">endl</span><span class="style10">;
+    </span><span class="style5">return </span><span class="style11">out </span><span
+class="style10">;
+};
+
+</span><span class="style5">int </span><span class="style11">main</span><span class="style10">(</span><span
+class="style5">int </span><span class="style11">argc</span><span class="style10">, </span><span
+class="style5">char</span><span class="style10">* </span><span class="style11">argv</span><span
+class="style10">[])
+{
+    </span><span class="style16">std</span><span class="style10">::</span><span
+class="style16">vector</span><span class="style10">&lt;</span><span class="style16">std</span><span
+class="style10">::</span><span class="style16">string</span><span class="style10">&gt; </span><span
+class="style11">cfg</span><span class="style10">;
+    </span><span class="style11">cfg</span><span class="style10">.</span><span class="style16">push_back</span><span
+class="style10">(</span><span class="style6">"hpx.os_threads=1"</span><span class="style10">);
+
+    </span><span class="style2">// Initialize and run HPX.
+    </span><span class="style5">return </span><span class="style11">hpx</span><span
+class="style10">::</span><span class="style11">init</span><span class="style10">(</span><span
+class="style11">argc</span><span class="style10">, </span><span class="style11">argv</span><span
+class="style10">, </span><span class="style11">cfg</span><span class="style10">);
+
+}
+</span><span class="style5">int </span><span class="style11">hpx_main</span><span
+class="style10">(</span><span class="style16">boost</span><span class="style10">::</span><span
+class="style11">program_options</span><span class="style10">::</span><span class="style11">variables_map</span><span
+class="style10">&amp;)
+{   </span><span class="style2">//------------------------ begin -----------------------
+    // The data are sorted by number
+    </span><span class="style16">vector</span><span class="style10">&lt;</span><span
+class="style11">member</span><span class="style10">&gt; </span><span class="style11">VM </span><span
+class="style10">= { {</span><span class="style4">1</span><span class="style10">,</span><span
+class="style6">"Peter"</span><span class="style10">,</span><span class="style4">85.6</span><span
+class="style10">},   {</span><span class="style4">2</span><span class="style10">,</span><span
+class="style6">"Hanna"</span><span class="style10">, </span><span class="style4">63.4 </span><span
+class="style10">},
+                          {</span><span class="style4">3</span><span class="style10">,</span><span
+class="style6">"John"</span><span class="style10">, </span><span class="style4">83.6</span><span
+class="style10">},   {</span><span class="style4">4</span><span class="style10">,</span><span
+class="style6">"Elsa"</span><span class="style10">,</span><span class="style4">56.6</span><span
+class="style10">} };
+    </span><span class="style16">vector</span><span class="style10">&lt;</span><span
+class="style11">iter_t</span><span class="style10">&gt; </span><span class="style11">Ix_name</span><span
+class="style10">, </span><span class="style11">Ix_weight </span><span class="style10">;
+
+    </span><span class="style5">for </span><span class="style10">( </span><span
+class="style11">iter_t it</span><span class="style10">= </span><span class="style11">VM</span><span
+class="style10">.</span><span class="style16">begin</span><span class="style10">() ; </span><span
+class="style11">it </span><span class="style10">!= </span><span class="style11">VM</span><span
+class="style10">.</span><span class="style16">end</span><span class="style10">() ; ++</span><span
+class="style11">it</span><span class="style10">)
+    {   </span><span class="style11">Ix_name</span><span class="style10">.</span><span
+class="style16">push_back </span><span class="style10">( </span><span class="style11">it</span><span
+class="style10">);
+        </span><span class="style11">Ix_weight</span><span class="style10">.</span><span
+class="style16">push_back</span><span class="style10">( </span><span class="style11">it</span><span
+class="style10">);
     };
-    </span><span class="style11">NThread </span><span class="style10">&amp; </span><span
-class="style5">operator</span><span class="style10">= ( </span><span class="style5">uint32_t </span><span
-class="style11">Nmb</span><span class="style10">)
-    {   </span><span class="style11">num_th </span><span class="style10">= ( </span><span
-class="style11">Nmb </span><span class="style10">&lt; </span><span class="style4">2</span><span
-class="style10">)?</span><span class="style4">1</span><span class="style10">:</span><span
-class="style11">Nmb</span><span class="style10">;
-        </span><span class="style5">return </span><span class="style10">*</span><span
-class="style5">this </span><span class="style10">;
-    };
-};</span></span></code><code><span class="style5" style="font: 9pt Monospace;"><span
-class="style10"><br /><br /></span></span></code></pre>
-          <span class="style9"> </span> </div>
-        <p><br />
-        </p>
-        <p><a name="programming"></a> <span style="font-size: 18pt;font-weight: bold; color: black;">1.2.-
-            Programming </span> </p>
-          <br />
-        For to use you only need to include the file
-        boost/sort/parallel/sort.hpp<br />
-        <br />
-        <div class="caja_codigo">
-          <pre><code><span style="font: 9pt Monospace;"><span class="style9"><br />#include &lt;boost/sort/parallel/sort.hpp&gt;<br /></span></span>
-          </code></pre>
-        </div>
-        <br />
-        All the functions and definitions are in the namespace
-        boost::sort::parallel<br />
-        <br />
-        <p><a name="examples"></a> <span style="font-size: 18pt;font-weight: bold; color: black;">1.3.-
-            Examples</span></p>
-        <p><span style="font-size: 16pt;font-weight: bold; color: black;"></span></p>
-        <p><br />
-        </p>
-        <p>This example use the single thread introsort and smart merge_sort.</p>
-        <p><br />
-          <span style="font-size: 16pt;font-weight: bold; color: black;"></span></p>
-        <div class="caja_codigo">
-          <pre><code><span style="font: 9pt Monospace;"><span class="style9"><br />#include &lt;iostream&gt;
-#include &lt;vector&gt;<br /></span></span></code><code><span style="font: 9pt Monospace;"><span
-class="style9"><code><span style="font: 9pt Monospace;"><span class="style9">#include &lt;random&gt;</span></span></code></span></span></code><br /><code><span
-style="font: 9pt Monospace;"><span class="style9"><code><span style="font: 9pt Monospace;"><span
-class="style9"><code><span style="font: 9pt Monospace;"><span class="style9"></span></span></code></span></span></code>#include &lt;boost/sort/parallel/sort.hpp&gt;
-</span><span class="style5">namespace </span><span class="style11">bsp </span><span
-class="style10">= </span><span class="style16">boost</span><span class="style10">::</span><span
-class="style16">sort</span><span class="style10">::</span><span class="style11">parallel</span><span
+
+    </span><span class="style5">typedef </span><span class="style11">less_ptr_no_null </span><span
+class="style10">&lt;</span><span class="style11">iter_t</span><span class="style10">, </span><span
+class="style11">cmp_name</span><span class="style10">&gt;     </span><span class="style11">compare_name </span><span
+class="style10">;
+    </span><span class="style5">typedef </span><span class="style11">less_ptr_no_null </span><span
+class="style10">&lt;</span><span class="style11">iter_t</span><span class="style10">, </span><span
+class="style11">cmp_weight</span><span class="style10">&gt;   </span><span class="style11">compare_weight </span><span
 class="style10">;
 
-</span><span class="style5">int </span><span class="style11">main</span><span class="style10">( </span><span
-class="style5">void </span><span class="style10">)
-{   </span><span class="style2">//-------------- begin------------
-    </span><span class="style16">std</span><span class="style10">::</span><span
-class="style16">mt19937_64 </span><span class="style11">my_rand</span><span class="style10">(</span><span
-class="style4">0</span><span class="style10">);
-    </span><span class="style5">const uint32_t </span><span class="style11">NMAX </span><span
-class="style10">= </span><span class="style4">1000000 </span><span class="style10">;
-    </span><span class="style16">std</span><span class="style10">::</span><span
-class="style16">vector </span><span class="style10">&lt;</span><span class="style5">uint64_t</span><span
-class="style10">&gt; </span><span class="style11">A </span><span class="style10">, </span><span
-class="style11">B </span><span class="style10">;<br /><br /> </span><span class="style5">   for </span><span
-class="style10">( </span><span class="style5">uint32_t </span><span class="style11">i </span><span
-class="style10">=</span><span class="style4">0 </span><span class="style10">; </span><span
-class="style11">i </span><span class="style10">&lt; </span><span class="style11">NMAX </span><span
-class="style10">; ++</span><span class="style11">i</span><span class="style10">)  </span><span
-class="style11">A</span><span class="style10">.</span><span class="style16">push_back</span><span
-class="style10">( </span><span class="style11">my_rand</span><span class="style10">() );
-    </span><span class="style11">B </span><span class="style10">= </span><span class="style11">A </span><span
-class="style10">;
-    </span><span class="style11">bsp</span><span class="style10">::</span><span
-class="style11">introsort </span><span class="style10">( </span><span class="style11">A</span><span
-class="style10">.</span><span class="style16">begin</span><span class="style10">(), </span><span
-class="style11">A</span><span class="style10">.</span><span class="style16">end</span><span
-class="style10">());
-    </span><span class="style11">bsp</span><span class="style10">::</span><span
-class="style11">smart_merge_sort </span><span class="style10">( </span><span class="style11">B</span><span
-class="style10">.</span><span class="style16">begin</span><span class="style10">() , </span><span
-class="style11">B</span><span class="style10">.</span><span class="style16">end</span><span
-class="style10">());
-
-    </span><span class="style5">for </span><span class="style10">( </span><span
-class="style5">uint32_t </span><span class="style11">i </span><span class="style10">=</span><span
-class="style4">0 </span><span class="style10">; </span><span class="style11">i </span><span
-class="style10">&lt; </span><span class="style11">NMAX </span><span class="style10">; ++</span><span
-class="style11">i </span><span class="style10">)
-        </span><span class="style5">if </span><span class="style10">( </span><span
-class="style11">A</span><span class="style10">[</span><span class="style11">i</span><span
-class="style10">] != </span><span class="style11">B</span><span class="style10">[</span><span
-class="style11">i</span><span class="style10">])  </span><span class="style16">std</span><span
-class="style10">::</span><span class="style16">cout</span><span class="style10">&lt;&lt;</span><span
-class="style6">"Error in the sorting process\n"</span><span class="style10">;
-    </span><span class="style5">return </span><span class="style4">0 </span><span
-class="style10">;
-};<br /><br /></span></span></code></pre>
-          <span class="style9"> </span> </div>
-        <br />
-        <p>This example use the parallel_introsort and sample_sort algorithms.
-          Don't define the number of threads to use in the sorting process, and
-          by default is defined NThread ( ). The NThread object, by default,
-          have NThread_HW, the number of HW threads of the machine where the
-          program is running.</p>
-        <p><br />
-          <span style="font-size: 16pt;font-weight: bold; color: black;"></span></p>
-        <div class="caja_codigo">
-          <pre><code><span style="font: 9pt Monospace;"><span class="style9"><br />#include &lt;iostream&gt;
-#include &lt;vector&gt;
-</span></span></code><code><span style="font: 9pt Monospace;"><span class="style9"><code><span
-style="font: 9pt Monospace;"><span class="style9">#include &lt;random&gt;</span></span></code>
-#include &lt;boost/sort/parallel/sort.hpp&gt;
-</span><span class="style5">namespace </span><span class="style11">bsp </span><span
-class="style10">= </span><span class="style16">boost</span><span class="style10">::</span><span
-class="style16">sort</span><span class="style10">::</span><span class="style11">parallel</span><span
-class="style10">;
-
-</span><span class="style5">int </span><span class="style11">main</span><span class="style10">( </span><span
-class="style5">void </span><span class="style10">)
-{   </span><span class="style2">//-------------- begin------------
-    </span><span class="style16">std</span><span class="style10">::</span><span
-class="style16">mt19937_64 </span><span class="style11">my_rand</span><span class="style10">(</span><span
-class="style4">0</span><span class="style10">);
-    </span><span class="style5">const uint32_t </span><span class="style11">NMAX </span><span
-class="style10">= </span><span class="style4">1000000 </span><span class="style10">;<br />    </span><span
-class="style16">std</span><span class="style10">::</span><span class="style16">vector </span><span
-class="style10">&lt;</span><span class="style5">uint64_t</span><span class="style10">&gt; </span><span
-class="style11">A </span><span class="style10">, </span><span class="style11">B </span><span
-class="style10">;
-    </span><span class="style5"><br />    for </span><span class="style10">( </span><span
-class="style5">uint32_t </span><span class="style11">i </span><span class="style10">=</span><span
-class="style4">0 </span><span class="style10">; </span><span class="style11">i </span><span
-class="style10">&lt; </span><span class="style11">NMAX </span><span class="style10">; ++</span><span
-class="style11">i</span><span class="style10">) </span><span class="style11">A</span><span
-class="style10">.</span><span class="style16">push_back</span><span class="style10">( </span><span
-class="style11">my_rand</span><span class="style10">() );
-    </span><span class="style11">B </span><span class="style10">= </span><span class="style11">A </span><span
-class="style10">;
-    </span><span class="style2">//------------------------------------------------------------------------
-    // if the thread parameter is not specified, the number of thread used
-    // is the number of HW threads of the machine where the program is running.
-    // This number is calculate in each execution of the code
-    //------------------------------------------------------------------------
-    </span><span class="style11">bsp</span><span class="style10">::</span><span
-class="style11">parallel_introsort </span><span class="style10">( </span><span class="style11">A</span><span
-class="style10">.</span><span class="style16">begin</span><span class="style10">(), </span><span
-class="style11">A</span><span class="style10">.</span><span class="style16">end</span><span
-class="style10">());
-    </span><span class="style11">bsp</span><span class="style10">::</span><span
-class="style11">sample_sort </span><span class="style10">( </span><span class="style11">B</span><span
-class="style10">.</span><span class="style16">begin</span><span class="style10">() , </span><span
-class="style11">B</span><span class="style10">.</span><span class="style16">end</span><span
-class="style10">());
-
-    </span><span class="style5">for </span><span class="style10">( </span><span
-class="style5">uint32_t </span><span class="style11">i </span><span class="style10">=</span><span
-class="style4">0 </span><span class="style10">; </span><span class="style11">i </span><span
-class="style10">&lt; </span><span class="style11">NMAX </span><span class="style10">; ++</span><span
-class="style11">i </span><span class="style10">)
-        </span><span class="style5">if </span><span class="style10">( </span><span
-class="style11">A</span><span class="style10">[</span><span class="style11">i</span><span
-class="style10">] != </span><span class="style11">B</span><span class="style10">[</span><span
-class="style11">i</span><span class="style10">]) </span><span class="style16">std</span><span
-class="style10">::</span><span class="style16">cout</span><span class="style10">&lt;&lt;</span><span
-class="style6">"Error in the sorting process\n"</span><span class="style10">;
-    </span><span class="style5">return </span><span class="style4">0 </span><span
-class="style10">;
-};</span></span>
-</code></pre> <span class="style9"> </span> </div>
-        <br />
-        <p>This example use 100 threads in the sample_sort algorithms, and
-          NThread_HW / 6 in the parallel_introsort algorithms. If the number of
-          threads passed to the algorithm is less than 1, the internal value of
-          the NThread object is 1.</p>
-        <p><br />
-          <span style="font-size: 16pt;font-weight: bold; color: black;"></span></p>
-        <div class="caja_codigo">
-          <pre><code><span style="font: 9pt Monospace;"><span class="style9"><br />#include &lt;iostream&gt;
-#include &lt;vector&gt;
-</span></span></code><code><span style="font: 9pt Monospace;"><span class="style9"><code><span
-style="font: 9pt Monospace;"><span class="style9">#include &lt;random&gt;</span></span></code>
-#include &lt;boost/sort/parallel/sort.hpp&gt;
-</span><span class="style5">namespace </span><span class="style11">bsp </span><span
-class="style10">= </span><span class="style16">boost</span><span class="style10">::</span><span
-class="style16">sort</span><span class="style10">::</span><span class="style11">parallel</span><span
-class="style10">;
-</span><span class="style5">using </span><span class="style11">bsp</span><span class="style10">::</span><span
-class="style11">NThread </span><span class="style10">;
-</span><span class="style5">using </span><span class="style11">bsp</span><span class="style10">::</span><span
-class="style11">NThread_HW </span><span class="style10">;
-
-</span><span class="style5">int </span><span class="style11">main</span><span class="style10">( </span><span
-class="style5">void </span><span class="style10">)
-{   </span><span class="style2">//-------------- begin------------
-    </span><span class="style16">std</span><span class="style10">::</span><span
-class="style16">mt19937_64 </span><span class="style11">my_rand</span><span class="style10">(</span><span
-class="style4">0</span><span class="style10">);
-    </span><span class="style5">const uint32_t </span><span class="style11">NMAX </span><span
-class="style10">= </span><span class="style4">1000000 </span><span class="style10">;
-    </span><span class="style16">std</span><span class="style10">::</span><span
-class="style16">vector </span><span class="style10">&lt;</span><span class="style5">uint64_t</span><span
-class="style10">&gt; </span><span class="style11">A </span><span class="style10">, </span><span
-class="style11">B </span><span class="style10">;
-    </span><span class="style5">for </span><span class="style10">( </span><span
-class="style5">uint32_t </span><span class="style11">i </span><span class="style10">=</span><span
-class="style4">0 </span><span class="style10">; </span><span class="style11">i </span><span
-class="style10">&lt; </span><span class="style11">NMAX </span><span class="style10">; ++</span><span
-class="style11">i</span><span class="style10">)  </span><span class="style11">A</span><span
-class="style10">.</span><span class="style16">push_back</span><span class="style10">( </span><span
-class="style11">my_rand</span><span class="style10">() );
-    </span><span class="style11">B </span><span class="style10">= </span><span class="style11">A </span><span
-class="style10">;
-    </span><span class="style2">//------------------------------------------------------------------------
-    // If the result of NThread_HW / 6 is smaller than 1, is converted to 1
-    //------------------------------------------------------------------------
-    </span><span class="style11">bsp</span><span class="style10">::</span><span
-class="style11">parallel_introsort </span><span class="style10">( </span><span class="style11">A</span><span
-class="style10">.</span><span class="style16">begin</span><span class="style10">(), </span><span
-class="style11">A</span><span class="style10">.</span><span class="style16">end</span><span
-class="style10">(), </span><span class="style11">NThread </span><span class="style10">( </span><span
-class="style11">NThread_HW </span><span class="style10">/ </span><span class="style4">6</span><span
-class="style10">));
-    </span><span class="style2">//------------------------------------------------------------------------
-    // NThread ( 100) force to execute with 100 threads
-    //------------------------------------------------------------------------
-    </span><span class="style11">bsp</span><span class="style10">::</span><span
-class="style11">sample_sort </span><span class="style10">( </span><span class="style11">B</span><span
-class="style10">.</span><span class="style16">begin</span><span class="style10">() , </span><span
-class="style11">B</span><span class="style10">.</span><span class="style16">end</span><span
-class="style10">(), </span><span class="style11">NThread </span><span class="style10">( </span><span
-class="style4">100</span><span class="style10">));
-
-    </span><span class="style5">for </span><span class="style10">( </span><span
-class="style5">uint32_t </span><span class="style11">i </span><span class="style10">=</span><span
-class="style4">0 </span><span class="style10">; </span><span class="style11">i </span><span
-class="style10">&lt; </span><span class="style11">NMAX </span><span class="style10">; ++</span><span
-class="style11">i </span><span class="style10">)
-        </span><span class="style5">if </span><span class="style10">( </span><span
-class="style11">A</span><span class="style10">[</span><span class="style11">i</span><span
-class="style10">] != </span><span class="style11">B</span><span class="style10">[</span><span
-class="style11">i</span><span class="style10">])  </span><span class="style16">std</span><span
-class="style10">::</span><span class="style16">cout</span><span class="style10">&lt;&lt;</span><span
-class="style6">"Error in the sorting process\n"</span><span class="style10">;
-    </span><span class="style5">return </span><span class="style4">0 </span><span
-class="style10">;
-};<br /></span></span> </code></pre>
-          <span class="style9"> </span> </div>
-        <br />
-        <br />
-        <p><a name="algorithms"></a> <span style="font-size: 18pt;font-weight: bold; color: black;">2.-
-            Algorithms</span></p>
-        <br />
-        <p><a name="introsort"></a> <span style="font-size: 16pt;font-weight: bold; color: black;">2.1.-
-            Introsort </span></p>
-        <p>  </p>
-        <p style="margin-bottom: 0cm; line-height: 100%"><font face="Arimo, sans-serif">Introsort
-is
-            a hybrid algorithm. Initially is a quicksort, but when the numbers
-            of division is greater than a number, change to the heapsort
-            algorithm.</font></p>
-        <p style="margin-bottom: 0cm; line-height: 100%"><font face="Arimo, sans-serif"><br />
-          </font></p>
-        <p style="margin-bottom: 0cm; line-height: 100%"><font face="Arimo, sans-serif">
-          </font></p>
-        <p style="margin-bottom: 0cm; line-height: 100%"><font face="Arimo, sans-serif">Heapsort
-is
-            a O(NlogN) algorithm but slower than quick_sort. This is for to
-            prevent the worst case of QuickSort (N²).</font></p>
-        <br />
-        <div class="caja_codigo">
-          <pre><code><span style="font: 9pt Monospace;"><span class="style5">template </span><span
-class="style10">&lt; </span><span class="style5">class </span><span class="style11">iter_t</span><span
+    </span><span class="style11">hpx_sort</span><span class="style10">::</span><span
+class="style16">sort </span><span class="style10">(</span><span class="style11">hpx</span><span
+class="style10">::</span><span class="style11">parallel</span><span class="style10">::</span><span
+class="style11">v1</span><span class="style10">::</span><span class="style11">seq</span><span
 class="style10">,
-           </span><span class="style5">typename </span><span class="style11">compare </span><span
-class="style10">= </span><span class="style16">std</span><span class="style10">::</span><span
-class="style16">less </span><span class="style10">&lt;</span><span class="style5">typename </span><span
-class="style11">iter_value</span><span class="style10">&lt;</span><span class="style11">iter_t</span><span
-class="style10">&gt;::</span><span class="style11">type</span><span class="style10">&gt; <br />         &gt;
-</span><span class="style5">void </span><span class="style11">introsort </span><span
-class="style10">( </span><span class="style11">iter_t first</span><span class="style10">, </span><span
-class="style11">iter_t last</span><span class="style10">,</span><span class="style11">compare comp </span><span
-class="style10">= </span><span class="style11">compare</span><span class="style10">() ) </span><span
-class="style10">;<br /><br /></span></span></code></pre>
-          <span class="style9"> </span> </div>
-        <br />
-        <br />
-        <br />
-        <p><a name="parallel_introsort"></a> <span style="font-size: 16pt;font-weight: bold; color: black;">2.2.-
-            parallel_introsort</span></p>
-        <p> </p>
-        This is the parallel version of introsort. Divide the range of elements
-        in small parts, which will be ordered by the threads. When the number of
-        threads is 1, use introsort.<br />
-        <br />
-        The auxiliary memory needed is logN, for to store the pivot elements in
-        the recursive calls<br />
-        <br />
-        <div class="caja_codigo">
-          <pre><code><span style="font: 9pt Monospace;"><span class="style5"><br /></span></span></code><code><span
-style="font: 9pt Monospace;"><span class="style5">template    </span><span class="style10">&lt; </span><span
-class="style5">class </span><span class="style11">iter_t </span><span class="style10">&gt;
-</span><span class="style5">void </span><span class="style11">parallel_introsort </span><span
-class="style10">( </span><span class="style11">iter_t first</span><span class="style10">, </span><span
-class="style11">iter_t last </span><span class="style10">, </span><span class="style5">const </span><span
-class="style11">NThread </span><span class="style10">&amp;</span><span class="style11">NT </span><span
-class="style10">= </span><span class="style11">NThread</span><span class="style10">() )</span><span
-class="style10">;</span></span></code>
-<br /><br /><code><span style="font: 9pt Monospace;"><span class="style5">template </span><span
-class="style10">&lt; </span><span class="style5">class </span><span class="style11">iter_t</span><span
+                    </span><span class="style11">Ix_name</span><span class="style10">.</span><span
+class="style16">begin</span><span class="style10">()  , </span><span class="style11">Ix_name</span><span
+class="style10">.</span><span class="style16">end</span><span class="style10">()  , </span><span
+class="style11">compare_name  </span><span class="style10">());
+    </span><span class="style11">hpx_sort</span><span class="style10">::</span><span
+class="style16">sort </span><span class="style10">(</span><span class="style11">hpx</span><span
+class="style10">::</span><span class="style11">parallel</span><span class="style10">::</span><span
+class="style11">v1</span><span class="style10">::</span><span class="style11">seq</span><span
 class="style10">,
-           </span><span class="style5">typename </span><span class="style11">compare </span><span
-class="style10">= </span><span class="style16">std</span><span class="style10">::</span><span
-class="style16">less </span><span class="style10">&lt;</span><span class="style5">typename </span><span
-class="style11">iter_value</span><span class="style10">&lt;</span><span class="style11">iter_t</span><span
-class="style10">&gt;::</span><span class="style11">type</span><span class="style10">&gt; <br />         &gt;
-</span><span class="style5">void </span><span class="style11">parallel_introsort </span><span
-class="style10">( </span><span class="style11">iter_t first</span><span class="style10">, </span><span
-class="style11">iter_t last</span><span class="style10">, </span><span class="style11">compare comp</span><span
-class="style10">, </span><span class="style5">const </span><span class="style11">NThread </span><span
-class="style10">&amp;</span><span class="style11">NT </span><span class="style10">= </span><span
-class="style11">NThread</span><span class="style10">() )</span><span class="style10">;</span></span></code><br />
-<code><span style="font: 9pt Monospace;"><span class="style5"></span><span class="style10"><br /></span></span></code></pre>
-          <span class="style9"> </span> </div>
-        <br />
-        <p><a name="smart_merge_sort"></a> <span style="font-size: 16pt;font-weight: bold; color: black;">2.3.-
-            smart_merge_sort</span></p>
-        <p> </p>
-        <font face="Arimo, sans-serif">This is a new single thread stable sort
-          algorithm, created and developed specifically for this library. This
-          algorithm combine several ideas for to improve the characteristics of
-          others stable sort algorithms as merge_sort , Timsort...<br />
-          <br />
-        </font>
-        <p style="margin-bottom: 0cm; line-height: 100%"><font face="Arimo, sans-serif">(In
-the
-            benchmarks you have a detailed description of the results in time
-            and memory obtained)</font></p>
-        <p style="margin-bottom: 0cm; line-height: 100%"><font face="Arimo, sans-serif">This
-algorithm
-            use an auxiliary memory of (N/2) elements.</font></p>
-        <br />
-        <p>  </p>
-        <div class="caja_codigo"> <br />
-          <pre><code><span style="font: 9pt Monospace;"><span class="style5">template </span><span
-class="style10">&lt; </span><span class="style5">class </span><span class="style11">iter_t</span><span
-class="style10">,
-           </span><span class="style5">typename </span><span class="style11">compare </span><span
-class="style10">= </span><span class="style16">std</span><span class="style10">::</span><span
-class="style16">less</span><span class="style10">&lt;</span><span class="style5">typename </span><span
-class="style11">iter_value</span><span class="style10">&lt;</span><span class="style11">iter_t</span><span
-class="style10">&gt;::</span><span class="style11">type</span><span class="style10">&gt;
-         &gt;
-</span><span class="style5">void </span><span class="style11">smart_merge_sort</span><span
-class="style10">(</span><span class="style11">iter_t first</span><span class="style10">, </span><span
-class="style11">iter_t last</span><span class="style10">, </span><span class="style11">compare comp </span><span
-class="style10">= </span><span class="style11">compare</span><span class="style10">() )</span><span
-class="style10">;</span></span></code></pre>
+                    </span><span class="style11">Ix_weight</span><span class="style10">.</span><span
+class="style16">begin</span><span class="style10">(), </span><span class="style11">Ix_weight</span><span
+class="style10">.</span><span class="style16">end</span><span class="style10">(), </span><span
+class="style11">compare_weight</span><span class="style10">());
+
+    </span><span class="style16">cout</span><span class="style10">&lt;&lt;</span><span
+class="style6">"Printing sorted by number \n"</span><span class="style10">;
+    </span><span class="style5">for </span><span class="style10">(</span><span class="style5">auto </span><span
+class="style11">it </span><span class="style10">= </span><span class="style11">VM</span><span
+class="style10">.</span><span class="style16">begin</span><span class="style10">(); </span><span
+class="style11">it </span><span class="style10">!= </span><span class="style11">VM</span><span
+class="style10">.</span><span class="style16">end</span><span class="style10">() ; ++</span><span
+class="style11">it</span><span class="style10">)
+        </span><span class="style16">cout</span><span class="style10">&lt;&lt;(*</span><span
+class="style11">it</span><span class="style10">);
+
+    </span><span class="style16">cout</span><span class="style10">&lt;&lt;</span><span
+class="style6">"Printing sorted by name \n"</span><span class="style10">;
+    </span><span class="style5">for </span><span class="style10">(</span><span class="style5">auto </span><span
+class="style11">it </span><span class="style10">= </span><span class="style11">Ix_name</span><span
+class="style10">.</span><span class="style16">begin</span><span class="style10">(); </span><span
+class="style11">it </span><span class="style10">!= </span><span class="style11">Ix_name</span><span
+class="style10">.</span><span class="style16">end</span><span class="style10">() ; ++</span><span
+class="style11">it</span><span class="style10">)
+        </span><span class="style16">cout</span><span class="style10">&lt;&lt;(*(*</span><span
+class="style11">it</span><span class="style10">));
+
+    </span><span class="style16">cout</span><span class="style10">&lt;&lt;</span><span
+class="style6">"Printing sorted by weight \n"</span><span class="style10">;
+    </span><span class="style5">for </span><span class="style10">(</span><span class="style5">auto </span><span
+class="style11">it </span><span class="style10">= </span><span class="style11">Ix_weight</span><span
+class="style10">.</span><span class="style16">begin</span><span class="style10">(); </span><span
+class="style11">it </span><span class="style10">!= </span><span class="style11">Ix_weight</span><span
+class="style10">.</span><span class="style16">end</span><span class="style10">() ; ++</span><span
+class="style11">it</span><span class="style10">)
+        </span><span class="style16">cout</span><span class="style10">&lt;&lt;(*(*</span><span
+class="style11">it</span><span class="style10">));
+
+    </span><span class="style5">return </span><span class="style11">hpx</span><span
+class="style10">::</span><span class="style11">finalize</span><span class="style10">();
+};</span></span></code></pre>
           <br />
           <span class="style9"> </span> </div>
         <br />
-        <br />
-        <p><a name="parallel_stable_sort"></a> <span style="font-size: 16pt;font-weight: bold; color: black;">2.4.-
-            parallel_stable_sort</span></p>
-        <p> </p>
-        This is a parallel stable sort algorithm, built over the sample sort
-        algorithm , bust using less auxiliary memory (N / 2) elements in
-        exchange for loss about 5% of the speed.
-        <p> </p>
+         The output of the program is<br />
         <br />
         <div class="caja_codigo"> <br />
-          <pre><code><span style="font: 9pt Monospace;"><span class="style5">template    </span><span
-class="style10">&lt; </span><span class="style5">class </span><span class="style11">iter_t </span><span
-class="style10">&gt;
-</span><span class="style5">void </span><span class="style11">parallel_stable_sort </span><span
-class="style10">( </span><span class="style11">iter_t first</span><span class="style10">, </span><span
-class="style11">iter_t last </span><span class="style10">, </span><span class="style5">const </span><span
-class="style11">NThread </span><span class="style10">&amp;</span><span class="style11">NT </span><span
-class="style10">= </span><span class="style11">NThread</span><span class="style10">() )</span><span
-class="style10">;</span></span></code></pre>
-          <br />
-          <pre><code><span style="font: 9pt Monospace;"><span class="style5">template    </span><span
-class="style10">&lt; </span><span class="style5">class </span><span class="style11">iter_t</span><span
-class="style10">,
-              </span><span class="style5">typename </span><span class="style11">compare </span><span
-class="style10">= </span><span class="style16">std</span><span class="style10">::</span><span
-class="style16">less </span><span class="style10">&lt; </span><span class="style5">typename </span><span
-class="style11">iter_value</span><span class="style10">&lt;</span><span class="style11">iter_t</span><span
-class="style10">&gt;::</span><span class="style11">type</span><span class="style10">&gt;
-            &gt;
-</span><span class="style5">void </span><span class="style11">parallel_stable_sort </span><span
-class="style10">( </span><span class="style11">iter_t first</span><span class="style10">, </span><span
-class="style11">iter_t last</span><span class="style10">, </span><span class="style11">compare comp </span><span
-class="style10">, </span><span class="style5">const </span><span class="style11">NThread </span><span
-class="style10">&amp;</span><span class="style11">NT </span><span class="style10">= </span><span
-class="style11">NThread</span><span class="style10">() )</span><span class="style10">;</span></span></code></pre>
-          <br />
+          Printing sorted by number <br />
+          1 - Peter - 85.6<br />
+          2 - Hanna - 63.4<br />
+          3 - John - 83.6<br />
+          4 - Elsa - 56.6<br />
+          Printing sorted by name <br />
+          4 - Elsa - 56.6<br />
+          2 - Hanna - 63.4<br />
+          3 - John - 83.6<br />
+          1 - Peter - 85.6<br />
+          Printing sorted by weight <br />
+          4 - Elsa - 56.6<br />
+          2 - Hanna - 63.4<br />
+          3 - John - 83.6<br />
+          1 - Peter - 85.6<br />
           <br />
           <span class="style9"> </span> </div>
         <br />
-        <p><a name="sample_sort"></a> <span style="font-size: 16pt;font-weight: bold; color: black;">2.5.-
-            sample_sort</span></p>
-        <p> </p>
-        This is a parallel stable sort algorithm. It is faster than
-        parallel_stable_sort but the auxiliary memory used is N elements. <br />
-        You can see the details in the benchmark chapter<br />
-        <p>  </p>
-        <br />
-        <div class="caja_codigo"> <br />
-          <br />
-          <pre><code><span style="font: 9pt Monospace;"><span class="style5">template    </span><span
-class="style10">&lt; </span><span class="style5">class </span><span class="style11">iter_t </span><span
-class="style10">&gt;
-</span><span class="style5">void </span><span class="style11">sample_sort </span><span
-class="style10">( </span><span class="style11">iter_t first</span><span class="style10">, </span><span
-class="style11">iter_t last </span><span class="style10">, </span><span class="style5">const </span><span
-class="style11">NThread </span><span class="style10">&amp;</span><span class="style11">NT </span><span
-class="style10">= </span><span class="style11">NThread</span><span class="style10">() )</span><span
-class="style10">;</span></span></code></pre>
-          <br />
-          <br />
-          <pre><code><span style="font: 9pt Monospace;"><span class="style5">template    </span><span
-class="style10">&lt; </span><span class="style5">class </span><span class="style11">iter_t</span><span
-class="style10">,
-              </span><span class="style5">typename </span><span class="style11">compare </span><span
-class="style10">= </span><span class="style16">std</span><span class="style10">::</span><span
-class="style16">less </span><span class="style10">&lt; </span><span class="style5">typename </span><span
-class="style11">iter_value</span><span class="style10">&lt;</span><span class="style11">iter_t</span><span
-class="style10">&gt;::</span><span class="style11">type</span><span class="style10">&gt;
-            &gt;
-</span><span class="style5">void </span><span class="style11">sample_sort </span><span
-class="style10">( </span><span class="style11">iter_t first</span><span class="style10">, </span><span
-class="style11">iter_t last</span><span class="style10">, </span><span class="style11">compare comp </span><span
-class="style10">, </span><span class="style5">const </span><span class="style11">NThread </span><span
-class="style10">&amp;</span><span class="style11">NT </span><span class="style10">= </span><span
-class="style11">NThread</span><span class="style10">() )</span><span class="style10">;</span></span></code></pre>
-          <br />
-          <br />
-          <span class="style9"> </span> </div>
-        <br />
-        <img align="justify" src="img/paso3.png" alt="" /></div>
+        <img align="justify" src="file:///home/francisco/Projects/Sort/Boost_dev/doc/img/paso3.png"
+          alt="" /></div>
       <a title="benchmark.html" href="benchmark.html" style="float:right"><img alt="link to benchmark page"
           src="img/next.png" /></a> <a title="index.html" href="index.html" style="float:right"><img
           alt="go to head of the page" src="img/up.png" /></a> 
@@ -714,7 +620,8 @@ class="style11">NThread</span><span class="style10">() )</span><span class="styl
         <tbody>
           <tr>
             <td align="left">
-              <p><small>Last revised: May  20, 2015</small></p>
+              <p><small>Last revised: <br />
+                </small></p>
             </td>
             <td> <br />
             </td>
@@ -725,24 +632,16 @@ class="style11">NThread</span><span class="style10">() )</span><span class="styl
       <div id="footer">
         <div id="footer-left">
           <div id="copyright">
-            <p>Copyright Francisco Jose Tapia 2015.</p>
-          </div>
+            <p><span style="font-style: italic;">Copyright Francisco Jose Tapia
+                2015.</span></p>
+            <span style="font-style: italic;"> </span></div>
+          <span style="font-style: italic;"> </span>
           <div id="license">
-            <p>Distributed under the <a href="/LICENSE_1_0.txt" class="internal">Boost
-                Software License, Version 1.0</a>.</p>
+            <p><span style="font-style: italic;">Distributed under the <a href="/LICENSE_1_0.txt"
+                  class="internal">Boost Software License, Version 1.0</a>.</span></p>
           </div>
-        </div>
-        <div id="footer-right">
-          <div id="banners">
-            <p id="banner-xhtml"> <a href="http://validator.w3.org/check?uri=referer"
-                class="external">XHTML 1.0</a></p>
-            <p id="banner-css"> <a href="http://jigsaw.w3.org/css-validator/check/referer"
-                class="external">CSS</a></p>
-            <p id="banner-osi"> <a href="http://www.opensource.org/docs/definition.php"
-                class="external">OSI Certified</a></p>
-          </div>
-        </div>
-      </div>
+          <span style="font-style: italic;"> </span></div>
+        <span style="font-style: italic;"> </span> </div>
     </div>
   </body>
 </html>

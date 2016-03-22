@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.9.1"/>
-<title>sort::parallel: nthread.hpp File Reference</title>
+<title>HPX Parallel Sort: include/hpx/parallel/sort/tools/nthread.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,9 +25,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">sort::parallel
+   <div id="projectname">HPX Parallel Sort
    </div>
-   <div id="projectbrief">Parallel Sorting Algorithms for the Boost Library</div>
+   <div id="projectbrief">Parallel sorting algorithms for the HPX library</div>
   </td>
  </tr>
  </tbody>
@@ -38,7 +38,7 @@
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
     </ul>
   </div>
@@ -64,7 +64,7 @@ $(document).ready(function(){initNavTree('nthread_8hpp.html','');});
 <div id="doc-content">
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Data Structures</a>  </div>
+<a href="#nested-classes">Classes</a>  </div>
   <div class="headertitle">
 <div class="title">nthread.hpp File Reference</div>  </div>
 </div><!--header-->
@@ -77,22 +77,19 @@ $(document).ready(function(){initNavTree('nthread_8hpp.html','');});
 <code>#include &lt;cassert&gt;</code><br />
 <code>#include &lt;utility&gt;</code><br />
 <code>#include &lt;type_traits&gt;</code><br />
-<code>#include &lt;boost/sort/parallel/util/config.hpp&gt;</code><br />
-<code>#include &lt;boost/sort/parallel/util/definition.hpp&gt;</code><br />
-<code>#include &lt;boost/sort/parallel/util/algorithm.hpp&gt;</code><br />
-<code>#include &lt;boost/sort/parallel/util/util_iterator.hpp&gt;</code><br />
+<code>#include &lt;iterator&gt;</code><br />
 </div>
 <p><a href="nthread_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classboost_1_1sort_1_1parallel_1_1util_1_1_n_thread.html">NThread</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This class encapsulate a number of threads. This number never can be 0. We use this class instead un unsigned for to simplify the calling of concurrent functions where the number of threads is a parameter.  <a href="classboost_1_1sort_1_1parallel_1_1util_1_1_n_thread.html#details">More...</a><br /></td></tr>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpx_1_1parallel_1_1sort_1_1tools_1_1_n_thread.html">hpx::parallel::sort::tools::NThread</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This class encapsulate a number of threads. This number never can be 0. We use this class instead un unsigned for to simplify the calling of concurrent functions where the number of threads is a parameter.  <a href="classhpx_1_1parallel_1_1sort_1_1tools_1_1_n_thread.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Description od the class NThreads, which is the variable for to pass to the para llel algorithms the number of threads to use. </p>
-<dl class="section author"><dt>Author</dt><dd>Copyright(c) 2010 2015 Francisco José Tapia (<a href="#" onclick="location.href='mai'+'lto:'+'fjt'+'ap'+'ia@'+'gm'+'ail'+'.c'+'om'; return false;">fjtap<span style="display: none;">.nosp@m.</span>ia@g<span style="display: none;">.nosp@m.</span>mail.<span style="display: none;">.nosp@m.</span>com</a> )<br />
+<dl class="section author"><dt>Author</dt><dd>Copyright(c) 2015 Francisco José Tapia (<a href="#" onclick="location.href='mai'+'lto:'+'fjt'+'ap'+'ia@'+'gm'+'ail'+'.c'+'om'; return false;">fjtap<span style="display: none;">.nosp@m.</span>ia@g<span style="display: none;">.nosp@m.</span>mail.<span style="display: none;">.nosp@m.</span>com</a> )<br />
  Distributed under the Boost Software License, Version 1.0.<br />
  ( See accompanyingfile LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt">http://www.boost.org/LICENSE_1_0.txt</a> ) </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>0.1</dd></dl>
@@ -102,8 +99,8 @@ Data Structures</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_324b075c5c683b88f34047fdffd66f78.html">include_doxy</a></li><li class="navelem"><a class="el" href="dir_548af52e118a68b933d77d3ecf631920.html">boost</a></li><li class="navelem"><a class="el" href="dir_f43f33a8a4984a52735f1e60aef0864a.html">sort</a></li><li class="navelem"><a class="el" href="dir_7437668acb636e8a3efef77c65734137.html">parallel</a></li><li class="navelem"><a class="el" href="dir_2f8321dfc1d0e699259c7631cc09844f.html">util</a></li><li class="navelem"><a class="el" href="nthread_8hpp.html">nthread.hpp</a></li>
-    <li class="footer">Generated on Wed Jun 24 2015 14:16:37 for sort::parallel by
+    <li class="navelem"><a class="el" href="dir_ae67f297c181d17e0b79cd265fac1ae9.html">include</a></li><li class="navelem"><a class="el" href="dir_3184b9c967111bb530c92a966b20572d.html">hpx</a></li><li class="navelem"><a class="el" href="dir_c6a5aa13cd524b679c66588cb1a252cb.html">parallel</a></li><li class="navelem"><a class="el" href="dir_f1c75274084b4abcd741a3b28c52faf4.html">sort</a></li><li class="navelem"><a class="el" href="dir_90eb253cb90e962a060f28c25986510a.html">tools</a></li><li class="navelem"><a class="el" href="nthread_8hpp.html">nthread.hpp</a></li>
+    <li class="footer">Generated on Mon Mar 21 2016 21:27:27 for HPX Parallel Sort by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.9.1 </li>
   </ul>
