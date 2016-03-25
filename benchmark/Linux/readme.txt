@@ -1,7 +1,7 @@
 Benchmark
 ================
 
-For to compile the two program , need to include the next directories
+For to compile the two programs , need to include the next directories
 hpx/include and hpx/benchmark/include
 
 Compile the file_generator.cpp program
