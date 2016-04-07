@@ -20,36 +20,35 @@ template <uint32_t NN>
 struct int_array
 {   uint64_t M[NN];
 
-    int_array ( uint64_t K =0 )
-    {   for ( uint32_t i =0 ; i < NN ; ++i)
-            M[i] = K;
-    };
-
     template <class generator >
-    static int_array<NN> & generate (int_array<NN> & K , generator & gen)
-    {   for ( uint32_t i =0 ; i < NN ; ++i)
-            K.M[i] = gen();
-        return K ;
+    static int_array<NN> generate (generator &gen)
+    {
+      int_array<NN> result;
+      for ( uint32_t i =0 ; i < NN ; ++i)
+        result.M[i] = gen();
+      return result;
     };
-    int_array & operator = ( uint64_t K)
-    {   for ( uint32_t i =0 ; i < NN ; ++i)
-            M[i] = K;
-        return *this ;
-    };
-    uint64_t counter ( void) const
-    {   uint64_t Acc =0 ;
-        for ( uint32_t i =0 ; i < NN ; Acc += M[i++]) ;
-        return Acc ;
-    }
 
-    bool operator < ( const int_array &R) const
-    {   return ( counter() < R.counter());
-    };
-    
-    ~int_array ()
-    {   for ( uint32_t i =0 ; i < NN ; ++i)  M[i] = 0;
+    uint64_t counter ( void) const
+    {   uint64_t Acc =M[0] ;
+        for ( uint32_t i =1 ; i < NN ; Acc += M[i++]) ;
+        return Acc ;
     };
 };
+
+template <class IA >
+struct H_comp
+{	bool operator () ( const  IA &A1, const IA & A2)const
+	{return (  A1.counter() < A2.counter());};
+};
+
+template <class IA >
+struct L_comp
+{
+	bool operator () ( const  IA & A1, const IA & A2)const
+	{return (  A1.M[0]< A2.M[0] );};
+};
+
 template <uint32_t NN>
 std::ostream & operator << ( std::ostream & out, const int_array<NN> & IA)
 {	out<<IA.counter() ;
