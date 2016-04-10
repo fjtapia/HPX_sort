@@ -14,7 +14,7 @@
 #define __SORT_ALGORITHM_TOKEN_HPP
 
 
-namespace hpx
+namespace hpx2
 {
 namespace parallel
 {

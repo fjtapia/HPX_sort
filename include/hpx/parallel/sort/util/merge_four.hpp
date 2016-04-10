@@ -20,7 +20,7 @@
 #include <vector>
 #include <hpx/parallel/sort/util/range.hpp>
 
-namespace hpx
+namespace hpx2
 {
 namespace parallel
 {

@@ -27,15 +27,15 @@
 
 
 
-namespace hpx		{
+namespace hpx2		{
 namespace parallel	{    
 namespace sort		{
 namespace algorithm	{
 
 using std::iterator_traits ;
-namespace bspu = hpx::parallel::sort::util;
-using hpx::parallel::sort::tools::NThread ;
-using hpx::parallel::sort::tools::NThread_HW ;
+namespace bspu = util;
+using hpx2::parallel::sort::tools::NThread ;
+using hpx2::parallel::sort::tools::NThread_HW ;
 //
 ///---------------------------------------------------------------------------
 /// @struct parallel_stable_sort_tag

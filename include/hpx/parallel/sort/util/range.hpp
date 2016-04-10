@@ -25,7 +25,7 @@
 #define __DEBUG_SORT 0
 #endif
 
-namespace hpx
+namespace hpx2
 {
 namespace parallel
 {

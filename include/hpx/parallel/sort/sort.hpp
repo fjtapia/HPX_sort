@@ -20,7 +20,7 @@
 #include <hpx/parallel/sort/algorithm/parallel_stable_sort.hpp>
 #include <hpx/parallel/execution_policy.hpp>
 
-namespace hpx
+namespace hpx2
 {
 namespace parallel
 {
@@ -30,10 +30,10 @@ namespace sort
 //****************************************************************************
 //             USING AND DEFINITIONS
 //****************************************************************************
-namespace hpx_algo 	= hpx::parallel::sort::algorithm ;
-namespace hpx_util 	= hpx::parallel::sort::util ;
-namespace hpx_tools = hpx::parallel::sort::tools ;
-namespace hpx_sort 	= hpx::parallel::sort ;
+namespace hpx_algo 	= hpx2::parallel::sort::algorithm ;
+namespace hpx_util 	= hpx2::parallel::sort::util ;
+namespace hpx_tools = hpx2::parallel::sort::tools ;
+namespace hpx_sort 	= hpx2::parallel::sort ;
 
 using std::iterator_traits ;
 //----------------------------------------------------------------------------

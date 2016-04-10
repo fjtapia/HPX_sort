@@ -23,7 +23,7 @@
 #include <hpx/parallel/sort/algorithm/indirect.hpp>
 
 
-namespace hpx
+namespace hpx2
 {
 namespace parallel
 {

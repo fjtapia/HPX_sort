@@ -21,7 +21,7 @@
 //#include <thread>
 //#include <ctime>
 
-namespace hpx
+namespace hpx2
 {
 namespace parallel
 {

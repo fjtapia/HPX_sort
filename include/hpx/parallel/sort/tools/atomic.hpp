@@ -20,7 +20,7 @@
 #include <iterator>
 
 
-namespace hpx
+namespace hpx2
 {
 namespace parallel
 {

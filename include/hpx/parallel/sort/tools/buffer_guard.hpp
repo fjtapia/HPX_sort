@@ -17,7 +17,7 @@
 #include <vector>
 #include <cassert>
 
-namespace hpx
+namespace hpx2
 {
 namespace parallel
 {

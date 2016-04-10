@@ -21,7 +21,7 @@
 
 
 
-namespace hpx		{
+namespace hpx2		{
 namespace parallel	{
 namespace sort		{
 namespace algorithm	{

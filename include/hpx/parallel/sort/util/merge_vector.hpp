@@ -21,7 +21,7 @@
 #include <vector>
 #include <hpx/parallel/sort/util/merge_four.hpp>
 
-namespace hpx
+namespace hpx2
 {
 namespace parallel
 {

@@ -25,7 +25,7 @@
 #include <hpx/parallel/sort/algorithm/insertion_sort.hpp>
 #include <hpx/parallel/sort/util/range.hpp>
 
-namespace hpx		{
+namespace hpx2		{
 namespace parallel	{
 namespace sort		{
 namespace algorithm	{
@@ -33,9 +33,9 @@ namespace algorithm	{
 //****************************************************************************
 //                 NAMESPACES AND USING SENTENCES
 //****************************************************************************
-namespace su = hpx::parallel::sort::util ;
-using hpx::parallel::sort::util::range ;
-using hpx::parallel::sort::tools::NBits64 ;
+namespace su = hpx2::parallel::sort::util ;
+using hpx2::parallel::sort::util::range ;
+using hpx2::parallel::sort::tools::NBits64 ;
 using std::iterator_traits ;
 
 //-----------------------------------------------------------------------------
@@ -320,7 +320,7 @@ template < class iter_t,
            = std::less<typename iterator_traits<iter_t>::value_type>  >
 void indirect_spin_sort ( iter_t first, iter_t last, compare comp = compare() )
 {   //------------------------------- begin-----------------------------------
-    typedef less_ptr_no_null <iter_t, compare>      compare_ptr ;
+    typedef hpx2::parallel::sort::algorithm::less_ptr_no_null <iter_t, compare>      compare_ptr ;
 
     std::vector<iter_t> VP ;
     create_index ( first , last , VP);

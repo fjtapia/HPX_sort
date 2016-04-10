@@ -17,7 +17,7 @@
 #include <hpx/parallel/sort/tools/spinlock.hpp>
 #include <vector>
 
-namespace hpx
+namespace hpx2
 {
 namespace parallel
 {
@@ -59,7 +59,7 @@ typedef typename vector_t::reference                        reference;
 typedef typename vector_t::const_reference                  const_reference;
 typedef typename vector_t::allocator_type                   allocator_type;
 typedef Allocator                                           alloc_t ;
-typedef spinlock  spinlock_t ;
+typedef hpx::util::spinlock  spinlock_t ;
 
 
 protected:
