@@ -376,6 +376,16 @@ int Prueba_hpx ( const std::vector <IA> & B , compare comp )
     VERIFY(A);
 
     A = B ;
+    //--------------------- HPX2 sample_sort (par) ---------------------
+    cout<<"HPX2 sample sort (par)       : ";
+    start = now() ;
+    hpx_sort::sample_sort (hpx::parallel::v1::par, A.begin() , A.end(), comp);
+    finish = now() ;
+    duracion = subtract_time(finish ,start) ;
+    cout<<duracion<<" secs\n";
+    VERIFY(A);
+
+    A = B ;
     //cout<<"---------------- HPX sort (seq) --------------\n";
     cout<<"HPX sort (seq)               : ";
     start = now() ;
@@ -395,27 +405,6 @@ int Prueba_hpx ( const std::vector <IA> & B , compare comp )
     cout<<duracion<<" secs\n";
     VERIFY(A);
 
-    A = B ;
-    //--------------------- HPX2 sample_sort (par) ---------------------
-    cout<<"HPX2 sample sort (par)       : ";
-    start = now() ;
-    hpx_sort::sample_sort (hpx::parallel::v1::par, A.begin() , A.end(), comp);
-    finish = now() ;
-    duracion = subtract_time(finish ,start) ;
-    cout<<duracion<<" secs\n";
-    VERIFY(A);
-
-/*
-    A = B ;
-    //--------------------- HPX2 sample_sort (seq) ---------------------
-    cout<<"HPX2 sample sort (par)       : ";
-    start = now() ;
-    hpx_sort::sample_sort (hpx::parallel::v1::seq, A.begin() , A.end(), comp );
-    finish = now() ;
-    duracion = subtract_time(finish ,start) ;
-    cout<<duracion<<" secs\n";
-    VERIFY(A);
-*/
     // terminate the HPX runtime
     return hpx::finalize();
 }
