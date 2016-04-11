@@ -47,7 +47,6 @@
 #include <file_vector.hpp>
 
 // Boost sort
-#include <boost/sort/spreadsort/spreadsort.hpp>
 #include "int_array.hpp"
 
 #include <boost/random/mersenne_twister.hpp>
