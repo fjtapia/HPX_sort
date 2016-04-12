@@ -1,0 +1,358 @@
+****************************************************************
+**                                                            **
+**         B O O S T :: S O R T :: P A R A L L E L            **
+**                                                            **
+**               F A S T  B E N C H M A R K                   **
+**                                                            **
+****************************************************************
+
+Architecture:          x86_64
+CPU op-mode(s):        32-bit, 64-bit
+Byte Order:            Little Endian
+CPU(s):                12
+On-line CPU(s) list:   0-11
+Thread(s) per core:    1
+Core(s) per socket:    12
+Socket(s):             1
+NUMA node(s):          1
+Vendor ID:             GenuineIntel
+CPU family:            6
+Model:                 79
+Model name:            Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz
+Stepping:              1
+CPU MHz:               1396.914
+BogoMIPS:              4399.61
+Virtualization:        VT-x
+L1d cache:             32K
+L1i cache:             32K
+L2 cache:              256K
+L3 cache:              30720K
+NUMA node0 CPU(s):     0-11
+
+=============================================
+4096 elements of size 4 randomly filled 
+ std::less<>() comparison 
+====================================
+std::sort                    : 0.000391471 secs
+std::stable_sort             : 0.000328437 secs
+TBB parallel sort            : 0.00271115 secs
+TBB parallel stable sort     : 0.000884338 secs
+GCC parallel sort            : 0.00719713 secs
+GCC parallel stable sort     : 0.000108971 secs
+HPX2 sort (seq)              : 0.000409197 secs
+HPX2 stable_sort (seq)       : 0.00039826 secs
+HPX2 sort (par)              : 0.000437573 secs
+HPX2 stable_sort (par)       : 0.00038865 secs
+HPX2 sample sort (par)       : 0.000365658 secs
+HPX sort (seq)               : 0.000406345 secs
+HPX sort (par)               : 0.000441802 secs
+
+=============================================
+8192 elements of size 4 randomly filled 
+ std::less<>() comparison 
+====================================
+std::sort                    : 0.00101557 secs
+std::stable_sort             : 0.000857714 secs
+TBB parallel sort            : 0.000548867 secs
+TBB parallel stable sort     : 0.000134762 secs
+GCC parallel sort            : 0.000177093 secs
+GCC parallel stable sort     : 0.000147045 secs
+HPX2 sort (seq)              : 0.00086616 secs
+HPX2 stable_sort (seq)       : 0.000800827 secs
+HPX2 sort (par)              : 0.000877431 secs
+HPX2 stable_sort (par)       : 0.000802795 secs
+HPX2 sample sort (par)       : 0.000594155 secs
+HPX sort (seq)               : 0.000930613 secs
+HPX sort (par)               : 0.000915879 secs
+
+=============================================
+16384 elements of size 4 randomly filled 
+ std::less<>() comparison 
+====================================
+std::sort                    : 0.00201011 secs
+std::stable_sort             : 0.00164765 secs
+TBB parallel sort            : 0.000491748 secs
+TBB parallel stable sort     : 0.000189983 secs
+GCC parallel sort            : 0.0023089 secs
+GCC parallel stable sort     : 0.000256966 secs
+HPX2 sort (seq)              : 0.00173826 secs
+HPX2 stable_sort (seq)       : 0.00172922 secs
+HPX2 sort (par)              : 0.00173981 secs
+HPX2 stable_sort (par)       : 0.00172462 secs
+HPX2 sample sort (par)       : 0.000827004 secs
+HPX sort (seq)               : 0.00187046 secs
+HPX sort (par)               : 0.00188548 secs
+
+=============================================
+32768 elements of size 4 randomly filled 
+ std::less<>() comparison 
+====================================
+std::sort                    : 0.00469791 secs
+std::stable_sort             : 0.00381415 secs
+TBB parallel sort            : 0.000893537 secs
+TBB parallel stable sort     : 0.000359367 secs
+GCC parallel sort            : 0.00170132 secs
+GCC parallel stable sort     : 0.000506994 secs
+HPX2 sort (seq)              : 0.00207925 secs
+HPX2 stable_sort (seq)       : 0.00192842 secs
+HPX2 sort (par)              : 0.00209125 secs
+HPX2 stable_sort (par)       : 0.00193045 secs
+HPX2 sample sort (par)       : 0.000782867 secs
+HPX sort (seq)               : 0.00256453 secs
+HPX sort (par)               : 0.00256808 secs
+
+=============================================
+65536 elements of size 4 randomly filled 
+ std::less<>() comparison 
+====================================
+std::sort                    : 0.00992644 secs
+std::stable_sort             : 0.00740507 secs
+TBB parallel sort            : 0.00176369 secs
+TBB parallel stable sort     : 0.00104694 secs
+GCC parallel sort            : 0.002191 secs
+GCC parallel stable sort     : 0.000954948 secs
+HPX2 sort (seq)              : 0.00784524 secs
+HPX2 stable_sort (seq)       : 0.00744415 secs
+HPX2 sort (par)              : 0.00150648 secs
+Verify sort failed
+HPX2 stable_sort (par)       : 0.00168008 secs
+HPX2 sample sort (par)       : 0.00126472 secs
+HPX sort (seq)               : 0.00682877 secs
+HPX sort (par)               : 0.00764598 secs
+
+=============================================
+131072 elements of size 4 randomly filled 
+ std::less<>() comparison 
+====================================
+std::sort                    : 0.0192028 secs
+std::stable_sort             : 0.0143706 secs
+TBB parallel sort            : 0.00356818 secs
+TBB parallel stable sort     : 0.0022909 secs
+GCC parallel sort            : 0.0021437 secs
+GCC parallel stable sort     : 0.00191987 secs
+HPX2 sort (seq)              : 0.016011 secs
+HPX2 stable_sort (seq)       : 0.0137381 secs
+HPX2 sort (par)              : 0.00238535 secs
+Verify sort failed
+HPX2 stable_sort (par)       : 0.00256051 secs
+HPX2 sample sort (par)       : 0.0022456 secs
+HPX sort (seq)               : 0.0140023 secs
+HPX sort (par)               : 0.00721674 secs
+
+=============================================
+262144 elements of size 4 randomly filled 
+ std::less<>() comparison 
+====================================
+std::sort                    : 0.0186505 secs
+std::stable_sort             : 0.0149967 secs
+TBB parallel sort            : 0.00629503 secs
+TBB parallel stable sort     : 0.00423202 secs
+GCC parallel sort            : 0.0041895 secs
+GCC parallel stable sort     : 0.00365976 secs
+HPX2 sort (seq)              : 0.0324796 secs
+HPX2 stable_sort (seq)       : 0.0276486 secs
+HPX2 sort (par)              : 0.00351853 secs
+Verify sort failed
+HPX2 stable_sort (par)       : 0.00401958 secs
+HPX2 sample sort (par)       : 0.00316489 secs
+HPX sort (seq)               : 0.0235203 secs
+HPX sort (par)               : 0.00716025 secs
+
+=============================================
+524288 elements of size 4 randomly filled 
+ std::less<>() comparison 
+====================================
+std::sort                    : 0.0698561 secs
+std::stable_sort             : 0.0434324 secs
+TBB parallel sort            : 0.0107936 secs
+TBB parallel stable sort     : 0.00828846 secs
+GCC parallel sort            : 0.0079977 secs
+GCC parallel stable sort     : 0.00707966 secs
+HPX2 sort (seq)              : 0.0507436 secs
+HPX2 stable_sort (seq)       : 0.0397737 secs
+HPX2 sort (par)              : 0.00533065 secs
+HPX2 stable_sort (par)       : 0.00668043 secs
+HPX2 sample sort (par)       : 0.00570826 secs
+HPX sort (seq)               : 0.0444197 secs
+HPX sort (par)               : 0.00950205 secs
+
+=============================================
+1048576 elements of size 4 randomly filled 
+ std::less<>() comparison 
+====================================
+std::sort                    : 0.118121 secs
+std::stable_sort             : 0.0667279 secs
+TBB parallel sort            : 0.0225551 secs
+TBB parallel stable sort     : 0.0158941 secs
+GCC parallel sort            : 0.014366 secs
+GCC parallel stable sort     : 0.0129978 secs
+HPX2 sort (seq)              : 0.0909997 secs
+HPX2 stable_sort (seq)       : 0.0916177 secs
+HPX2 sort (par)              : 0.0105028 secs
+HPX2 stable_sort (par)       : 0.0132695 secs
+HPX2 sample sort (par)       : 0.00930121 secs
+HPX sort (seq)               : 0.0935627 secs
+HPX sort (par)               : 0.0169074 secs
+
+=============================================
+2097152 elements of size 4 randomly filled 
+ std::less<>() comparison 
+====================================
+std::sort                    : 0.166077 secs
+std::stable_sort             : 0.136774 secs
+TBB parallel sort            : 0.046547 secs
+TBB parallel stable sort     : 0.0289388 secs
+GCC parallel sort            : 0.0244718 secs
+GCC parallel stable sort     : 0.0224629 secs
+HPX2 sort (seq)              : 0.208627 secs
+HPX2 stable_sort (seq)       : 0.200557 secs
+HPX2 sort (par)              : 0.0226157 secs
+HPX2 stable_sort (par)       : 0.0273123 secs
+HPX2 sample sort (par)       : 0.0212133 secs
+HPX sort (seq)               : 0.217495 secs
+HPX sort (par)               : 0.0335458 secs
+
+=============================================
+4194304 elements of size 4 randomly filled 
+ std::less<>() comparison 
+====================================
+std::sort                    : 0.366191 secs
+std::stable_sort             : 0.281757 secs
+TBB parallel sort            : 0.0819429 secs
+TBB parallel stable sort     : 0.0495128 secs
+GCC parallel sort            : 0.0424533 secs
+GCC parallel stable sort     : 0.0401766 secs
+HPX2 sort (seq)              : 0.407912 secs
+HPX2 stable_sort (seq)       : 0.397443 secs
+HPX2 sort (par)              : 0.0368967 secs
+HPX2 stable_sort (par)       : 0.0577466 secs
+HPX2 sample sort (par)       : 0.0339617 secs
+HPX sort (seq)               : 0.386017 secs
+HPX sort (par)               : 0.059634 secs
+
+=============================================
+8388608 elements of size 4 randomly filled 
+ std::less<>() comparison 
+====================================
+std::sort                    : 0.667429 secs
+std::stable_sort             : 0.585957 secs
+TBB parallel sort            : 0.16528 secs
+TBB parallel stable sort     : 0.0902421 secs
+GCC parallel sort            : 0.0820783 secs
+GCC parallel stable sort     : 0.0758966 secs
+HPX2 sort (seq)              : 0.796185 secs
+HPX2 stable_sort (seq)       : 0.760733 secs
+HPX2 sort (par)              : 0.074107 secs
+HPX2 stable_sort (par)       : 0.0981895 secs
+HPX2 sample sort (par)       : 0.0702276 secs
+HPX sort (seq)               : 0.765528 secs
+HPX sort (par)               : 0.11859 secs
+
+=============================================
+16777216 elements of size 4 randomly filled 
+ std::less<>() comparison 
+====================================
+std::sort                    : 1.33002 secs
+std::stable_sort             : 1.20138 secs
+TBB parallel sort            : 0.289403 secs
+TBB parallel stable sort     : 0.180654 secs
+GCC parallel sort            : 0.161891 secs
+GCC parallel stable sort     : 0.144292 secs
+HPX2 sort (seq)              : 1.46547 secs
+HPX2 stable_sort (seq)       : 1.67755 secs
+HPX2 sort (par)              : 0.149208 secs
+HPX2 stable_sort (par)       : 0.201691 secs
+HPX2 sample sort (par)       : 0.131795 secs
+HPX sort (seq)               : 1.54211 secs
+HPX sort (par)               : 0.230234 secs
+
+=============================================
+33554432 elements of size 4 randomly filled 
+ std::less<>() comparison 
+====================================
+std::sort                    : 2.84923 secs
+std::stable_sort             : 2.52264 secs
+TBB parallel sort            : 0.521307 secs
+TBB parallel stable sort     : 0.394433 secs
+GCC parallel sort            : 0.356384 secs
+GCC parallel stable sort     : 0.353892 secs
+HPX2 sort (seq)              : 2.96333 secs
+HPX2 stable_sort (seq)       : 3.20682 secs
+HPX2 sort (par)              : 0.348523 secs
+HPX2 stable_sort (par)       : 0.419566 secs
+HPX2 sample sort (par)       : 0.288364 secs
+HPX sort (seq)               : 3.0824 secs
+HPX sort (par)               : 0.464793 secs
+
+=============================================
+67108864 elements of size 4 randomly filled 
+ std::less<>() comparison 
+====================================
+std::sort                    : 5.27266 secs
+std::stable_sort             : 5.15539 secs
+TBB parallel sort            : 1.03343 secs
+TBB parallel stable sort     : 0.742085 secs
+GCC parallel sort            : 0.604698 secs
+GCC parallel stable sort     : 0.62727 secs
+HPX2 sort (seq)              : 5.89562 secs
+HPX2 stable_sort (seq)       : 6.95914 secs
+HPX2 sort (par)              : 0.691936 secs
+HPX2 stable_sort (par)       : 0.821189 secs
+HPX2 sample sort (par)       : 0.546055 secs
+HPX sort (seq)               : 6.11049 secs
+HPX sort (par)               : 0.956621 secs
+
+=============================================
+134217728 elements of size 4 randomly filled 
+ std::less<>() comparison 
+====================================
+std::sort                    : 10.7054 secs
+std::stable_sort             : 10.8495 secs
+TBB parallel sort            : 1.93159 secs
+TBB parallel stable sort     : 1.41746 secs
+GCC parallel sort            : 1.13169 secs
+GCC parallel stable sort     : 1.1605 secs
+HPX2 sort (seq)              : 11.8713 secs
+HPX2 stable_sort (seq)       : 13.3125 secs
+HPX2 sort (par)              : 1.31355 secs
+HPX2 stable_sort (par)       : 1.58197 secs
+HPX2 sample sort (par)       : 1.19647 secs
+HPX sort (seq)               : 12.3056 secs
+HPX sort (par)               : 1.80262 secs
+
+=============================================
+268435456 elements of size 4 randomly filled 
+ std::less<>() comparison 
+====================================
+std::sort                    : 21.6498 secs
+std::stable_sort             : 22.135 secs
+TBB parallel sort            : 3.98817 secs
+TBB parallel stable sort     : 2.83187 secs
+GCC parallel sort            : 2.20662 secs
+GCC parallel stable sort     : 2.39255 secs
+HPX2 sort (seq)              : 23.7224 secs
+HPX2 stable_sort (seq)       : 27.9319 secs
+HPX2 sort (par)              : 2.5041 secs
+HPX2 stable_sort (par)       : 3.37602 secs
+HPX2 sample sort (par)       : 2.28763 secs
+HPX sort (seq)               : 24.833 secs
+HPX sort (par)               : 3.58495 secs
+
+=============================================
+536870912 elements of size 4 randomly filled 
+ std::less<>() comparison 
+====================================
+std::sort                    : 43.8432 secs
+std::stable_sort             : 46.4908 secs
+TBB parallel sort            : 7.85732 secs
+TBB parallel stable sort     : 5.79327 secs
+GCC parallel sort            : 4.35337 secs
+GCC parallel stable sort     : 4.71781 secs
+HPX2 sort (seq)              : 47.6644 secs
+HPX2 stable_sort (seq)       : 53.0389 secs
+HPX2 sort (par)              : 4.87095 secs
+HPX2 stable_sort (par)       : 6.55256 secs
+HPX2 sample sort (par)       : 5.00825 secs
+HPX sort (seq)               : 50.102 secs
+HPX sort (par)               : 7.2292 secs
+
