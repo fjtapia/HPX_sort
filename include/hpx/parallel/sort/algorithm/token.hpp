@@ -14,11 +14,11 @@
 #define __SORT_ALGORITHM_TOKEN_HPP
 
 
-namespace hpx2
+namespace hpx
 {
 namespace parallel
 {
-namespace sort
+HPX_INLINE_NAMESPACE(v2) { namespace sort
 {
 namespace algorithm
 {
@@ -59,7 +59,7 @@ struct token_level
 //
 //****************************************************************************
 };//    End namespace algorithm
-};//    End namespace sort
+};};//    End HPX_INLINE_NAMESPACE(v2) 
 };//    End namespace parallel
 };//    End namespace hpx
 //****************************************************************************

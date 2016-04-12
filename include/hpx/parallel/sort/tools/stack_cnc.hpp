@@ -17,11 +17,11 @@
 #include <hpx/parallel/sort/tools/spinlock.hpp>
 #include <vector>
 
-namespace hpx2
+namespace hpx
 {
 namespace parallel
 {
-namespace sort
+HPX_INLINE_NAMESPACE(v2) { namespace sort
 {
 namespace tools
 {
@@ -424,7 +424,7 @@ size_type pop_copy_back ( std::vector<value_type,Allocator2> & V1,
 
 //***************************************************************************
 };// end namespace tools
-};// end namespace sort
+};};// end HPX_INLINE_NAMESPACE(v2)
 };// end namespace parallel
 };// end namespace hpx
 //***************************************************************************

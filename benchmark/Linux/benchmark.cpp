@@ -19,6 +19,7 @@
 //-----------------------------------------------------------------------------
 
 #ifdef SORT_HAS_HPX
+# include <hpx/hpx.hpp>
 # include <hpx/parallel/algorithms/sort.hpp>
 # include <hpx/parallel/sort/sort.hpp>
 #endif
@@ -56,9 +57,9 @@
 #define NELEM 100000000
 #define NMAXSTRING 10000000
 using namespace std ;
-namespace hpx_util  = hpx2::parallel::sort::util ;
-namespace hpx_tools = hpx2::parallel::sort::tools ;
-namespace hpx_sort  = hpx2::parallel::sort ;
+namespace hpx_util  = hpx::parallel::v2::sort::util ;
+namespace hpx_tools = hpx::parallel::v2::sort::tools ;
+namespace hpx_sort  = hpx::parallel::v2::sort ;
 
 using hpx_tools::time_point ;
 using hpx_tools::now;
@@ -257,9 +258,9 @@ void Generator (uint64_t N )
     rnd_fill(A, -131072, 131072, 12345);
 
     //------------------------ Inicio -----------------------------
-    cout<<N<<" elements of size "<<sizeof (IA)<<" randomly filled \n";
     cout<<"=============================================\n";
-    cout<<"\n  std::less<>() comparison \n";
+    cout<<N<<" elements of size "<<sizeof (IA)<<" randomly filled \n";
+    cout<<" std::less<>() comparison \n";
     cout<<"====================================\n";
     Prueba(A, std::less<IA>()) ;
     cout<<std::endl ;
@@ -289,6 +290,7 @@ int main (int argc, char *argv[] )
     //------------------------------------------------------------------------
     // Execution with different object format
     //------------------------------------------------------------------------
+/*
     Generator_sorted() ;
     Generator_uint64() ;
     Generator_string () ;
@@ -306,10 +308,12 @@ int main (int argc, char *argv[] )
     cout<<"=                                                              =\n";
     cout<<"================================================================\n";
     cout<<"\n\n";
+*/
 
     for (int i=4096; i<1073741824; i<<=1) {
         Generator<int32_t>(i);
     }
+
 /*
     Generator< int_array<1> >   ( NELEM   );
     Generator< int_array<2> >   ( NELEM>>1);
@@ -318,7 +322,7 @@ int main (int argc, char *argv[] )
     Generator< int_array<16> >  ( NELEM>>4);
     Generator< int_array<32> >  ( NELEM>>5);
     Generator< int_array<64> >  ( NELEM>>6);
-*/    
+*/
     return code ;
 }
 
@@ -334,7 +338,7 @@ int Prueba_hpx ( const std::vector <IA> & B , compare comp )
     double duracion ;
     time_point start, finish;
     std::vector <IA> A;
- 
+
     A = B ;
     //cout<<"---------------- HPX2 sort (seq) --------------\n";
     cout<<"HPX2 sort (seq)              : ";
@@ -389,17 +393,17 @@ int Prueba_hpx ( const std::vector <IA> & B , compare comp )
     //cout<<"---------------- HPX sort (seq) --------------\n";
     cout<<"HPX sort (seq)               : ";
     start = now() ;
-    hpx::parallel::sort(hpx::parallel::v1::seq, A.begin() , A.end(), comp );
+    hpx::parallel::v1::sort(hpx::parallel::v1::seq, A.begin() , A.end(), comp );
     finish = now() ;
     duracion = subtract_time(finish ,start) ;
     cout<<duracion<<" secs\n";
     VERIFY(A);
-    
+
     A = B ;
     //cout<<"---------------- HPX sort (par) --------------\n";
     cout<<"HPX sort (par)               : ";
     start = now() ;
-    hpx::parallel::sort(hpx::parallel::v1::par, A.begin() , A.end(), comp );
+    hpx::parallel::v1::sort(hpx::parallel::v1::par, A.begin() , A.end(), comp );
     finish = now() ;
     duracion = subtract_time(finish ,start) ;
     cout<<duracion<<" secs\n";

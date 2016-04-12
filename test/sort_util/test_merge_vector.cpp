@@ -19,7 +19,7 @@
 #include <algorithm>
 
 
-using namespace sort::util  ;
+using HPX_INLINE_NAMESPACE(v2) { namespace sort::util  ;
 
 template <class iter_t >
 std::ostream & operator << ( std::ostream & out , range<iter_t>  R)

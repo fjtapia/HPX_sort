@@ -21,7 +21,7 @@
 using std::cout ;
 using std::endl;
 
-using namespace sort::util;
+using HPX_INLINE_NAMESPACE(v2) { namespace sort::util;
 
 typedef typename std::vector<uint32_t>::iterator iter_t ;
 std::vector<uint32_t> A ;

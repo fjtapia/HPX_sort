@@ -23,11 +23,11 @@
 #include <hpx/parallel/sort/algorithm/indirect.hpp>
 
 
-namespace hpx2
+namespace hpx
 {
 namespace parallel
 {
-namespace sort
+HPX_INLINE_NAMESPACE(v2) { namespace sort
 {
 namespace algorithm
 {
@@ -212,7 +212,7 @@ void indirect_heap_sort ( iter_t first, iter_t last ,
 //
 //****************************************************************************
 };//    End namespace algorithm
-};//    End namespace sort
+};};//    End HPX_INLINE_NAMESPACE(v2) 
 };//    End namespace parallel
 };//    End namespace hpx
 //****************************************************************************

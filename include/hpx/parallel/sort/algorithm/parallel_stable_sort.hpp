@@ -27,15 +27,15 @@
 
 
 
-namespace hpx2		{
+namespace hpx		{
 namespace parallel	{    
-namespace sort		{
+HPX_INLINE_NAMESPACE(v2) { namespace sort		{
 namespace algorithm	{
 
 using std::iterator_traits ;
 namespace bspu = util;
-using hpx2::parallel::sort::tools::NThread ;
-using hpx2::parallel::sort::tools::NThread_HW ;
+using hpx::parallel::v2::sort::tools::NThread ;
+using hpx::parallel::v2::sort::tools::NThread_HW ;
 //
 ///---------------------------------------------------------------------------
 /// @struct parallel_stable_sort_tag
@@ -226,7 +226,7 @@ void indirect_parallel_stable_sort ( iter_t first, iter_t last,
 //****************************************************************************
 };//    End namespace algorithm
 };//    End namespace parallel
-};//    End namespace sort
+};};//    End HPX_INLINE_NAMESPACE(v2) 
 };//    End namespace boost
 //****************************************************************************
 //

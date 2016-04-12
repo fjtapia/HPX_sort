@@ -23,11 +23,11 @@
 #include <vector>
 #include <iterator>
 
-namespace hpx2
+namespace hpx
 {
 namespace parallel
 {
-namespace sort
+HPX_INLINE_NAMESPACE(v2) { namespace sort
 {
 namespace algorithm
 {
@@ -196,7 +196,7 @@ template < class iter_t >
 void indirect_parallel_sort ( iter_t first, iter_t last )
 {   //------------------------------- begin--------------------------
     typedef std::less <typename iterator_traits<iter_t>::value_type> compare ;
-    typedef hpx2::parallel::sort::algorithm::less_ptr_no_null <iter_t, compare>      compare_ptr ;
+    typedef hpx::parallel::v2::sort::algorithm::less_ptr_no_null <iter_t, compare>      compare_ptr ;
 
     std::vector<iter_t> VP ;
     create_index ( first , last , VP);
@@ -230,7 +230,7 @@ void indirect_parallel_sort ( iter_t first, iter_t last,
 //
 //****************************************************************************
 };//    End namespace algorithm
-};//    End namespace sort
+};};//    End HPX_INLINE_NAMESPACE(v2) 
 };//    End namespace parallel
 };//    End namespace hpx
 //****************************************************************************

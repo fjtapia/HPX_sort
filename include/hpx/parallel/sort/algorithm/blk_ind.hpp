@@ -23,18 +23,18 @@
 #include <hpx/parallel/sort/util/range.hpp>
 #include <hpx/parallel/sort/algorithm/intro_sort.hpp>
 
-namespace hpx2		{
+namespace hpx		{
 namespace parallel	{
-namespace sort		{
+HPX_INLINE_NAMESPACE(v2) { namespace sort		{
 namespace algorithm	{
 namespace pblk		{
 //
 //----------------------------------------------------------------------------
 //       U S I N G     S E N T E N C E S
 //----------------------------------------------------------------------------
-namespace hpx_tools = hpx2::parallel::sort::tools ;
-namespace hpx_util 	= hpx2::parallel::sort::util ;
-namespace hpx_algo 	= hpx2::parallel::sort::algorithm;
+namespace hpx_tools = hpx::parallel::v2::sort::tools ;
+namespace hpx_util 	= hpx::parallel::v2::sort::util ;
+namespace hpx_algo 	= hpx::parallel::v2::sort::algorithm;
 
 using hpx_tools::NThread ;
 using std::iterator_traits ;
@@ -641,9 +641,9 @@ void blk_ind<iter_t,compare>::move_blocks ( itpos_t first, itpos_t last)
 //****************************************************************************
 };//    End namespace pblk
 //****************************************************************************
-namespace hpx_tools = hpx2::parallel::sort::tools ;
-namespace hpx_util 	= hpx2::parallel::sort::util ;
-namespace hpx_algo 	= hpx2::parallel::sort::algorithm;
+namespace hpx_tools = hpx::parallel::v2::sort::tools ;
+namespace hpx_util 	= hpx::parallel::v2::sort::util ;
+namespace hpx_algo 	= hpx::parallel::v2::sort::algorithm;
 
 using hpx_tools::NThread ;
 using std::iterator_traits ;
@@ -702,7 +702,7 @@ void blk_ind ( iter_t first, iter_t last, compare comp, NThread NT = NThread() )
 //****************************************************************************
 };//    End namespace algorithm
 };//    End namespace parallel
-};//    End namespace sort
+};};//    End HPX_INLINE_NAMESPACE(v2) 
 };//    End namespace boost
 //****************************************************************************
 //

@@ -30,18 +30,18 @@
 #include <hpx/parallel/sort/util/merge_vector.hpp>
 #include <hpx/parallel/sort/algorithm/indirect.hpp>
 
-namespace hpx2		{
+namespace hpx		{
 namespace parallel 	{
-namespace sort		{
+HPX_INLINE_NAMESPACE(v2) { namespace sort		{
 namespace algorithm	{
 
 namespace su = util ;
 using std::iterator_traits ;
-using hpx2::parallel::sort::tools::NThread ;
-using hpx2::parallel::sort::tools::NThread_HW ;
-using hpx2::parallel::sort::tools::atomic_add ;
-using hpx2::parallel::sort::util::uninit_merge_level4 ;
-using hpx2::parallel::sort::util::merge_vector4 ;
+using hpx::parallel::v2::sort::tools::NThread ;
+using hpx::parallel::v2::sort::tools::NThread_HW ;
+using hpx::parallel::v2::sort::tools::atomic_add ;
+using hpx::parallel::v2::sort::util::uninit_merge_level4 ;
+using hpx::parallel::v2::sort::util::merge_vector4 ;
 //
 ///---------------------------------------------------------------------------
 /// @struct sample_sort_tag
@@ -523,7 +523,7 @@ void indirect_sample_sort ( iter_t first, iter_t last,
 //****************************************************************************
 };//    End namespace algorithm
 };//    End namespace parallel
-};//    End namespace sort
+};};//    End HPX_INLINE_NAMESPACE(v2) 
 };//    End namespace boost
 //****************************************************************************
 //

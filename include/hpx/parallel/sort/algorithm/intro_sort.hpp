@@ -23,14 +23,14 @@
 #include <hpx/parallel/sort/algorithm/indirect.hpp>
 
 
-namespace hpx2		{
+namespace hpx		{
 namespace parallel 	{
-namespace sort		{
+HPX_INLINE_NAMESPACE(v2) { namespace sort		{
 namespace algorithm	{
 namespace deep   	{
 
 using std::iterator_traits ;
-using hpx2::parallel::sort::tools::NBits64;
+using hpx::parallel::v2::sort::tools::NBits64;
 
 template< typename iter_t, typename compare>
 inline iter_t mid3(iter_t it_l, iter_t it_m, iter_t it_r,compare comp)
@@ -179,7 +179,7 @@ void indirect_intro_sort ( iter_t first, iter_t last ,
 //****************************************************************************
 };//    End namespace algorithm
 };//    End namespace parallel
-};//    End namespace sort
+};};//    End HPX_INLINE_NAMESPACE(v2) 
 };//    End namespace boost
 //****************************************************************************
 //

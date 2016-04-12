@@ -22,9 +22,9 @@
 #include <iterator>
 
 
-namespace hpx2		{
+namespace hpx		{
 namespace parallel	{
-namespace sort		{
+HPX_INLINE_NAMESPACE(v2) { namespace sort		{
 namespace util		{
 namespace lwl		{
 
@@ -344,7 +344,7 @@ inline bool in_place_merge ( iter1_t   src1,
 };//    End namespace lwl
 };//    End namespace util
 };//    End namespace parallel
-};//    End namespace sort
+};};//    End HPX_INLINE_NAMESPACE(v2) 
 };//    End namespace boost
 //****************************************************************************
 //

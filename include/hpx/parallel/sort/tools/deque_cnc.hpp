@@ -22,7 +22,7 @@ namespace hpx
 {
 namespace parallel
 {
-namespace sort
+HPX_INLINE_NAMESPACE(v2) { namespace sort
 {
 namespace tools
 {
@@ -354,7 +354,7 @@ bool pop_move_front ( value_type & P)
 
 //****************************************************************************
 };//    End namespace tools
-};//    End namespace sort
+};};//    End HPX_INLINE_NAMESPACE(v2) 
 };//    End namespace parallel
 };//    End namespace hpx
 //****************************************************************************

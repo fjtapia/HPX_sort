@@ -21,11 +21,11 @@
 //#include <thread>
 //#include <ctime>
 
-namespace hpx2
+namespace hpx
 {
 namespace parallel
 {
-namespace sort
+HPX_INLINE_NAMESPACE(v2) { namespace sort
 {
 namespace tools
 {
@@ -103,7 +103,7 @@ inline void unlock() noexcept
 //
 //****************************************************************************
 };//    End namespace tools
-};//    End namespace sort
+};};//    End HPX_INLINE_NAMESPACE(v2) 
 };//    End namespace parallel
 };//    End namespace hpx
 //****************************************************************************

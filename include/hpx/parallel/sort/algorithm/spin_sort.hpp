@@ -25,17 +25,17 @@
 #include <hpx/parallel/sort/algorithm/insertion_sort.hpp>
 #include <hpx/parallel/sort/util/range.hpp>
 
-namespace hpx2		{
+namespace hpx		{
 namespace parallel	{
-namespace sort		{
+HPX_INLINE_NAMESPACE(v2) { namespace sort		{
 namespace algorithm	{
 //
 //****************************************************************************
 //                 NAMESPACES AND USING SENTENCES
 //****************************************************************************
-namespace su = hpx2::parallel::sort::util ;
-using hpx2::parallel::sort::util::range ;
-using hpx2::parallel::sort::tools::NBits64 ;
+namespace su = hpx::parallel::v2::sort::util ;
+using hpx::parallel::v2::sort::util::range ;
+using hpx::parallel::v2::sort::tools::NBits64 ;
 using std::iterator_traits ;
 
 //-----------------------------------------------------------------------------
@@ -320,7 +320,7 @@ template < class iter_t,
            = std::less<typename iterator_traits<iter_t>::value_type>  >
 void indirect_spin_sort ( iter_t first, iter_t last, compare comp = compare() )
 {   //------------------------------- begin-----------------------------------
-    typedef hpx2::parallel::sort::algorithm::less_ptr_no_null <iter_t, compare>      compare_ptr ;
+    typedef hpx::parallel::v2::sort::algorithm::less_ptr_no_null <iter_t, compare>      compare_ptr ;
 
     std::vector<iter_t> VP ;
     create_index ( first , last , VP);
@@ -331,7 +331,7 @@ void indirect_spin_sort ( iter_t first, iter_t last, compare comp = compare() )
 //****************************************************************************
 };//    End namespace algorithm
 };//    End namespace parallel
-};//    End namespace sort
+};};//    End HPX_INLINE_NAMESPACE(v2) 
 };//    End namepspace boost
 //****************************************************************************
 //

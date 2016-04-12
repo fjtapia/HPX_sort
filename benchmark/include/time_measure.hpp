@@ -16,9 +16,9 @@
 
 #include <chrono>
 
-namespace hpx2		{
+namespace hpx		{
 namespace parallel	{	    
-namespace sort		{
+HPX_INLINE_NAMESPACE(v2) { namespace sort		{
 namespace tools		{
 
 namespace chrn = std::chrono ;
@@ -54,7 +54,7 @@ double subtract_time  ( const time_point & t1 , const time_point &t2)
 //***************************************************************************
 };//    End namespace tools
 };//    End namespace parallel
-};//    End namespace sort
+};};//    End HPX_INLINE_NAMESPACE(v2) 
 };//    End namespace boost
 //***************************************************************************
 #endif

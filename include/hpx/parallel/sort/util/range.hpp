@@ -25,11 +25,11 @@
 #define __DEBUG_SORT 0
 #endif
 
-namespace hpx2
+namespace hpx
 {
 namespace parallel
 {
-namespace sort
+HPX_INLINE_NAMESPACE(v2) { namespace sort
 {
 namespace util
 {
@@ -327,7 +327,7 @@ inline range<iter1_t> in_place_merge (const range<iter1_t> &src1,
 //
 //****************************************************************************
 };//    End namespace util
-};//    End namespace sort
+};};//    End HPX_INLINE_NAMESPACE(v2) 
 };//    End namespace parallel
 };//    End namespace hpx
 //****************************************************************************

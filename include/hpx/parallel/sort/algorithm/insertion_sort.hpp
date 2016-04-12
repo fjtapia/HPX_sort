@@ -22,9 +22,9 @@
 #include <utility> // std::swap
 
 
-namespace hpx2		{
+namespace hpx		{
 namespace parallel	{
-namespace sort		{
+HPX_INLINE_NAMESPACE(v2) { namespace sort		{
 namespace algorithm	{
 
 using  std::iterator_traits;
@@ -62,7 +62,7 @@ inline void insertion_sort (iter_t first, iter_t last, compare comp=compare())
 //****************************************************************************
 };//    End namespace algorithm
 };//    End namespace parallel
-};//    End namespace sort
+};};//    End HPX_INLINE_NAMESPACE(v2) 
 };//    End namespace boost
 //****************************************************************************
 //

@@ -21,9 +21,9 @@
 
 
 
-namespace hpx2		{
+namespace hpx		{
 namespace parallel	{
-namespace sort		{
+HPX_INLINE_NAMESPACE(v2) { namespace sort		{
 namespace algorithm	{
 
 using std::iterator_traits ;
@@ -107,7 +107,7 @@ void sort_index (iter_t first, std::vector<iter_t> &VP )
 //****************************************************************************
 };//    End namespace algorithm
 };//    End namespace parallel
-};//    End namespace sort
+};};//    End HPX_INLINE_NAMESPACE(v2) 
 };//    End namespace boost
 //****************************************************************************
 //

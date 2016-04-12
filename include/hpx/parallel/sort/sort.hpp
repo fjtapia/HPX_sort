@@ -20,20 +20,20 @@
 #include <hpx/parallel/sort/algorithm/parallel_stable_sort.hpp>
 #include <hpx/parallel/execution_policy.hpp>
 
-namespace hpx2
+namespace hpx
 {
 namespace parallel
 {
-namespace sort
+HPX_INLINE_NAMESPACE(v2) { namespace sort
 {
 
 //****************************************************************************
 //             USING AND DEFINITIONS
 //****************************************************************************
-namespace hpx_algo 	= hpx2::parallel::sort::algorithm ;
-namespace hpx_util 	= hpx2::parallel::sort::util ;
-namespace hpx_tools = hpx2::parallel::sort::tools ;
-namespace hpx_sort 	= hpx2::parallel::sort ;
+namespace hpx_algo 	= hpx::parallel::v2::sort::algorithm ;
+namespace hpx_util 	= hpx::parallel::v2::sort::util ;
+namespace hpx_tools = hpx::parallel::v2::sort::tools ;
+namespace hpx_sort 	= hpx::parallel::v2::sort ;
 
 using std::iterator_traits ;
 //----------------------------------------------------------------------------
@@ -161,7 +161,7 @@ void stable_sort (	hpx::parallel::sequential_execution_policy ,
 };
 //
 //****************************************************************************
-};//    End namespace sort
+};};//    End HPX_INLINE_NAMESPACE(v2)
 };//    End namespace parallel
 };//    End namespace hpx
 //****************************************************************************

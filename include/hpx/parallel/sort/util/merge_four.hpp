@@ -20,11 +20,11 @@
 #include <vector>
 #include <hpx/parallel/sort/util/range.hpp>
 
-namespace hpx2
+namespace hpx
 {
 namespace parallel
 {
-namespace sort
+HPX_INLINE_NAMESPACE(v2) { namespace sort
 {
 namespace util
 {
@@ -336,7 +336,7 @@ range<value_t*> uninit_full_merge4 ( const range<value_t*> &dest,
 //
 //****************************************************************************
 };//    End namespace util
-};//    End namespace sort
+};};//    End HPX_INLINE_NAMESPACE(v2) 
 };//    End namespace parallel
 };//    End namespace hpx
 //****************************************************************************

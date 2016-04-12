@@ -21,11 +21,11 @@
 #include <vector>
 #include <hpx/parallel/sort/util/merge_four.hpp>
 
-namespace hpx2
+namespace hpx
 {
 namespace parallel
 {
-namespace sort
+HPX_INLINE_NAMESPACE(v2) { namespace sort
 {
 namespace util
 {
@@ -187,7 +187,7 @@ range<iter2_t> merge_vector4 ( range<iter1_t> Rin,
 //
 //****************************************************************************
 };//    End namespace util
-};//    End namespace sort
+};};//    End HPX_INLINE_NAMESPACE(v2) 
 };//    End namespace parallel
 };//    End namespace hpx
 //****************************************************************************
