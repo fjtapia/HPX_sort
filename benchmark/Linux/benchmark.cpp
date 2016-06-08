@@ -19,6 +19,7 @@
 //-----------------------------------------------------------------------------
 
 #ifdef SORT_HAS_HPX
+# include <hpx/hpx_init.hpp>
 # include <hpx/hpx.hpp>
 # include <hpx/parallel/algorithms/sort.hpp>
 # include <hpx/parallel/sort/sort.hpp>
