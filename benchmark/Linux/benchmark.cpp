@@ -35,16 +35,15 @@
 #define NELEM 100000000
 #define NMAXSTRING 10000000
 using namespace std ;
-namespace hpx_util  = hpx::parallel::sort::util ;
-namespace hpx_tools = hpx::parallel::sort::tools ;
+namespace hpx_util  = hpx::parallel::sort::detail::util ;
 namespace hpx_sort  = hpx::parallel::sort ;
 
-using hpx_tools::time_point ;
-using hpx_tools::now;
-using hpx_tools::subtract_time ;
-using hpx_tools::fill_vector_uint64;
-using hpx_tools::write_file_uint64;
-using hpx_tools::NThread ;
+using hpx_util::time_point ;
+using hpx_util::now;
+using hpx_util::subtract_time ;
+using hpx_util::fill_vector_uint64;
+using hpx_util::write_file_uint64;
+
 
 
 void Generator_sorted(void );
@@ -63,7 +62,6 @@ int main(int argc, char* argv[])
 {
     std::vector<std::string> cfg;
     cfg.push_back("hpx.os_threads=all");
-
     // Initialize and run HPX.
     return hpx::init(argc, argv, cfg);
 
@@ -153,7 +151,7 @@ void Generator_string(void)
     std::vector <std::string> A ;
     A.reserve ( NMAXSTRING);
     A.clear();
-    if ( hpx_tools::fill_vector_string("input.bin", A, NMAXSTRING) != 0)
+    if ( hpx_util::fill_vector_string("input.bin", A, NMAXSTRING) != 0)
     {   std::cout<<"Error in the input file\n";
         return ;
     };
@@ -164,7 +162,7 @@ void Generator_string(void)
 template <class IA>
 void Generator (uint64_t N )
 {   //------------------------------- begin ----------------------------------
-    hpx_tools::uint64_file_generator gen ( "input.bin");
+    hpx_util::uint64_file_generator gen ( "input.bin");
     vector<IA> A ;
    	A.reserve ( N);
 

@@ -15,9 +15,11 @@
 
 #include <iostream>
 #include <iterator>
-#include <hpx/parallel/sort/algorithm/blk_ind.hpp>
-#include <hpx/parallel/sort/algorithm/parallel_sort.hpp>
-#include <hpx/parallel/sort/algorithm/parallel_stable_sort.hpp>
+#include <iterator>
+#include <hpx/parallel/sort/detail/util/compare_traits.hpp>
+#include <hpx/parallel/sort/detail/parallel_stable_sort.hpp>
+#include <hpx/parallel/sort/detail/block_indirect_sort.hpp>
+
 #include <hpx/parallel/execution_policy.hpp>
 
 namespace hpx
@@ -30,17 +32,12 @@ namespace sort
 //****************************************************************************
 //             USING AND DEFINITIONS
 //****************************************************************************
-namespace hpx_algo 	= hpx::parallel::sort::algorithm ;
-namespace hpx_util 	= hpx::parallel::sort::util ;
-namespace hpx_tools = hpx::parallel::sort::tools ;
-namespace hpx_sort 	= hpx::parallel::sort ;
+using hpx::parallel::sort::detail::util::compare_iter ;
 
 using std::iterator_traits ;
 //----------------------------------------------------------------------------
 // The code of the class NThread is in boost/sort/parallel/util/atomic.hpp
 //----------------------------------------------------------------------------
-using hpx_tools::NThread ;
-using hpx_algo::less_ptr_no_null;
 //
 //-----------------------------------------------------------------------------
 //  function : sample_sort
@@ -57,12 +54,12 @@ using hpx_algo::less_ptr_no_null;
 /// @return
 /// @remarks
 //-----------------------------------------------------------------------------
-template <class iter_t,
-          class compare= std::less < typename iterator_traits<iter_t>::value_type> >
+template <class iter_t, class compare= compare_iter<iter_t> >
 void sample_sort (	hpx::parallel::parallel_execution_policy ,
             iter_t first, iter_t last , compare comp= compare()  )
-{	NThread NT ( (uint32_t) hpx::get_os_thread_count()) ;
-	hpx_algo::sample_sort ( first, last,comp, NT);
+{   //------------------------------ begin ---------------------------------
+    uint32_t nthread = (uint32_t) hpx::get_os_thread_count() ;
+	detail::sample_sort <iter_t,compare>( first, last,comp, nthread);
 };
 //
 //-----------------------------------------------------------------------------
@@ -79,16 +76,12 @@ void sample_sort (	hpx::parallel::parallel_execution_policy ,
 /// @return
 /// @remarks
 //-----------------------------------------------------------------------------
-template <class iter_t,
-          class compare= std::less < typename iterator_traits<iter_t>::value_type> >
+template <class iter_t, class compare= compare_iter<iter_t> >
 void sort (	hpx::parallel::parallel_execution_policy ,
             iter_t first, iter_t last , compare comp= compare()  )
 {	//----------------------------- begin -------------------------------
-	NThread NT ( (uint32_t) hpx::get_os_thread_count()) ;
-	if ( NT() >8 )
-		hpx_algo::blk_ind ( first, last , comp, NT);
-	else
-        hpx_algo::parallel_sort ( first, last,comp);
+    uint32_t nthread = (uint32_t) hpx::get_os_thread_count() ;
+	detail::block_indirect_sort<1024, 64,iter_t,compare> ( first, last,comp, nthread);
 };
 
 //
@@ -106,11 +99,10 @@ void sort (	hpx::parallel::parallel_execution_policy ,
 /// @return
 /// @remarks
 //-----------------------------------------------------------------------------
-template <class iter_t,
-          class compare= std::less < typename iterator_traits<iter_t>::value_type> >
+template <class iter_t, class compare= compare_iter<iter_t> >
 void sort (	hpx::parallel::sequential_execution_policy ,
             iter_t first, iter_t last ,compare comp= compare()  )
-{	hpx_algo::intro_sort(first, last,comp);
+{	detail::intro_sort(first, last,comp);
 };
 
 //
@@ -128,14 +120,12 @@ void sort (	hpx::parallel::sequential_execution_policy ,
 /// @return
 /// @remarks
 //-----------------------------------------------------------------------------
-template <class iter_t,
-          class compare= std::less < typename iterator_traits<iter_t>::value_type> >
+template <class iter_t, class compare= compare_iter<iter_t> >
 void stable_sort (	hpx::parallel::parallel_execution_policy ,
             iter_t first, iter_t last , compare comp= compare()  )
 {	//--------------------------- begin --------------------------------------
-	NThread NT ( (uint32_t) hpx::get_os_thread_count()) ;
-
-	hpx_algo::parallel_stable_sort ( first, last,comp, NT);
+    uint32_t nthread = (uint32_t) hpx::get_os_thread_count() ;
+	detail::parallel_stable_sort <iter_t,compare>( first, last,comp, nthread);
 };
 
 //
@@ -153,11 +143,10 @@ void stable_sort (	hpx::parallel::parallel_execution_policy ,
 /// @return
 /// @remarks
 //-----------------------------------------------------------------------------
-template <class iter_t,
-          class compare= std::less < typename iterator_traits<iter_t>::value_type> >
+template <class iter_t, class compare= compare_iter<iter_t> >
 void stable_sort (	hpx::parallel::sequential_execution_policy ,
             iter_t first, iter_t last ,compare comp= compare()  )
-{	hpx_algo::spin_sort(first, last,comp);
+{	detail::spin_sort<iter_t,compare>(first, last,comp);
 };
 //
 //****************************************************************************

@@ -34,6 +34,7 @@ struct int_array
         for ( uint32_t i =1 ; i < NN ; Acc += M[i++]) ;
         return Acc ;
     };
+
 };
 
 template <class IA >

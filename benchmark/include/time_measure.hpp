@@ -11,15 +11,16 @@
 ///
 /// @remarks
 //-----------------------------------------------------------------------------
-#ifndef __HPX_PARALLEL_SORT_TOOLS_TIME_MEASURE_HPP
-#define __HPX_PARALLEL_SORT_TOOLS_TIME_MEASURE_HPP
+#ifndef __HPX_PARALLEL_SORT_DETAIL_UTIL_TIME_MEASURE_HPP
+#define __HPX_PARALLEL_SORT_DETAIL_UTIL_TIME_MEASURE_HPP
 
 #include <chrono>
 
 namespace hpx		{
-namespace parallel	{	    
+namespace parallel	{    
 namespace sort		{
-namespace tools		{
+namespace detail	{
+namespace util		{
 
 namespace chrn = std::chrono ;
 //
@@ -52,9 +53,10 @@ double subtract_time  ( const time_point & t1 , const time_point &t2)
 };
 
 //***************************************************************************
-};//    End namespace tools
-};//    End namespace parallel
+};//    End namespace util
+};//    End namespace detail
 };//    End namespace sort
-};//    End namespace boost
+};//    End namespace parallel
+};//    End namespace hpx
 //***************************************************************************
 #endif

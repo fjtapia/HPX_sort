@@ -21,7 +21,7 @@
 
 using std::cout ;
 using std::endl;
-namespace hpx_tools = hpx::parallel::sort::tools ;
+namespace hpx_util = hpx::parallel::sort::detail::util ;
 
 
 void print_banner() ;
@@ -45,7 +45,7 @@ int main (int argc, char *argv[] )
         return 0 ;
     };
 
-    if ( hpx_tools::generate_file (name,number) != 0)
+    if ( hpx_util::generate_file (name,number) != 0)
         std::cout<<"Error in the file creation\n" ;
     return 0 ;
 };
