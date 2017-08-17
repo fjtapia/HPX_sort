@@ -21,11 +21,11 @@
 #include <thread>
 #include <ctime>
 
-namespace hpx		{
-namespace parallel	{    
-namespace sort		{
-namespace detail	{
-namespace util		{
+namespace hpx       {
+namespace parallel  {
+namespace sort      {
+namespace detail    {
+namespace util      {
 
 //##########################################################################
 //                                                                        ##
@@ -58,13 +58,12 @@ explicit inline spinlock_t() noexcept{ af.clear(); };
 //  function : lock
 /// @brief  Lock the spinlock_t
 //---------------------------------------------------------------------------
-inline void lock() noexcept
-{   if ( af.test_and_set(std::memory_order_acquire))
-    {	std::this_thread::yield() ;
-		while (af.test_and_set(std::memory_order_relaxed))
-		{	std::this_thread::yield();
-		};
-    };
+inline void lock ( ) noexcept
+{
+        while (af.test_and_set (std::memory_order_acquire))
+        {
+            std::this_thread::yield ( );
+        };
 };
 //
 //---------------------------------------------------------------------------
