@@ -91,7 +91,7 @@ parallel_sort (backbone_t &bkbn, iter_t first, iter_t last):bk(bkbn), counter(0)
     uint32_t nbits_size = (nbits64(sizeof (value_t)))>>1;
     if ( nbits_size > 5 ) nbits_size = 5 ;
     max_per_thread = 1<< (18 - nbits_size);
-    uint32_t level = ((nbits64(nelem / max_per_thread)) * 3) / 2;
+    uint32_t level = ((nbits64(nelem / max_per_thread)) * 2);
 
     //---------------- check if only single thread -----------------------
     if ( nelem < ( max_per_thread))
