@@ -21,10 +21,10 @@
 #include <hpx/parallel/sort/detail/bis/merge_blocks.hpp>
 #include <hpx/parallel/sort/detail/bis/move_blocks.hpp>
 
-namespace hpx		{
-namespace parallel	{
-namespace sort		{
-namespace detail	{
+namespace hpx       {
+namespace parallel  {
+namespace sort      {
+namespace detail    {
 
 
 //
@@ -44,16 +44,16 @@ struct block_indirect_sort
 //                  D E F I N I T I O N S
 //----------------------------------------------------------------------------
 typedef typename std::iterator_traits<iter_t>::value_type   value_t ;
-typedef std::atomic<uint32_t> 				                atomic_t ;
-typedef util::range <size_t>				                range_pos ;
+typedef std::atomic<uint32_t>                               atomic_t ;
+typedef util::range <size_t>                                range_pos ;
 typedef util::range <iter_t>                                range_it ;
 typedef util::range <value_t*>                              range_buf ;
 typedef std::function <void (void) >                        function_t ;
 
-typedef bis::block_pos 						block_pos_t;
-typedef bis::block<block_size, iter_t> 		block_t;
-typedef bis::backbone<block_size, iter_t, compare>		backbone_t;
-typedef bis::parallel_sort<block_size, iter_t, compare>		parallel_sort_t;
+typedef bis::block_pos                      block_pos_t;
+typedef bis::block<block_size, iter_t>      block_t;
+typedef bis::backbone<block_size, iter_t, compare>      backbone_t;
+typedef bis::parallel_sort<block_size, iter_t, compare>     parallel_sort_t;
 typedef bis::merge_blocks < block_size, group_size, iter_t, compare> merge_blocks_t;
 typedef bis::move_blocks <block_size, group_size, iter_t, compare> move_blocks_t;
 typedef bis::compare_block_pos <block_size, iter_t, compare> compare_block_pos_t ;
@@ -77,7 +77,7 @@ block_indirect_sort ( iter_t first , iter_t last , compare cmp, uint32_t nthr );
 
 block_indirect_sort ( iter_t first , iter_t last ):
 block_indirect_sort ( first, last, compare(),
-		              std::thread::hardware_concurrency() ) {};
+                      std::thread::hardware_concurrency() ) {};
 
 block_indirect_sort (iter_t first , iter_t last , compare cmp):
 block_indirect_sort ( first, last, cmp, std::thread::hardware_concurrency()){};
@@ -98,9 +98,9 @@ block_indirect_sort  ( first, last, compare(), nthread){};
 {   //----------------------------------- begin -------------------------
     if (ptr != nullptr)
     {   if ( construct)
-    	{   util::destroy (rglobal_buf);
-        	construct = false ;
-    	};
+        {   util::destroy (rglobal_buf);
+            construct = false ;
+        };
         std::return_temporary_buffer ( ptr) ;
     };
 };
@@ -131,8 +131,8 @@ template <uint32_t block_size, uint32_t group_size, class iter_t, class compare>
 block_indirect_sort<block_size, group_size, iter_t, compare>::
 block_indirect_sort ( iter_t first , iter_t last , compare cmp, uint32_t nthr )
                 :bk (first, last, cmp), counter(0), ptr(nullptr),
-				 construct (false ),nthread ( nthr)
-{	//-------------------------- begin -------------------------------------
+                 construct (false ),nthread ( nthr)
+{   //-------------------------- begin -------------------------------------
     assert ( (last-first) >= 0 ) ;
     size_t nelem = size_t ( last - first ) ;
     if ( nelem == 0 ) return ;
@@ -144,6 +144,9 @@ block_indirect_sort ( iter_t first , iter_t last , compare cmp, uint32_t nthr )
     if (sorted) return ;
 
     //---------------- check if only single thread -----------------------
+    size_t nthreadmax = nelem / (block_size * group_size) + 1;
+    if (nthread > nthreadmax) nthread = (uint32_t) nthreadmax;
+
     uint32_t nbits_size = (util::nbits64(sizeof (value_t)))>>1;
     if ( nbits_size > 5 ) nbits_size = 5 ;
     size_t max_per_thread = 1<< (18 - nbits_size);
@@ -164,12 +167,12 @@ block_indirect_sort ( iter_t first , iter_t last , compare cmp, uint32_t nthr )
 
     std::vector< value_t*> vbuf ( nthread);
     for ( uint32_t i =0 ; i < nthread ; ++i)
-    	vbuf[i] = ptr + (i * block_size);
+        vbuf[i] = ptr + (i * block_size);
 
     //------------------------------------------------------------------------
-	util::atomic_write ( counter , 1 ) ;
+    util::atomic_write ( counter , 1 ) ;
     function_t f1 = [&]()
-    	            { 	 start_function( );
+                    {    start_function( );
                          util::atomic_sub( counter , 1 ) ;
                     };
     bk.works.emplace_back ( f1 ) ;
@@ -180,8 +183,8 @@ block_indirect_sort ( iter_t first , iter_t last , compare cmp, uint32_t nthr )
     std::vector <hpx::future <void> > vfuture (nthread);
 
     for ( uint32_t i =0 ; i < nthread ; ++i)
-    {	auto f1 = [=, &vbuf ] () {	bk.exec (vbuf[i], this->counter);};
-    	vfuture[i] = hpx::async (  f1 );
+    {   auto f1 = [=, &vbuf ] () {  bk.exec (vbuf[i], this->counter);};
+        vfuture[i] = hpx::async (  f1 );
     };
     for ( uint32_t i =0 ; i < nthread ; ++i) vfuture[i].get() ;
 };
@@ -194,12 +197,12 @@ block_indirect_sort ( iter_t first , iter_t last , compare cmp, uint32_t nthr )
 ///        directly or call to a recursive split_range
 /// @param [in] pf : pointer to the atomic counter of the father
 /// @param [in] RP : range of positions to split
-/// @param [in]	Level : depth of the split
+/// @param [in] Level : depth of the split
 //-----------------------------------------------------------------------------
 template <uint32_t block_size, uint32_t group_size, class iter_t, class compare>
 void block_indirect_sort<block_size, group_size, iter_t, compare>::
 split_range ( size_t pos_index1 ,size_t pos_index2, uint32_t level_thread )
-{	//----------------------------- begin -----------------------------------
+{   //----------------------------- begin -----------------------------------
     size_t nblock = pos_index2 - pos_index1;
 
     //-------------------------------------------------------------------------
@@ -222,7 +225,7 @@ split_range ( size_t pos_index1 ,size_t pos_index2, uint32_t level_thread )
     //-------------------------------------------------------------------------
     if ( level_thread != 0 )
     {   auto f1 = [=, &son_counter]( )
-    	          {	split_range ( pos_index_mid,pos_index2, level_thread-1) ;
+                  { split_range ( pos_index_mid,pos_index2, level_thread-1) ;
                     util::atomic_sub ( son_counter , 1 ) ;
                   };
         bk.works.emplace_back ( f1 ) ;
@@ -231,7 +234,7 @@ split_range ( size_t pos_index1 ,size_t pos_index2, uint32_t level_thread )
     else
     {   iter_t mid = first + ( (nblock >>1 ) * block_size ) ;
         auto f1 = [=, &son_counter]()
-        		  {	parallel_sort_t ( bk, mid , last ) ;
+                  { parallel_sort_t ( bk, mid , last ) ;
                     util::atomic_sub ( son_counter , 1 ) ;
                   };
         bk.works.emplace_back ( f1 ) ;
@@ -247,20 +250,20 @@ split_range ( size_t pos_index1 ,size_t pos_index2, uint32_t level_thread )
 ///        directly or call to a recursive split_range
 /// @param [in] pf : pointer to the atomic counter of the father
 /// @param [in] RP : range of positions to split
-/// @param [in]	Level : depth of the split
+/// @param [in] Level : depth of the split
 //-----------------------------------------------------------------------------
 template <uint32_t block_size, uint32_t group_size, class iter_t, class compare>
 void block_indirect_sort<block_size, group_size, iter_t, compare>::
 start_function ( void)
 {   //----------------------- begin -----------------------------------
-	if (nthread < 9 )
-	{	parallel_sort_t (bk, bk.global_range.first, bk.global_range.last);
-	}
-	else
-	{	size_t level_thread = nbits64 ( nthread -1 );
-    	split_range ( 0 , bk.nblock, level_thread -1) ;
-    	move_blocks_t k( bk ) ;
-	};
+    if (nthread < 6 )
+    {   parallel_sort_t (bk, bk.global_range.first, bk.global_range.last);
+    }
+    else
+    {   size_t level_thread = nbits64 ( nthread -1 );
+        split_range ( 0 , bk.nblock, level_thread -1) ;
+        move_blocks_t k( bk ) ;
+    };
 };
 //
 //****************************************************************************
