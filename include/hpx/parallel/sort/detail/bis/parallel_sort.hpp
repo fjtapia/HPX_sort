@@ -15,10 +15,10 @@
 
 #include <hpx/parallel/sort/detail/bis/backbone.hpp>
 
-namespace hpx		{
-namespace parallel	{    
-namespace sort		{
-namespace detail	{
+namespace hpx       {
+namespace parallel  {
+namespace sort      {
+namespace detail    {
 namespace bis       {
 
 using hpx::parallel::sort::detail::util::nbits64 ;
@@ -33,17 +33,17 @@ using hpx::parallel::sort::detail::util::nbits64 ;
 template <uint32_t block_size, class iter_t, class compare>
 struct parallel_sort
 {
-	//-------------------------------------------------------------------------
-	//                  D E F I N I T I O N S
-	//-------------------------------------------------------------------------
-	typedef typename std::iterator_traits<iter_t>::value_type   value_t ;
-	typedef std::atomic<uint32_t> 				                atomic_t ;
-	typedef std::function <void (void) >                        function_t ;
-    typedef backbone<block_size, iter_t, compare>				backbone_t;
+    //-------------------------------------------------------------------------
+    //                  D E F I N I T I O N S
+    //-------------------------------------------------------------------------
+    typedef typename std::iterator_traits<iter_t>::value_type   value_t ;
+    typedef std::atomic<uint32_t>                               atomic_t ;
+    typedef std::function <void (void) >                        function_t ;
+    typedef backbone<block_size, iter_t, compare>               backbone_t;
 
-	//------------------------------------------------------------------------
-	//                V A R I A B L E S
-	//------------------------------------------------------------------------
+    //------------------------------------------------------------------------
+    //                V A R I A B L E S
+    //------------------------------------------------------------------------
     backbone_t &bk ;
     size_t max_per_thread ;
     atomic_t counter ;
@@ -53,7 +53,7 @@ struct parallel_sort
     //------------------------------------------------------------------------
     parallel_sort ( backbone_t &bkbn, iter_t first, iter_t last);
 
-    void divide_sort(iter_t first, iter_t last   );
+    void divide_sort(iter_t first, iter_t last , uint32_t level  );
 //--------------------------------------------------------------------------
 };// end struct parallel_sort
 //--------------------------------------------------------------------------
@@ -91,6 +91,7 @@ parallel_sort (backbone_t &bkbn, iter_t first, iter_t last):bk(bkbn), counter(0)
     uint32_t nbits_size = (nbits64(sizeof (value_t)))>>1;
     if ( nbits_size > 5 ) nbits_size = 5 ;
     max_per_thread = 1<< (18 - nbits_size);
+    uint32_t level = ((nbits64(nelem / max_per_thread)) * 3) / 2;
 
     //---------------- check if only single thread -----------------------
     if ( nelem < ( max_per_thread))
@@ -98,7 +99,7 @@ parallel_sort (backbone_t &bkbn, iter_t first, iter_t last):bk(bkbn), counter(0)
         return ;
     };
 
-    divide_sort ( first, last ) ;
+    divide_sort ( first, last,level ) ;
     // wait until all the parts are finished
     bk.exec(counter);
 };
@@ -112,7 +113,7 @@ parallel_sort (backbone_t &bkbn, iter_t first, iter_t last):bk(bkbn), counter(0)
 //------------------------------------------------------------------------
 template <uint32_t block_size, class iter_t, class compare>
 void parallel_sort <block_size, iter_t, compare>::
-divide_sort(iter_t first, iter_t last   )
+divide_sort(iter_t first, iter_t last , uint32_t level  )
 {   //------------------- check if sort -----------------------------------
     bool sorted = true ;
     for ( iter_t it1 = first, it2 = first+1 ;
@@ -121,7 +122,7 @@ divide_sort(iter_t first, iter_t last   )
 
     //---------------- check if finish the subdivision -------------------
     size_t nelem  = last - first ;
-    if ( nelem < ( max_per_thread))
+    if ( level == 0 or nelem < ( max_per_thread))
     {   return intro_sort (first, last, bk.cmp);
     };
 
@@ -141,13 +142,13 @@ divide_sort(iter_t first, iter_t last   )
 
     // insert  the work of the second half in the stack of works
     util::atomic_add ( counter , 1 );
-    function_t f1 = [=] ( ){	divide_sort ( c_first, last) ;
-                        		util::atomic_sub( this->counter,1);
-                    	   };
+    function_t f1 = [=] ( ){    divide_sort ( c_first, last,level -1) ;
+                                util::atomic_sub( this->counter,1);
+                           };
     bk.works.emplace_back( f1) ;
 
     // The first half is done by the same thread
-    divide_sort (first, c_last);
+    divide_sort (first, c_last, level -1);
 };
 //
 //****************************************************************************
