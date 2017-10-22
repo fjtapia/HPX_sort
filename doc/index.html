@@ -1,10 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
-    <meta name="generator" content="HTML Tidy for Windows (vers 1st November 2003), see www.w3.org" />
+    <meta content="HTML Tidy for Windows (vers 1st November 2003), see www.w3.org"
+      name="generator" />
     <title>HPX Parallel Sort</title>
-    <link href="files/code.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="files/code.css" />
   </head>
   <!--***************************************************************************************** -->
   <!--                                        B O D Y                                           -->
@@ -12,17 +13,18 @@
   <body>
     <div class="cuerpo_central"> <br />
       <div class="cuerpo_texto">
-        <h1 class="heading-title"><img src="files/hpx.png" alt="" title="HPX title" />  
+        <h1 class="heading-title"><img title="HPX title" alt="" src="files/hpx.png" />  
           </h1> <br />
         <span style="font-size: 32pt;"> <span style="font-weight: bold; color: black;">
           </span><span style="color: black;"><a href="index.html">The HPX
               Parallel Sort Library</a> </span></span><br />
         <div>
           <div class="author">
-            <h2><span style="font-weight: normal; font-style: italic;"><a href="https://github.com/fjtapia/HPX_sort"
-                  target="_blank">( https://github.com/fjtapia/HPX_sort )</a></span></h2>
+            <h2><span style="font-weight: normal; font-style: italic;"><a target="_blank"
+                  href="https://github.com/fjtapia/HPX_sort">(
+                  https://github.com/fjtapia/HPX_sort )</a></span></h2>
             <h3 class="author"> <span class="firstname"></span></h3>
-            <h3 style="font-style: italic;" class="author"><span style="font-weight: normal;"><span
+            <h3 class="author" style="font-style: italic;"><span style="font-weight: normal;"><span
                   class="firstname">Francisco Jose Tapia</span>   Copyright ©
                 2016 Francisco Jose Tapia</span></h3>
           </div>
@@ -30,9 +32,11 @@
         <div>
           <div class="legalnotice">
             <p><span style="font-style: italic;">Distributed under the Boost
-                Software License, Version 1.0. (See accompanying file
-                LICENSE_1_0.txt or copy at </span><a style="font-style: italic;"
-                href="file:///LICENSE_1_0.txt" target="_top">
+                Software License, Version 1.0. <br />
+              </span></p>
+            <p><span style="font-style: italic;">(See accompanying file
+                LICENSE_1_0.txt or copy at </span><a target="_top" href="file:///LICENSE_1_0.txt"
+                style="font-style: italic;">
                 http://www.boost.org/LICENSE_1_0.txt </a><span style="font-style: italic;">)</span>
             </p>
           </div>
@@ -85,10 +89,10 @@
         <br />
         <p><a name="Introduction"></a> <span style="font-size: 18pt;font-weight: bold; color: black;">1.-
             Introduction</span></p>
-        <p> The<a target="_blank" title=" HPX Parallel Sort" href="https://github.com/fjtapia/HPX_sort">
-            HPX parallel sort</a>, had been designed for to be included in the <a
-            href="https://github.com/STEllAR-GROUP/hpx" data-original-href="https://github.com/STEllAR-GROUP/hpx">HPX
-            Library</a></p>
+        <p> The<a href="https://github.com/fjtapia/HPX_sort" title=" HPX Parallel Sort"
+            target="_blank"> HPX parallel sort</a>, had been designed for to be
+          included in the <a data-original-href="https://github.com/STEllAR-GROUP/hpx"
+            href="https://github.com/STEllAR-GROUP/hpx">HPX Library</a></p>
         <p>HPX is a general purpose C++ runtime system for parallel and
           distributed applications of any scale. The goal of HPX is to create a
           high quality, freely available, open source implementation of the
@@ -106,93 +110,106 @@
           generated inside the objects (in the move or in the copy constructor..
           ) the results can be unpredictable. </p>
         <p>For to select the single thread and the parallel version, these
-          algorithms use the execution policy, as described in the <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n4071.htm"
-            data-original-href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n4071.htm">Working
+          algorithms use the execution policy, as described in the <a data-original-href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n4071.htm"
+            href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n4071.htm">Working
             Draft, Technical Specification for C++ Extensions for Parallelism</a>
-          . If you want a simplified version you can find in <a href="http://en.cppreference.com/w/cpp/experimental/parallelism"
-            data-original-href="http://en.cppreference.com/w/cpp/experimental/parallelism">cpp
+          . If you want a simplified version you can find in <a data-original-href="http://en.cppreference.com/w/cpp/experimental/parallelism"
+            href="http://en.cppreference.com/w/cpp/experimental/parallelism">cpp
             reference</a>.</p>
+        <p>Al the functions are in the namespace <code><span style="font: 10pt Monospace;"><span
+                class="style11">hpx</span><span class="style10">::</span><span class="style11">parallel</span><span
+                class="style10">::</span><span class="style11">tr1, </span></span></code>and
+          for use, only need include the file <code><span style="font: 10pt Monospace;"><span
+                class="style11">hpx</span><span class="style10">/</span><span class="style11">parallel/</span><span
+                class="style10"></span></span></code><code><span style="font: 10pt Monospace;"><span
+                class="style11"><code><span style="font: 10pt Monospace;"><span
+                      class="style11">algorithms/</span><span class="style10"></span></span></code>tr1/</span></span></code><code><span
+              style="font: 10pt Monospace;"><span class="style11"><code><span style="font: 10pt Monospace;"><span
+                      class="style10"></span></span></code>sort.hpp</span></span></code></p>
         <p>For the single thread version, pass as first parameter <code><span style="font: 10pt Monospace;"><span
                 class="style11">hpx</span><span class="style10">::</span><span class="style11">parallel</span><span
                 class="style10">::</span><span class="style11">v1</span><span class="style10">::</span><span
                 class="style11">seq ,</span></span></code>and for the parallel
-          version <code><span class="style5" style="font: 9pt Monospace;"><span
+          version <code><span style="font: 9pt Monospace;" class="style5"><span
                 class="style5"><code><span style="font: 10pt Monospace;"><span class="style11">hpx</span><span
                       class="style10">::</span><span class="style11">parallel</span><span
                       class="style10">::</span><span class="style11">v1</span><span
                       class="style10">::</span><span class="style11">par</span><span
                       class="style10"></span></span></code></span></span></code></p>
         <div class="caja_codigo">
-          <pre><code><span class="style5" style="font: 9pt Monospace;"><span class="style5"><br /></span></span></code><br /><code><span
+          <pre><br /><code><span style="font: 9pt Monospace;"><span class="style9">#include &lt;hpx/parallel/algorithms/tr1/sort.hpp&gt;<br /><br /><br /></span></span></code><code><span
 style="font: 10pt Monospace;"><span class="style2">//----------------------------------------------------------------------------
 </span><span class="style15">// Non stable sort single thread<br /></span></span></code><code><span
 style="font: 10pt Monospace;"><span class="style15"><code><span style="font: 10pt Monospace;"><span
 class="style2">//-----------------------------------------------------------------------------</span></span></code><br /></span></span></code><code><span
 style="font: 10pt Monospace;"><span class="style15"><code><span style="font: 10pt Monospace;"><span
-class="style11">hpx::parallel::sort</span><span class="style10">::</span><span class="style16">sort </span><span
+class="style11">hpx::parallel::tr1</span><span class="style10">::</span><span class="style16">sort </span><span
 class="style10">(</span><span class="style11">hpx</span><span class="style10">::</span><span
 class="style11">parallel</span><span class="style10">::</span><span class="style11">v1</span><span
 class="style10">::</span><span class="style11">seq</span><span class="style10">, </span><span
 class="style11">A</span><span class="style10">.</span><span class="style16">begin</span><span
-class="style10">() , </span><span class="style11">A</span><span class="style10">.</span><span
-class="style16">end</span><span class="style10">(), </span><span class="style11">comp </span><span
+class="style10">(), </span><span class="style11">A</span><span class="style10">.</span><span
+class="style16">end</span><span class="style10">(), </span><span class="style11">comp</span><span
 class="style10">);</span></span></code><br /><br /></span></span></code><code><span
 style="font: 10pt Monospace;"><span class="style15"><code><span style="font: 10pt Monospace;"><span
 class="style2">//----------------------------------------------------------------------------
 </span><span class="style15">// Non stable sort, parallel<br /></span></span></code><code><span
 style="font: 10pt Monospace;"><span class="style15"><code><span style="font: 10pt Monospace;"><span
 class="style2">//-----------------------------------------------------------------------------</span></span></code><br /></span></span></code></span></span></code><code><span
-style="font: 10pt Monospace;"><span class="style15"><code><span class="style5" style="font: 9pt Monospace;"><span
-class="style5"><code><span style="font: 10pt Monospace;"><span class="style11">hpx::parallel::sort</span><span
-class="style10">::</span><span class="style16">sort </span><span class="style10">(</span><span
-class="style11">hpx</span><span class="style10">::</span><span class="style11">parallel</span><span
-class="style10">::</span><span class="style11">v1</span><span class="style10">::</span><span
-class="style11">par</span><span class="style10">, </span><span class="style11">A</span><span
-class="style10">.</span><span class="style16">begin</span><span class="style10">() , </span><span
-class="style11">A</span><span class="style10">.</span><span class="style16">end</span><span
-class="style10">(), </span><span class="style11">comp </span><span class="style10">);</span></span></code></span></span></code><br /><br /></span></span></code><code><span
+style="font: 10pt Monospace;"><span class="style15"><code><span style="font: 9pt Monospace;"
+class="style5"><span class="style5"><code><span style="font: 10pt Monospace;"><span
+class="style11">hpx::parallel::tr1</span><span class="style10">::</span><span class="style16">sort </span><span
+class="style10">(</span><span class="style11">hpx</span><span class="style10">::</span><span
+class="style11">parallel</span><span class="style10">::</span><span class="style11">v1</span><span
+class="style10">::</span><span class="style11">par</span><span class="style10">, </span><span
+class="style11">A</span><span class="style10">.</span><span class="style16">begin</span><span
+class="style10">(), </span><span class="style11">A</span><span class="style10">.</span><span
+class="style16">end</span><span class="style10">(), </span><span class="style11">comp</span><span
+class="style10">);</span></span></code></span></span></code><br /><br /></span></span></code><code><span
 style="font: 10pt Monospace;"><span class="style15"><code><span style="font: 10pt Monospace;"><span
 class="style2">//----------------------------------------------------------------------------
 </span><span class="style15">// Stable sort single thread<br /></span></span></code><code><span
 style="font: 10pt Monospace;"><span class="style15"><code><span style="font: 10pt Monospace;"><span
 class="style2">//-----------------------------------------------------------------------------</span></span></code></span></span></code><br /></span></span></code><code><span
-style="font: 10pt Monospace;"><span class="style15"><code><span class="style5" style="font: 9pt Monospace;"><span
-class="style10"><code><span style="font: 10pt Monospace;"><span class="style11">hpx::parallel::sort</span><span
-class="style10">::</span><span class="style16">stable_sort </span><span class="style10">(</span><span
-class="style11">hpx</span><span class="style10">::</span><span class="style11">parallel</span><span
-class="style10">::</span><span class="style11">v1</span><span class="style10">::</span><span
-class="style11">seq</span><span class="style10">,</span><span class="style11">A</span><span
-class="style10">.</span><span class="style16">begin</span><span class="style10">() , </span><span
-class="style11">A</span><span class="style10">.</span><span class="style16">end</span><span
-class="style10">(), </span><span class="style11">comp  </span><span class="style10">);</span></span></code></span></span></code><br /><br /></span></span></code><code><span
+style="font: 10pt Monospace;"><span class="style15"><code><span style="font: 9pt Monospace;"
+class="style5"><span class="style10"><code><span style="font: 10pt Monospace;"><span
+class="style11">hpx::parallel::tr1</span><span class="style10">::</span><span class="style16">stable_sort </span><span
+class="style10">(</span><span class="style11">hpx</span><span class="style10">::</span><span
+class="style11">parallel</span><span class="style10">::</span><span class="style11">v1</span><span
+class="style10">::</span><span class="style11">seq</span><span class="style10">, </span><span
+class="style11">A</span><span class="style10">.</span><span class="style16">begin</span><span
+class="style10">(), </span><span class="style11">A</span><span class="style10">.</span><span
+class="style16">end</span><span class="style10">(), </span><span class="style11">comp</span><span
+class="style10">);</span></span></code></span></span></code><br /><br /></span></span></code><code><span
 style="font: 10pt Monospace;"><span class="style15"><code><span style="font: 10pt Monospace;"><span
 class="style15"><code><span style="font: 10pt Monospace;"><span class="style2">//----------------------------------------------------------------------------
 </span><span class="style15">// Stable sort, parallel<br /></span></span></code><code><span
 style="font: 10pt Monospace;"><span class="style15"><code><span style="font: 10pt Monospace;"><span
 class="style2">//-----------------------------------------------------------------------------</span></span></code></span></span></code></span></span></code><br /></span></span></code><code><span
-style="font: 10pt Monospace;"><span class="style15"><code><span class="style5" style="font: 9pt Monospace;"><span
-class="style10"><code><span style="font: 10pt Monospace;"><span class="style11">hpx::parallel::sort</span><span
-class="style10">::</span><span class="style16">stable_sort </span><span class="style10">(</span><span
-class="style11">hpx</span><span class="style10">::</span><span class="style11">parallel</span><span
-class="style10">::</span><span class="style11">v1</span><span class="style10">::</span><span
-class="style11">par</span><span class="style10">,</span><span class="style11">A</span><span
-class="style10">.</span><span class="style16">begin</span><span class="style10">() , </span><span
-class="style11">A</span><span class="style10">.</span><span class="style16">end</span><span
-class="style10">() , </span><span class="style11">comp</span><span class="style10">);</span></span></code></span></span></code><br /><br /></span></span></code><code><span
+style="font: 10pt Monospace;"><span class="style15"><code><span style="font: 9pt Monospace;"
+class="style5"><span class="style10"><code><span style="font: 10pt Monospace;"><span
+class="style11">hpx::parallel::tr1</span><span class="style10">::</span><span class="style16">stable_sort </span><span
+class="style10">(</span><span class="style11">hpx</span><span class="style10">::</span><span
+class="style11">parallel</span><span class="style10">::</span><span class="style11">v1</span><span
+class="style10">::</span><span class="style11">par</span><span class="style10">,</span><span
+class="style11"> A</span><span class="style10">.</span><span class="style16">begin</span><span
+class="style10">(), </span><span class="style11">A</span><span class="style10">.</span><span
+class="style16">end</span><span class="style10">(), </span><span class="style11">comp</span><span
+class="style10">);</span></span></code></span></span></code><br /><br /></span></span></code><code><span
 style="font: 10pt Monospace;"><span class="style15"><code><span style="font: 10pt Monospace;"><span
 class="style15"><code><span style="font: 10pt Monospace;"><span class="style15"><code><span
 style="font: 10pt Monospace;"><span class="style2">//----------------------------------------------------------------------------
 </span><span class="style15">// Sample sort, stable sort, parallel faster than stable sort parallel, but need<br />// more memory<br /></span></span></code><code><span
 style="font: 10pt Monospace;"><span class="style15"><code><span style="font: 10pt Monospace;"><span
 class="style2">//-----------------------------------------------------------------------------</span></span></code></span></span></code></span></span></code></span></span></code><br /></span></span></code><code><span
-style="font: 10pt Monospace;"><span class="style11">hpx::parallel::sort</span><span
+style="font: 10pt Monospace;"><span class="style11">hpx::parallel::tr1</span><span
 class="style10">::</span><span class="style11">sample_sort </span><span class="style10">(</span><span
 class="style11">hpx</span><span class="style10">::</span><span class="style11">parallel</span><span
 class="style10">::</span><span class="style11">v1</span><span class="style10">::</span><span
-class="style11">par</span><span class="style10">,</span><span class="style11">A</span><span
-class="style10">.</span><span class="style16">begin</span><span class="style10">() , </span><span
+class="style11">par</span><span class="style10">, </span><span class="style11">A</span><span
+class="style10">.</span><span class="style16">begin</span><span class="style10">(), </span><span
 class="style11">A</span><span class="style10">.</span><span class="style16">end</span><span
-class="style10">(), </span><span class="style11">comp </span><span class="style10">);<br /><br /></span></span></code></pre>
+class="style10">(), </span><span class="style11">comp</span><span class="style10">);<br /><br /></span></span></code></pre>
           <span class="style9"> </span> </div>
         <p><br />
         </p>
@@ -315,20 +332,21 @@ class="style10">(), </span><span class="style11">comp </span><span class="style1
             implemented specifically for this library</strong> by the author.</em><br />
         <p> <em>If you are interested in a <span style="font-weight: bold;">brief
               description</span> of the algorithm, you can find in the next link</em>
-          <a href="../block_indirect_sort_brief_en.pdf" target="_blank" data-original-href="../block_indirect_sort_brief_en.pdf">
+          <a data-original-href="../block_indirect_sort_brief_en.pdf" target="_blank"
+href="../block_indirect_sort_brief_en.pdf">
             Block Indirect Sort Brief </a> <br />
           <em>If you are interested in a <span style="font-weight: bold;">detailed
               description</span> of the algorithm, you can find in the next link</em>
-          <a target="_blank" href="../block_indirect_sort_en.pdf" data-original-href="../block_indirect_sort_en.pdf">
+          <a data-original-href="../block_indirect_sort_en.pdf" href="../block_indirect_sort_en.pdf"
+target="_blank">
             Block Indirect Sort </a><br />
         </p>
         <br />
         <p><a name="thread"></a> <span style="font-size: 18pt;font-weight: bold; color: black;">2.-
             Creating index ( </span><span style="font-size: 18pt;font-weight: bold; color: black;"><span
-              style="font-size: 16pt;font-weight: bold; color: black;">
+style="font-size: 16pt;font-weight: bold; color: black;">
               less_ptr_no_null </span>)<br />
           </span></p>
-        <br />
         Sometimes, we don't want   sort the data, but we want create en index,
         which is  a collection of iterators or pointers , sorted by the value
         pointed by them.<br />
@@ -377,8 +395,7 @@ class="style10">,*</span><span class="style11">T2</span><span class="style10">);
           <br />
           <span class="style9"> </span> </div>
         <br />
-        <img align="justify" src="file:///home/francisco/Projects/Sort/Boost_dev/doc/img/paso3.png"
-          alt="" /><br />
+        <br />
         With an example, you will understand. We have a registers sorted by the
         num field , but create an index for to have the elements sorted by name,
         and other for to have sorted by weight. Create the less_ptr_no_null
@@ -393,18 +410,20 @@ class="style10">,*</span><span class="style11">T2</span><span class="style10">);
 #include &lt;iterator&gt;
 #include &lt;cassert&gt;
 
-#include &lt;hpx/parallel/sort/sort.hpp&gt;
+#include &lt;hpx/parallel/algorithms/tr1/sort.hpp&gt;
 
 </span><span class="style5">using namespace </span><span class="style16">std </span><span
 class="style10">;
 </span><span class="style5">namespace </span><span class="style11">hpx_sort </span><span
 class="style10">= </span><span class="style11">hpx</span><span class="style10">::</span><span
-class="style11">parallel</span><span class="style10">::</span><span class="style16">sort </span><span
+class="style11">parallel</span><span class="style10">::</span><span class="style16">tr1</span><span
 class="style10">;
 </span><span class="style5">using </span><span class="style11">hpx_sort</span><span
-class="style10">::</span><span class="style11">less_ptr_no_null </span><span class="style10">;
-
-</span><span class="style5">struct </span><span class="style11">member
+class="style10">::</span><span class="style11">less_ptr_no_null</span><span class="style10">;<br /></span></span></code><code><span
+style="font: 9pt Monospace;"><span class="style10"><code><span style="font: 9pt Monospace;"><span
+class="style5">using </span><span class="style11">hpx_sort</span><span class="style10">::</span><span
+class="style11">sort</span><span class="style10">;</span></span></code><br /><br /> </span><span
+class="style5">struct </span><span class="style11">member
 </span><span class="style10">{   </span><span class="style5">uint32_t </span><span
 class="style11">num </span><span class="style10">;
     </span><span class="style16">std</span><span class="style10">::</span><span
@@ -532,24 +551,22 @@ class="style10">&lt;</span><span class="style11">iter_t</span><span class="style
 class="style11">cmp_weight</span><span class="style10">&gt;   </span><span class="style11">compare_weight </span><span
 class="style10">;
 
-    </span><span class="style11">hpx_sort</span><span class="style10">::</span><span
-class="style16">sort </span><span class="style10">(</span><span class="style11">hpx</span><span
-class="style10">::</span><span class="style11">parallel</span><span class="style10">::</span><span
-class="style11">v1</span><span class="style10">::</span><span class="style11">seq</span><span
-class="style10">,
-                    </span><span class="style11">Ix_name</span><span class="style10">.</span><span
-class="style16">begin</span><span class="style10">()  , </span><span class="style11">Ix_name</span><span
-class="style10">.</span><span class="style16">end</span><span class="style10">()  , </span><span
-class="style11">compare_name  </span><span class="style10">());
-    </span><span class="style11">hpx_sort</span><span class="style10">::</span><span
-class="style16">sort </span><span class="style10">(</span><span class="style11">hpx</span><span
-class="style10">::</span><span class="style11">parallel</span><span class="style10">::</span><span
-class="style11">v1</span><span class="style10">::</span><span class="style11">seq</span><span
-class="style10">,
-                    </span><span class="style11">Ix_weight</span><span class="style10">.</span><span
-class="style16">begin</span><span class="style10">(), </span><span class="style11">Ix_weight</span><span
-class="style10">.</span><span class="style16">end</span><span class="style10">(), </span><span
-class="style11">compare_weight</span><span class="style10">());
+    </span><span class="style10"></span><span class="style16">sort </span><span
+class="style10">(</span><span class="style11">hpx</span><span class="style10">::</span><span
+class="style11">parallel</span><span class="style10">::</span><span class="style11">v1</span><span
+class="style10">::</span><span class="style11">seq</span><span class="style10">, </span><span
+class="style11">Ix_name</span><span class="style10">.</span><span class="style16">begin</span><span
+class="style10">()  , </span><span class="style11">Ix_name</span><span class="style10">.</span><span
+class="style16">end</span><span class="style10">()  , </span><span class="style11">compare_name  </span><span
+class="style10">());
+    </span><span class="style10"></span><span class="style16">sort </span><span
+class="style10">(</span><span class="style11">hpx</span><span class="style10">::</span><span
+class="style11">parallel</span><span class="style10">::</span><span class="style11">v1</span><span
+class="style10">::</span><span class="style11">seq</span><span class="style10">, </span><span
+class="style11">Ix_weight</span><span class="style10">.</span><span class="style16">begin</span><span
+class="style10">(), </span><span class="style11">Ix_weight</span><span class="style10">.</span><span
+class="style16">end</span><span class="style10">(), </span><span class="style11">compare_weight</span><span
+class="style10">());
 
     </span><span class="style16">cout</span><span class="style10">&lt;&lt;</span><span
 class="style6">"Printing sorted by number \n"</span><span class="style10">;
@@ -611,11 +628,10 @@ class="style10">::</span><span class="style11">finalize</span><span class="style
           <br />
           <span class="style9"> </span> </div>
         <br />
-        <img align="justify" src="file:///home/francisco/Projects/Sort/Boost_dev/doc/img/paso3.png"
-          alt="" /></div>
-      <a title="benchmark.html" href="benchmark.html" style="float:right"><img alt="link to benchmark page"
-          src="img/next.png" /></a> <a title="index.html" href="index.html" style="float:right"><img
-          alt="go to head of the page" src="img/up.png" /></a> 
+        </div>
+      <a style="float:right" href="benchmark.html" title="benchmark.html"><img src="img/next.png"
+alt="link to benchmark page" /></a> <a style="float:right" href="index.html" title="index.html"><img
+src="img/up.png" alt="go to head of the page" /></a> 
       <table width="100%" xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision">
         <tbody>
           <tr>
@@ -637,11 +653,12 @@ class="style10">::</span><span class="style11">finalize</span><span class="style
             <span style="font-style: italic;"> </span></div>
           <span style="font-style: italic;"> </span>
           <div id="license">
-            <p><span style="font-style: italic;">Distributed under the <a href="/LICENSE_1_0.txt"
-                  class="internal">Boost Software License, Version 1.0</a>.</span></p>
+            <p><span style="font-style: italic;">Distributed under the <a class="internal"
+href="/LICENSE_1_0.txt">Boost Software License, Version 1.0</a>.</span></p>
           </div>
           <span style="font-style: italic;"> </span></div>
         <span style="font-style: italic;"> </span> </div>
     </div>
-  </body>
-</html>
+  
+
+</body></html>

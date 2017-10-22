@@ -1,6 +1,0 @@
-var searchData=
-[
-  ['operator_28_29',['operator()',['../structhpx_1_1parallel_1_1sort_1_1detail_1_1bis_1_1compare__block__pos.html#a772558913d2c9c56fbf8465777888941',1,'hpx::parallel::sort::detail::bis::compare_block_pos::operator()()'],['../structhpx_1_1parallel_1_1sort_1_1detail_1_1less__ptr__no__null.html#a46960c01fc2228b9907a2701cd629678',1,'hpx::parallel::sort::detail::less_ptr_no_null::operator()()']]],
-  ['operator_3d',['operator=',['../classhpx_1_1parallel_1_1sort_1_1detail_1_1bis_1_1block__pos.html#a0a536ea1ff53fdb7615c79389ee5c8ce',1,'hpx::parallel::sort::detail::bis::block_pos::operator=()'],['../classhpx_1_1parallel_1_1sort_1_1detail_1_1util_1_1stack__cnc.html#afa7ba888bef9ba721d9b0f24e03dcf9e',1,'hpx::parallel::sort::detail::util::stack_cnc::operator=(const stack_cnc &amp;)=delete'],['../classhpx_1_1parallel_1_1sort_1_1detail_1_1util_1_1stack__cnc.html#a30f5170e5e4ddcf67638347be249b4a0',1,'hpx::parallel::sort::detail::util::stack_cnc::operator=(const std::vector&lt; value_type, alloc_t2 &gt; &amp;v_other)']]],
-  ['owner',['owner',['../structhpx_1_1parallel_1_1sort_1_1detail_1_1sample__sort.html#a5652717c40c5de8e205e907b353c75ac',1,'hpx::parallel::sort::detail::sample_sort']]]
-];

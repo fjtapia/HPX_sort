@@ -1,0 +1,462 @@
+//----------------------------------------------------------------------------
+/// @file test_block_indirect_sort.cpp
+/// @brief Test program of the block_indirect_sort algorithm
+///
+/// @author Copyright (c) 2016 Francisco Jose Tapia (fjtapia@gmail.com )\n
+///         Distributed under the Boost Software License, Version 1.0.\n
+///         ( See accompanying file LICENSE_1_0.txt or copy at
+///           http://www.boost.org/LICENSE_1_0.txt  )
+/// @version 0.1
+///
+/// @remarks
+//-----------------------------------------------------------------------------
+#include <hpx/hpx.hpp>
+#include <hpx/hpx_init.hpp>
+#include <algorithm>
+#include <random>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <vector>
+#include <ciso646>
+#include <hpx/parallel/algorithms/tr1/detail/block_indirect_sort.hpp>
+
+namespace hpx_par = hpx::parallel::tr1::detail;
+using hpx_par::blk_detail::block_indirect_sort;
+using hpx_par::util::range;
+
+
+
+void test1 (void)
+{
+    std::vector< uint32_t > VN;
+    std::mt19937 my_rand (0);
+    std::less<uint32_t> comp;
+    for (uint32_t i = 0; i < 130; ++i) {
+        VN.push_back (my_rand ( ) % 1000);
+    };
+    block_indirect_sort< 4, 4, uint32_t * > (&VN[ 0 ], &VN[ 130 ],comp, 2);
+    for (uint32_t i = 1; i < VN.size ( ); ++i)
+        assert (VN[ i - 1 ] <= VN[ i ]);
+
+    VN.clear ( );
+    for (uint32_t i = 0; i < 130; ++i) {
+        VN.push_back (my_rand ( ) % 1000);
+    };
+    block_indirect_sort< 4, 4, uint32_t * > (&VN[ 0 ], &VN[ 130 ],comp, 0);
+    for (uint32_t i = 1; i < VN.size ( ); ++i)
+        assert (VN[ i - 1 ] <= VN[ i ]);
+};
+
+void test2 ( )
+{
+    uint64_t V1[ 300 ];
+    std::less< uint64_t > comp;
+
+    for (uint32_t i = 0; i < 200; ++i) V1[ i ] = i;
+
+    block_indirect_sort< 4, 4, uint64_t *, std::less< uint64_t > > (
+        &V1[ 0 ], &V1[ 200 ], comp, 2);
+    for (unsigned i = 1; i < 200; i++) {
+        assert (V1[ i - 1 ] <= V1[ i ]);
+    };
+
+    for (uint32_t i = 0; i < 200; ++i) V1[ i ] = 199 - i;
+
+    block_indirect_sort< 4, 4, uint64_t *, std::less< uint64_t > > (
+        &V1[ 0 ], &V1[ 200 ], comp, 2);
+
+    for (unsigned i = 1; i < 200; i++) {
+        assert (V1[ i - 1 ] <= V1[ i ]);
+    };
+
+    for (uint32_t i = 0; i < 300; ++i) V1[ i ] = 299 - i;
+
+    block_indirect_sort< 4, 4, uint64_t *, std::less< uint64_t > > (
+        &V1[ 0 ], &V1[ 300 ], comp, 2);
+    for (unsigned i = 1; i < 300; i++) {
+        assert (V1[ i - 1 ] <= V1[ i ]);
+    };
+
+    for (uint32_t i = 0; i < 300; ++i) V1[ i ] = 88;
+
+    block_indirect_sort< 4, 4, uint64_t *, std::less< uint64_t > > (
+        &V1[ 0 ], &V1[ 300 ], comp, 2);
+    for (unsigned i = 1; i < 300; i++) {
+        assert (V1[ i - 1 ] <= V1[ i ]);
+    };
+    return;
+};
+
+void test3 (void)
+{
+    typedef typename std::vector< uint64_t >::iterator iter_t;
+    typedef std::less< uint64_t > compare;
+
+    const uint32_t NElem = 500000;
+    std::vector< uint64_t > V1;
+    std::mt19937_64 my_rand (0);
+    compare comp;
+
+    for (uint32_t i = 0; i < NElem; ++i) V1.push_back (my_rand ( ) % NElem);
+    block_indirect_sort< 1024, 16, iter_t, compare >
+        (V1.begin ( ), V1.end ( ), comp, 2);
+
+    for (unsigned i = 1; i < NElem; i++) {
+        assert (V1[ i - 1 ] <= V1[ i ]);
+    };
+
+    V1.clear ( );
+    for (uint32_t i = 0; i < NElem; ++i) V1.push_back (i);
+
+    block_indirect_sort< 1024, 16, iter_t, compare > (
+        V1.begin ( ), V1.end ( ), comp, 2);
+    for (unsigned i = 1; i < NElem; i++) {
+        assert (V1[ i - 1 ] <= V1[ i ]);
+    };
+
+    V1.clear ( );
+    for (uint32_t i = 0; i < NElem; ++i) V1.push_back (NElem - i);
+
+    block_indirect_sort< 1024, 16, iter_t, compare > (
+        V1.begin ( ), V1.end ( ), comp, 2);
+    for (unsigned i = 1; i < NElem; i++) {
+        assert (V1[ i - 1 ] <= V1[ i ]);
+    };
+
+    V1.clear ( );
+    for (uint32_t i = 0; i < NElem; ++i) V1.push_back (1000);
+
+    block_indirect_sort< 1024, 16, iter_t, compare > (
+        V1.begin ( ), V1.end ( ), comp, 2);
+    for (unsigned i = 1; i < NElem; i++) {
+        assert (V1[ i - 1 ] == V1[ i ]);
+    };
+};
+
+void test4 (void)
+{
+    typedef typename std::vector< uint64_t >::iterator iter_t;
+    typedef std::less< uint64_t > compare;
+    std::less< uint64_t > comp;
+    std::vector< uint64_t > V;
+
+    for (uint32_t i = 0; i < 2083333; ++i) V.push_back (i);
+
+    block_indirect_sort< 1024, 32, iter_t, compare > (
+        V.begin ( ), V.end ( ),comp, 8);
+    for (uint32_t i = 0; i < V.size ( ); ++i) {
+        assert (V[ i ] == i);
+    };
+};
+
+void test5 (void)
+{
+    typedef typename std::vector< uint64_t >::iterator iter_t;
+    typedef std::less< uint64_t > compare;
+    typedef range< iter_t > range_it;
+
+    const uint32_t NELEM = 416667;
+    std::vector< uint64_t > A;
+    std::less< uint64_t > comp;
+
+    for (uint32_t i = 0; i < 1000; ++i) A.push_back (0);
+    for (uint32_t i = 0; i < NELEM; ++i) A.push_back (NELEM - i);
+    for (uint32_t i = 0; i < 1000; ++i) A.push_back (0);
+
+    range_it R1 (A.begin ( ) + 1000, A.begin ( ) + (1000 + NELEM));
+    block_indirect_sort< 1024, 32, iter_t, compare > (
+        A.begin ( ) + 1000, A.begin ( ) + (1000 + NELEM), comp, 8);
+    for (iter_t it = A.begin ( ) + 1000; it != A.begin ( ) + (1000 + NELEM);
+         ++it)
+    {
+        assert ((*(it - 1)) <= (*it));
+    };
+    assert (A[ 998 ] == 0 and A[ 999 ] == 0 and A[ 1000 + NELEM ] == 0 and
+                 A[ 1001 + NELEM ] == 0);
+
+
+    A.clear ( );
+    for (uint32_t i = 0; i < 1000; ++i) A.push_back (999999999);
+    for (uint32_t i = 0; i < NELEM; ++i) A.push_back (NELEM - i);
+    for (uint32_t i = 0; i < 1000; ++i) A.push_back (999999999);
+
+    R1 = range_it (A.begin ( ) + 1000, A.begin ( ) + (1000 + NELEM));
+    block_indirect_sort< 1024, 32, iter_t, compare > (
+        A.begin ( ) + 1000, A.begin ( ) + (1000 + NELEM), comp, 4);
+
+    for (iter_t it = A.begin ( ) + 1001; it != A.begin ( ) + (1000 + NELEM);
+         ++it)
+    {
+        assert ((*(it - 1)) <= (*it));
+    };
+    assert (A[ 998 ] == 999999999 and A[ 999 ] == 999999999 and
+                 A[ 1000 + NELEM ] == 999999999 and
+                 A[ 1001 + NELEM ] == 999999999);
+};
+
+void test6 (void)
+{
+    typedef typename std::vector< uint32_t >::iterator iter_t;
+    typedef std::less< uint32_t > compare;
+
+    const uint32_t NElem = 1000000;
+    std::vector< uint32_t > V1, V2, V3;
+    V1.reserve ( NElem ) ;
+    std::mt19937 my_rand (0);
+
+    for (uint32_t i = 0; i < NElem; ++i) V1.push_back (my_rand ( ));
+
+    V2 = V1;
+    V3 = V1;
+    std::sort (V2.begin ( ), V2.end ( ));
+
+    V1 = V3;
+    block_indirect_sort< 1024, 32, iter_t, compare > (
+        V1.begin ( ), V1.end ( ), compare(), 2);
+    for (unsigned i = 0; i < V1.size(); i++)
+    {
+        assert (V1[ i ] == V2[ i ]);
+    };
+
+    V1 = V3;
+    block_indirect_sort< 1024, 32, iter_t, compare > (
+        V1.begin ( ), V1.end ( ), compare(), 4);
+    for (unsigned i = 0; i < V1.size(); i++)
+    {
+        assert (V1[ i ] == V2[ i ]);
+    };
+
+    V1 = V3;
+
+    block_indirect_sort< 1024, 32, iter_t, compare > (
+        V1.begin ( ), V1.end ( ), compare(), 8);
+
+    for (uint32_t i = 1 ; i < V1.size() ; ++i)
+    {
+        assert ( V1[i] >= V1[i-1]);
+    }
+
+    for (unsigned i = 0; i < V1.size(); i++)
+    {
+        assert (V1[ i ] == V2[ i ]);
+    };
+
+    V1 = V3;
+    block_indirect_sort< 1024, 32, iter_t, compare > (
+        V1.begin ( ), V1.end ( ), compare(), 16);
+    for (unsigned i = 0; i < V1.size(); i++) {
+        assert (V1[ i ] == V2[ i ]);
+    };
+
+    V1 = V3;
+    block_indirect_sort< 1024, 32, iter_t, compare > (
+        V1.begin ( ), V1.end ( ), compare(), 100);
+    for (unsigned i = 1; i < V1.size(); i++) {
+        assert (V1[ i ] == V2[ i ]);
+    };
+
+};
+
+void test7 ( )
+{
+    typedef typename std::vector< uint64_t >::iterator iter_t;
+    typedef std::less< uint64_t > compare;
+
+    const uint32_t NELEM = 10000000;
+    std::mt19937_64 my_rand (0);
+    std::vector< uint64_t > A, B;
+    A.reserve (NELEM);
+    compare comp;
+
+    for (uint32_t i = 0; i < NELEM; i++) {
+        A.push_back (my_rand ( ));
+    };
+    B = A;
+
+    block_indirect_sort< 1024, 32, iter_t, compare >
+    ( A.begin ( ), A.end ( ), comp, 8);
+    for (unsigned i = 0; i < (A.size ( ) - 1); i++) {
+        assert (A[ i ] <= A[ i + 1 ]);
+    };
+    std::sort (B.begin ( ), B.end ( ));
+    for (unsigned i = 0; i < NELEM; i++) {
+        assert (A[ i ] == B[ i ]);
+    };
+};
+
+template<uint32_t NN>
+struct int_array
+{
+	uint64_t M[NN];
+
+	int_array(uint64_t number = 0)
+	{   for (uint32_t i = 0; i < NN; ++i) M[i] = number;
+	};
+
+	bool operator<(const int_array<NN> &A) const
+	{   return M[0] < A.M[0];
+	};
+};
+
+
+
+void test8()
+{
+	std::less<uint64_t> cmp64;
+	std::less<uint32_t> cmp32;
+	std::less<uint16_t> cmp16;
+	std::less<uint8_t> cmp8;
+
+	std::mt19937_64 my_rand(0);
+
+	const uint32_t NELEM = (1 << 20);
+	std::vector<uint64_t> V1, V2;
+	V1.reserve(NELEM);
+	V2.reserve(NELEM);
+
+	for (uint32_t i = 0; i < NELEM; ++i)
+		V1.push_back(my_rand());
+	V2 = V1;
+
+	uint64_t *p64 = &V1[0];
+	uint32_t *p32 = reinterpret_cast<uint32_t *>(p64);
+	uint16_t *p16 = reinterpret_cast<uint16_t *>(p64);
+	uint8_t *p8 = reinterpret_cast<uint8_t *>(p64);
+
+	V1 = V2;
+	bsp::block_indirect_sort(p64, p64 + NELEM, cmp64, 8);
+	for (unsigned i = 1; i < NELEM; i++)
+	{
+		assert(p64[i - 1] <= p64[i]);
+	};
+
+	V1 = V2;
+	bsp::block_indirect_sort(p32, p32 + (NELEM << 1), cmp32, 8);
+	for (unsigned i = 1; i < (NELEM << 1); i++)
+	{
+		assert(p32[i - 1] <= p32[i]);
+	};
+
+	V1 = V2;
+	bsp::block_indirect_sort(p16, p16 + (NELEM << 2), cmp16, 8);
+	for (unsigned i = 1; i < (NELEM << 2); i++)
+	{
+		assert(p16[i - 1] <= p16[i]);
+	};
+
+	V1 = V2;
+	bsp::block_indirect_sort(p8, p8 + (NELEM << 3), cmp8, 8);
+	for (unsigned i = 1; i < (NELEM << 3); i++)
+	{
+		assert(p8[i - 1] <= p8[i]);
+	};
+};
+
+template<class IA>
+void test_int_array(uint32_t NELEM)
+{
+	typedef std::less<IA> compare;
+	std::mt19937_64 my_rand(0);
+
+	std::vector<IA> V1;
+	V1.reserve(NELEM);
+	for (uint32_t i = 0; i < NELEM; ++i)
+		V1.emplace_back(my_rand());
+
+	bsp::block_indirect_sort(V1.begin(), V1.end(), compare());
+	for (unsigned i = 1; i < NELEM; i++)
+	{
+		assert(not (V1[i] < V1[i - 1]));
+	};
+}
+
+void test9()
+{
+	test_int_array<int_array<1> >(1u << 20);
+	test_int_array<int_array<2> >(1u << 19);
+	test_int_array<int_array<4> >(1u << 18);
+	test_int_array<int_array<8> >(1u << 17);
+	test_int_array<int_array<16> >(1u << 17);
+	test_int_array<int_array<32> >(1u << 17);
+	test_int_array<int_array<64> >(1u << 17);
+	test_int_array<int_array<128> >(1u << 17);
+}
+void test10()
+{
+	std::mt19937_64 my_rand(0);
+	const uint32_t NELEM = 1 << 20;
+	const uint32_t NString = 100000;
+	std::vector<uint64_t> V1;
+	V1.reserve(NELEM);
+	for (uint32_t i = 0; i < NELEM; ++i)
+		V1.push_back(my_rand());
+
+	uint64_t *p64 = &V1[0];
+	char *pchar = reinterpret_cast<char *>(p64);
+
+	std::string sinput(pchar, (NELEM << 3));
+
+	std::istringstream strm_input(sinput);
+	std::string inval;
+	std::vector<std::string> V;
+	V.reserve(NString);
+	strm_input.seekg(0, std::ios_base::beg);
+
+	strm_input.seekg(0, std::ios_base::beg);
+
+	for (size_t i = 0; i < NString; ++i)
+	{
+		if (!strm_input.eof())
+		{
+			strm_input >> inval;
+			V.push_back(inval);
+			inval.clear();
+		}
+		else
+		{
+			throw std::ios_base::failure("Insuficient lenght of the file\n");
+		};
+	};
+
+	typedef std::less<std::string> compare;
+	bsp::block_indirect_sort(V.begin(), V.end(), compare());
+	for (unsigned i = 1; i < NString; i++)
+	{
+		assert(not (V[i] < V[i - 1]));
+	};
+
+}
+
+int test_main (void)
+{
+    test1  ( );
+    test2  ( );
+    test3  ( );
+    test4  ( );
+    test5  ( );
+    test6  ( );
+    test7  ( );
+    test8  ( );
+    test9  ( );
+    test10 ( );
+
+    return 0;
+};
+
+
+int main(int argc, char* argv[])
+{
+    std::vector<std::string> cfg;
+    cfg.push_back("hpx.os_threads=all");
+
+    // Initialize and run HPX.
+    return hpx::init(argc, argv, cfg);
+
+}
+int hpx_main(boost::program_options::variables_map&)
+{	{	test_main();
+    };
+    // Initiate shutdown of the runtime systems on all localities.
+    return hpx::finalize();
+};

@@ -1,0 +1,15 @@
+13:30:57 **** Incremental Build of configuration Debug for project test_block_indirect_sort ****
+make all 
+Building file: /home/francisco/Code/HPX_sort/test/detail/test_block_indirect_sort.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I/home/francisco/Code/HPX_sort/include -I/home/francisco/Code/hpx/hpx -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"test_block_indirect_sort.d" -MT"test_block_indirect_sort.d" -o "test_block_indirect_sort.o" "/home/francisco/Code/HPX_sort/test/detail/test_block_indirect_sort.cpp"
+Finished building: /home/francisco/Code/HPX_sort/test/detail/test_block_indirect_sort.cpp
+ 
+Building target: test_block_indirect_sort
+Invoking: GCC C++ Linker
+g++  -o "test_block_indirect_sort"  ./test_block_indirect_sort.o   -lpthread -lhpx -ldl -lboost_system -lboost_atomic -lboost_program_options -lboost_chrono -lboost_thread
+Finished building target: test_block_indirect_sort
+ 
+
+13:31:17 Build Finished (took 19s.445ms)
+

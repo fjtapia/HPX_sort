@@ -1,0 +1,12 @@
+13:46:55 **** Incremental Build of configuration Debug for project test_parallel_sort_original ****
+make all 
+Building file: /home/francisco/Code/HPX_sort/test/detail/test_parallel_sort_original.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I/home/francisco/Code/hpx/hpx -I/home/francisco/Code/HPX_sort/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"test_parallel_sort_original.d" -MT"test_parallel_sort_original.d" -o "test_parallel_sort_original.o" "/home/francisco/Code/HPX_sort/test/detail/test_parallel_sort_original.cpp"
+Finished building: /home/francisco/Code/HPX_sort/test/detail/test_parallel_sort_original.cpp
+ 
+Building target: test_parallel_sort_original
+Invoking: GCC C++ Linker
+g++  -o "test_parallel_sort_original"  ./test_parallel_sort_original.o   -lpthread -lhpx -ldl -lboost_system -lboost_atomic -lboost_program_options -lboost_chrono -lboost_thread
+Finished building target: test_parallel_sort_original
+ 

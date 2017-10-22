@@ -1,0 +1,281 @@
+//----------------------------------------------------------------------------
+/// @file fast_benchmark.cpp
+/// @brief Benchmark of several sort methods with different uint64_t numbers
+///
+/// @author Copyright (c) 2010 2015 Francisco José Tapia (fjtapia@gmail.com )\n
+///         Distributed under the Boost Software License, Version 1.0.\n
+///         ( See accompanying file LICENSE_1_0.txt or copy at
+///           http://www.boost.org/LICENSE_1_0.txt  )
+///         This program use for comparison purposes, the Threading Building
+///         Blocks which license is the GNU General Public License, version 2
+///         as  published  by  the  Free Software Foundation.
+/// @version 0.1
+///
+/// @remarks
+//-----------------------------------------------------------------------------
+#include <hpx/hpx.hpp>
+#include <hpx/hpx_init.hpp>
+#include <stdlib.h>
+#include <iostream>
+#include <algorithm>
+#include <random>
+#include <vector>
+#include <file_vector.hpp>
+
+
+#include "tbb/tbb_stddef.h"
+#include "tbb/task_scheduler_init.h"
+#include "tbb/parallel_sort.h"
+#include "parallel_stable_sort/tbb-lowlevel/parallel_stable_sort.h"
+
+#include <hpx/parallel/algorithms/tr1/sort.hpp>
+#include <hpx/parallel/algorithms/sort.hpp>
+#include <time_measure.hpp>
+#include "int_array.hpp"
+
+#define NELEM 100000000
+#define NMAXSTRING 10000000
+using namespace std ;
+
+namespace hpx_sort  = hpx::parallel::algorithms::tr1;
+namespace hpx_util  = hpx_sort::detail::util;
+
+
+using hpx_util::time_point ;
+using hpx_util::now;
+using hpx_util::subtract_time ;
+using hpx_util::fill_vector_uint64;
+using hpx_util::write_file_uint64;
+
+
+
+void Generator_sorted(void );
+void Generator_uint64(void );
+void Generator_string(void) ;
+
+template <class IA>
+void Generator (uint64_t N );
+
+template <class IA, class compare  >
+int Prueba  ( std::vector <IA> & B , compare comp = compare() );
+
+int test_main (void );
+
+int main(int argc, char* argv[])
+{
+    std::vector<std::string> cfg;
+    cfg.push_back("hpx.os_threads=all");
+    // Initialize and run HPX.
+    return hpx::init(argc, argv, cfg);
+
+}
+int hpx_main(boost::program_options::variables_map&)
+{	{	test_main() ;
+    };
+    // Initiate shutdown of the runtime systems on all localities.
+    return hpx::finalize();
+};
+
+
+
+int test_main (void )
+{   //------------------------------ Inicio ----------------------------------
+    cout<<"****************************************************************\n";
+    cout<<"**                                                            **\n";
+    cout<<"**         H P X : : P A R A L L E L : : S O R T              **\n";
+    cout<<"**                                                            **\n";
+    cout<<"**                   B E N C H M A R K                        **\n";
+    cout<<"**                                                            **\n";
+    cout<<"****************************************************************\n";
+    cout<<std::endl;
+    std::cout.flush();
+    int code = system ( "lscpu");
+    std::cout.flush();
+    cout<<"\n";
+
+    Generator_sorted() ;
+    Generator_uint64() ;
+    Generator_string () ;
+
+    cout<<"================================================================\n";
+    cout<<"=                OBJECT COMPARISON                             =\n";
+    cout<<"=              ---------------------                           =\n";
+    cout<<"=                                                              =\n";
+    cout<<"= The objects are arrays of 64 bits numbers                    =\n";
+    cout<<"= They are compared in two ways :                              =\n";
+    cout<<"=    (H) Heavy : The comparison is the sum of all the numbers  =\n";
+    cout<<"=                of the array                                  =\n";
+    cout<<"=    (L) Light : The comparison is with the first element of   =\n";
+    cout<<"=                the array, as a key                           =\n";
+    cout<<"=                                                              =\n";
+    cout<<"================================================================\n";
+    cout<<"\n\n";
+    Generator< int_array<1> >   ( NELEM   );
+    Generator< int_array<2> >   ( NELEM>>1);
+    Generator< int_array<4> >   ( NELEM>>2);
+    Generator< int_array<8> >   ( NELEM>>3);
+    Generator< int_array<16> >  ( NELEM>>4);
+    Generator< int_array<32> >  ( NELEM>>5);
+    Generator< int_array<64> >  ( NELEM>>6);
+    return code ;
+}
+
+void Generator_sorted(void )
+{   //---------------------------- begin--------------------------------------
+	vector<uint64_t> A  ;
+
+    A.reserve ( NELEM) ;
+    cout<<"  "<<NELEM<<" uint64_t elements already sorted\n" ;
+    cout<<"=================================================\n";
+    A.clear();
+    for ( size_t i =0 ; i < NELEM ; ++i)
+        A.push_back( i );
+    Prueba<uint64_t, std::less<uint64_t> >(A) ;
+    cout<<std::endl ;
+}
+void Generator_uint64(void )
+{   //---------------------------- begin--------------------------------------
+    vector<uint64_t> A  ;
+    A.reserve ( NELEM) ;
+    cout<<"  "<< NELEM<<" uint64_t elements randomly filled\n" ;
+    cout<<"=================================================\n";
+    A.clear();
+    if ( fill_vector_uint64("input.bin", A, NELEM) != 0)
+    {   std::cout<<"Error in the input file\n";
+        return ;
+    };
+    Prueba<uint64_t, std::less<uint64_t>>(A) ;
+    cout<<std::endl ;
+}
+void Generator_string(void)
+{   //------------------------------- begin ----------------------------------
+    cout<<"  "<< NMAXSTRING<<" strings randomly filled\n" ;
+    cout<<"===============================================\n";
+    std::vector <std::string> A ;
+    A.reserve ( NMAXSTRING);
+    A.clear();
+    if ( hpx_util::fill_vector_string("input.bin", A, NMAXSTRING) != 0)
+    {   std::cout<<"Error in the input file\n";
+        return ;
+    };
+    Prueba<std::string, std::less<std::string> >(A) ;
+    cout<<std::endl ;
+};
+
+template <class IA>
+void Generator (uint64_t N )
+{   //------------------------------- begin ----------------------------------
+    hpx_util::uint64_file_generator gen ( "input.bin");
+    vector<IA> A ;
+   	A.reserve ( N);
+
+    //------------------------ Inicio -----------------------------
+    cout<<N<<" elements of size "<<sizeof (IA)<<" randomly filled \n";
+    cout<<"=============================================\n";
+    gen.reset() ;
+    A.clear();
+    for ( uint32_t i = 0 ; i < N ; i ++)
+        A.emplace_back(IA::generate(gen)) ;
+    cout<<"\n  H E A V Y   C O M P A R I S O N\n";
+    cout<<"====================================\n";
+    Prueba(A , H_comp< IA >()) ;
+    cout<<"\n  L I G H T   C O M P A R I S O N \n";
+    cout<<"=======================================\n";
+    Prueba(A, L_comp< IA> ()) ;
+    cout<<std::endl ;
+};
+
+template <class IA, class compare  >
+int Prueba  ( std::vector <IA> & B , compare comp )
+{   //---------------------------- begin --------------------------------
+	double duracion ;
+	time_point start, finish;
+	std::vector <IA> A ( B);
+
+	//--------------------------------------------------------------------
+	A = B ;
+    cout<<"GCC std::sort                : ";
+    start= now() ;
+    std::sort (A.begin() , A.end(), comp  );
+    finish = now() ;
+    duracion = subtract_time(finish ,start) ;
+    cout<<duracion<<" secs\n";
+
+
+    //cout<<"---------------- HPX sort --------------\n";
+    A = B ;
+    cout<<"HPX sort                     : ";
+    start= now() ;
+    hpx_sort::sort (hpx::parallel::v1::seq, A.begin() , A.end(), comp );
+    finish = now() ;
+    duracion = subtract_time(finish ,start) ;
+    cout<<duracion<<" secs\n\n";
+
+
+    A = B ;
+    cout<<"GCC std::stable_sort         : ";
+    start= now() ;
+    std::stable_sort (A.begin() , A.end() , comp );
+    finish = now() ;
+    duracion = subtract_time(finish ,start) ;
+    cout<<duracion<<" secs\n";
+
+    A = B ;
+    //cout<<"--------------------- HPX stable sort ---------------\n";
+    cout<<"HPX  stable_sort             : ";
+    start= now() ;
+    hpx_sort::stable_sort (hpx::parallel::v1::seq,A.begin() , A.end(), comp  );
+    finish = now() ;
+    duracion = subtract_time(finish ,start) ;
+    cout<<duracion<<" secs\n\n";
+
+
+    A = B ;
+    //------------------- tbb::parallel_sort -----------------------------
+    cout<<"TBB parallel_sort            : ";
+    start= now() ;
+    tbb::parallel_sort (A.begin() , A.end(), comp  );
+    finish = now() ;
+    duracion = subtract_time(finish ,start) ;
+    cout<<duracion<<" secs\n";
+
+    A = B ;
+    //---------------------  HPX parallel_sort -------------------
+    cout<<"HPX parallel_sort            : ";
+    start= now() ;
+    //bs_algo::indirect_parallel_sort (A.begin() , A.end() );
+    hpx_sort::sort (hpx::parallel::par, A.begin() , A.end(), comp );
+    finish = now() ;
+    duracion = subtract_time(finish ,start) ;
+    cout<<duracion<<" secs\n\n";
+
+    A = B ;
+    //--------------------- tbb lowlevel parallel_stable_sort ------------
+    cout<<"TBB parallel stable sort     : ";
+    start= now() ;
+    pss::parallel_stable_sort (A.begin() , A.end(),comp );
+    finish = now() ;
+    duracion = subtract_time(finish ,start) ;
+    cout<<duracion<<" secs\n";
+
+    A = B ;
+    //---------------------  HPX parallel_stable_sort ------------
+    cout<<"HPX parallel stable sort     : ";
+    start= now() ;
+    hpx_sort::stable_sort (hpx::parallel::v1::par,A.begin() , A.end() , comp);
+    finish = now() ;
+    duracion = subtract_time(finish ,start) ;
+    cout<<duracion<<" secs\n";
+
+    A = B ;
+    //--------------------- HPX sample_sort ---------------------
+    cout<<"HPX sample sort              : ";
+    start= now() ;
+    //bs_algo::indirect_sample_sort (A.begin() , A.end() ,NThread() );
+    hpx_sort::sample_sort (hpx::parallel::v1::par,A.begin() , A.end(), comp );
+    finish = now() ;
+    duracion = subtract_time(finish ,start) ;
+    cout<<duracion<<" secs\n\n";
+
+    return 0 ;
+};

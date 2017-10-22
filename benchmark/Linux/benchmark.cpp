@@ -20,30 +20,35 @@
 #include <algorithm>
 #include <random>
 #include <vector>
-#include <file_vector.hpp>
-
+#include <hpx/parallel/algorithms/tr1/detail/util/file_vector.hpp>
+#include <hpx/parallel/algorithms/tr1/detail/util/time_measure.hpp>
+#include <hpx/parallel/algorithms/tr1/detail/util/int_array.hpp>
 
 #include "tbb/tbb_stddef.h"
 #include "tbb/task_scheduler_init.h"
 #include "tbb/parallel_sort.h"
 #include "parallel_stable_sort/tbb-lowlevel/parallel_stable_sort.h"
+#include <hpx/parallel/algorithms/sort.hpp>
+#include <hpx/parallel/algorithms/tr1/sort.hpp>
 
-#include <hpx/parallel/sort/sort.hpp>
-#include <time_measure.hpp>
-#include "int_array.hpp"
+
 
 #define NELEM 100000000
 #define NMAXSTRING 10000000
 using namespace std ;
-namespace hpx_util  = hpx::parallel::sort::detail::util ;
-namespace hpx_sort  = hpx::parallel::sort ;
+
+namespace hpx_sort  = hpx::parallel;
+namespace hpx_util  = hpx_sort::tr1::detail::util;
+
 
 using hpx_util::time_point ;
 using hpx_util::now;
 using hpx_util::subtract_time ;
 using hpx_util::fill_vector_uint64;
 using hpx_util::write_file_uint64;
-
+using hpx_util::int_array;
+using hpx_util::H_comp;
+using hpx_util::L_comp;
 
 
 void Generator_sorted(void );
@@ -203,7 +208,7 @@ int Prueba  ( std::vector <IA> & B , compare comp )
     A = B ;
     cout<<"HPX sort                     : ";
     start= now() ;
-    hpx_sort::sort (hpx::parallel::v1::seq, A.begin() , A.end(), comp );
+    hpx_sort::tr1::sort (hpx::parallel::seq, A.begin() , A.end(), comp );
     finish = now() ;
     duracion = subtract_time(finish ,start) ;
     cout<<duracion<<" secs\n\n";
@@ -221,7 +226,7 @@ int Prueba  ( std::vector <IA> & B , compare comp )
     //cout<<"--------------------- HPX stable sort ---------------\n";
     cout<<"HPX  stable_sort             : ";
     start= now() ;
-    hpx_sort::stable_sort (hpx::parallel::v1::seq,A.begin() , A.end(), comp  );
+    hpx_sort::tr1::stable_sort (hpx::parallel::seq,A.begin() , A.end(), comp  );
     finish = now() ;
     duracion = subtract_time(finish ,start) ;
     cout<<duracion<<" secs\n\n";
@@ -237,14 +242,25 @@ int Prueba  ( std::vector <IA> & B , compare comp )
     cout<<duracion<<" secs\n";
 
     A = B ;
+    //---------------------  HPX tr1 parallel_sort -------------------
+    cout<<"HPX tr1::parallel_sort       : ";
+    start= now() ;
+    //bs_algo::indirect_parallel_sort (A.begin() , A.end() );
+    hpx_sort::tr1::sort (hpx::parallel::par, A.begin() , A.end(), comp );
+    finish = now() ;
+    duracion = subtract_time(finish ,start) ;
+    cout<<duracion<<" secs\n";
+
+    A = B ;
     //---------------------  HPX parallel_sort -------------------
     cout<<"HPX parallel_sort            : ";
     start= now() ;
     //bs_algo::indirect_parallel_sort (A.begin() , A.end() );
-    hpx_sort::sort (hpx::parallel::v1::par, A.begin() , A.end(), comp );
+    hpx_sort::sort (hpx::parallel::par, A.begin() , A.end(), comp );
     finish = now() ;
     duracion = subtract_time(finish ,start) ;
     cout<<duracion<<" secs\n\n";
+
 
     A = B ;
     //--------------------- tbb lowlevel parallel_stable_sort ------------
@@ -259,7 +275,7 @@ int Prueba  ( std::vector <IA> & B , compare comp )
     //---------------------  HPX parallel_stable_sort ------------
     cout<<"HPX parallel stable sort     : ";
     start= now() ;
-    hpx_sort::stable_sort (hpx::parallel::v1::par,A.begin() , A.end() , comp);
+    hpx_sort::tr1::stable_sort (hpx::parallel::par,A.begin() , A.end() , comp);
     finish = now() ;
     duracion = subtract_time(finish ,start) ;
     cout<<duracion<<" secs\n";
@@ -269,7 +285,7 @@ int Prueba  ( std::vector <IA> & B , compare comp )
     cout<<"HPX sample sort              : ";
     start= now() ;
     //bs_algo::indirect_sample_sort (A.begin() , A.end() ,NThread() );
-    hpx_sort::sample_sort (hpx::parallel::v1::par,A.begin() , A.end(), comp );
+    hpx_sort::tr1::sample_sort (hpx::parallel::par,A.begin() , A.end(), comp );
     finish = now() ;
     duracion = subtract_time(finish ,start) ;
     cout<<duracion<<" secs\n\n";

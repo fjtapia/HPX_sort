@@ -1,6 +1,0 @@
-var searchData=
-[
-  ['backbone_5ft',['backbone_t',['../structhpx_1_1parallel_1_1sort_1_1detail_1_1bis_1_1merge__blocks.html#af440653ddcdd326f243b05125109b30d',1,'hpx::parallel::sort::detail::bis::merge_blocks::backbone_t()'],['../structhpx_1_1parallel_1_1sort_1_1detail_1_1bis_1_1move__blocks.html#a707d0f8bae357cffc526d74fbbf3433e',1,'hpx::parallel::sort::detail::bis::move_blocks::backbone_t()'],['../structhpx_1_1parallel_1_1sort_1_1detail_1_1bis_1_1parallel__sort.html#a134b3f346af21421121146762ae64aa0',1,'hpx::parallel::sort::detail::bis::parallel_sort::backbone_t()'],['../structhpx_1_1parallel_1_1sort_1_1detail_1_1block__indirect__sort.html#aaf1b0e5ff4480d76a534e8a6aebe7aba',1,'hpx::parallel::sort::detail::block_indirect_sort::backbone_t()']]],
-  ['block_5fpos_5ft',['block_pos_t',['../structhpx_1_1parallel_1_1sort_1_1detail_1_1block__indirect__sort.html#af5709d7a65fcc53f1c574b03f494a4ea',1,'hpx::parallel::sort::detail::block_indirect_sort']]],
-  ['block_5ft',['block_t',['../structhpx_1_1parallel_1_1sort_1_1detail_1_1bis_1_1backbone.html#a62138f240d439ee063afb9fffaa43de5',1,'hpx::parallel::sort::detail::bis::backbone::block_t()'],['../structhpx_1_1parallel_1_1sort_1_1detail_1_1block__indirect__sort.html#af0242733d4af44df03ec0481f687715e',1,'hpx::parallel::sort::detail::block_indirect_sort::block_t()']]]
-];

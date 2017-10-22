@@ -15,13 +15,14 @@
 #include <stdio.h>
 #include <time.h>
 #include <iostream>
-#include <file_vector.hpp>
+#include <hpx/parallel/algorithms/tr1/detail/util/file_vector.hpp>
 #include <vector>
 
 
-using std::cout ;
+using std::cout;
 using std::endl;
-namespace hpx_util = hpx::parallel::sort::detail::util ;
+
+namespace hpx_util = hpx::parallel::tr1::detail::util ;
 
 
 void print_banner() ;

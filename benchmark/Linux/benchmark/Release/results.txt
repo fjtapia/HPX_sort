@@ -1,0 +1,358 @@
+****************************************************************
+**                                                            **
+**         H P X : : P A R A L L E L : : S O R T              **
+**                                                            **
+**                   B E N C H M A R K                        **
+**                                                            **
+****************************************************************
+
+Arquitectura:          x86_64
+modo(s) de operación de las CPUs:32-bit, 64-bit
+Orden de bytes:        Little Endian
+CPU(s):                12
+On-line CPU(s) list:   0-11
+Hilo(s) de procesamiento por núcleo:2
+Núcleo(s) por «socket»:6
+Socket(s):             1
+Modo(s) NUMA:          1
+ID de fabricante:      GenuineIntel
+Familia de CPU:        6
+Modelo:                63
+Model name:            Intel(R) Core(TM) i7-5820K CPU @ 3.30GHz
+Revisión:             2
+CPU MHz:               1392.791
+CPU max MHz:           3600,0000
+CPU min MHz:           1200,0000
+BogoMIPS:              6599.92
+Virtualización:       VT-x
+Caché L1d:            32K
+Caché L1i:            32K
+Caché L2:             256K
+Caché L3:             15360K
+NUMA node0 CPU(s):     0-11
+Flags:                 fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm intel_ppin tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid cqm xsaveopt cqm_llc cqm_occup_llc dtherm ida arat pln pts
+
+  100000000 uint64_t elements already sorted
+=================================================
+GCC std::sort                : 2.60241 secs
+HPX sort                     : 0.087891 secs
+
+GCC std::stable_sort         : 5.28991 secs
+HPX  stable_sort             : 0.0691075 secs
+
+TBB parallel_sort            : 0.037605 secs
+HPX tr1::parallel_sort       : 0.0749623 secs
+HPX parallel_sort            : 0.0647351 secs
+
+TBB parallel stable sort     : 0.706968 secs
+HPX parallel stable sort     : 0.0838772 secs
+HPX sample sort              : 0.0702617 secs
+
+
+  100000000 uint64_t elements randomly filled
+=================================================
+GCC std::sort                : 9.02531 secs
+HPX sort                     : 8.68727 secs
+
+GCC std::stable_sort         : 8.98621 secs
+HPX  stable_sort             : 9.02838 secs
+
+TBB parallel_sort            : 1.763 secs
+HPX tr1::parallel_sort       : 1.09071 secs
+HPX parallel_sort            : 1.55907 secs
+
+TBB parallel stable sort     : 2.07174 secs
+HPX parallel stable sort     : 2.41496 secs
+HPX sample sort              : 1.97174 secs
+
+
+  10000000 strings randomly filled
+===============================================
+GCC std::sort                : 7.44621 secs
+HPX sort                     : 7.92181 secs
+
+GCC std::stable_sort         : 13.3771 secs
+HPX  stable_sort             : 9.19583 secs
+
+TBB parallel_sort            : 2.13058 secs
+HPX tr1::parallel_sort       : 1.33244 secs
+HPX parallel_sort            : 2.59292 secs
+
+TBB parallel stable sort     : 2.34349 secs
+HPX parallel stable sort     : 3.12607 secs
+HPX sample sort              : 2.48383 secs
+
+
+================================================================
+=                OBJECT COMPARISON                             =
+=              ---------------------                           =
+=                                                              =
+= The objects are arrays of 64 bits numbers                    =
+= They are compared in two ways :                              =
+=    (H) Heavy : The comparison is the sum of all the numbers  =
+=                of the array                                  =
+=    (L) Light : The comparison is with the first element of   =
+=                the array, as a key                           =
+=                                                              =
+================================================================
+
+
+100000000 elements of size 8 randomly filled 
+=============================================
+
+  H E A V Y   C O M P A R I S O N
+====================================
+GCC std::sort                : 9.05719 secs
+HPX sort                     : 8.91211 secs
+
+GCC std::stable_sort         : 10.9941 secs
+HPX  stable_sort             : 9.12832 secs
+
+TBB parallel_sort            : 1.84943 secs
+HPX tr1::parallel_sort       : 1.49937 secs
+HPX parallel_sort            : 1.5884 secs
+
+TBB parallel stable sort     : 2.26178 secs
+HPX parallel stable sort     : 2.52649 secs
+HPX sample sort              : 2.0419 secs
+
+
+  L I G H T   C O M P A R I S O N 
+=======================================
+GCC std::sort                : 9.60662 secs
+HPX sort                     : 8.95858 secs
+
+GCC std::stable_sort         : 11.1955 secs
+HPX  stable_sort             : 9.2155 secs
+
+TBB parallel_sort            : 1.82679 secs
+HPX tr1::parallel_sort       : 1.11486 secs
+HPX parallel_sort            : 1.65892 secs
+
+TBB parallel stable sort     : 2.17865 secs
+HPX parallel stable sort     : 2.52737 secs
+HPX sample sort              : 2.02748 secs
+
+
+50000000 elements of size 16 randomly filled 
+=============================================
+
+  H E A V Y   C O M P A R I S O N
+====================================
+GCC std::sort                : 5.16509 secs
+HPX sort                     : 4.88129 secs
+
+GCC std::stable_sort         : 6.08995 secs
+HPX  stable_sort             : 5.5444 secs
+
+TBB parallel_sort            : 0.973186 secs
+HPX tr1::parallel_sort       : 0.686343 secs
+HPX parallel_sort            : 0.984494 secs
+
+TBB parallel stable sort     : 1.4443 secs
+HPX parallel stable sort     : 1.53522 secs
+HPX sample sort              : 1.39987 secs
+
+
+  L I G H T   C O M P A R I S O N 
+=======================================
+GCC std::sort                : 5.01757 secs
+HPX sort                     : 4.6719 secs
+
+GCC std::stable_sort         : 5.72705 secs
+HPX  stable_sort             : 4.97378 secs
+
+TBB parallel_sort            : 0.927114 secs
+HPX tr1::parallel_sort       : 0.644089 secs
+HPX parallel_sort            : 0.823175 secs
+
+TBB parallel stable sort     : 1.32537 secs
+HPX parallel stable sort     : 1.30084 secs
+HPX sample sort              : 1.14904 secs
+
+
+25000000 elements of size 32 randomly filled 
+=============================================
+
+  H E A V Y   C O M P A R I S O N
+====================================
+GCC std::sort                : 3.23151 secs
+HPX sort                     : 2.96121 secs
+
+GCC std::stable_sort         : 4.05332 secs
+HPX  stable_sort             : 3.4457 secs
+
+TBB parallel_sort            : 0.661461 secs
+HPX tr1::parallel_sort       : 0.515677 secs
+HPX parallel_sort            : 0.618428 secs
+
+TBB parallel stable sort     : 1.00107 secs
+HPX parallel stable sort     : 1.09945 secs
+HPX sample sort              : 0.901703 secs
+
+
+  L I G H T   C O M P A R I S O N 
+=======================================
+GCC std::sort                : 2.81681 secs
+HPX sort                     : 2.58426 secs
+
+GCC std::stable_sort         : 3.60017 secs
+HPX  stable_sort             : 2.7965 secs
+
+TBB parallel_sort            : 0.533744 secs
+HPX tr1::parallel_sort       : 0.494393 secs
+HPX parallel_sort            : 0.583845 secs
+
+TBB parallel stable sort     : 0.874329 secs
+HPX parallel stable sort     : 0.920968 secs
+HPX sample sort              : 0.7335 secs
+
+
+12500000 elements of size 64 randomly filled 
+=============================================
+
+  H E A V Y   C O M P A R I S O N
+====================================
+GCC std::sort                : 2.47829 secs
+HPX sort                     : 2.22867 secs
+
+GCC std::stable_sort         : 3.27704 secs
+HPX  stable_sort             : 2.72488 secs
+
+TBB parallel_sort            : 0.619403 secs
+HPX tr1::parallel_sort       : 0.469134 secs
+HPX parallel_sort            : 0.555556 secs
+
+TBB parallel stable sort     : 0.845072 secs
+HPX parallel stable sort     : 0.919527 secs
+HPX sample sort              : 0.792887 secs
+
+
+  L I G H T   C O M P A R I S O N 
+=======================================
+GCC std::sort                : 1.79291 secs
+HPX sort                     : 1.65653 secs
+
+GCC std::stable_sort         : 2.81221 secs
+HPX  stable_sort             : 2.165 secs
+
+TBB parallel_sort            : 0.499499 secs
+HPX tr1::parallel_sort       : 0.431813 secs
+HPX parallel_sort            : 0.474852 secs
+
+TBB parallel stable sort     : 0.778591 secs
+HPX parallel stable sort     : 0.830544 secs
+HPX sample sort              : 0.685677 secs
+
+
+6250000 elements of size 128 randomly filled 
+=============================================
+
+  H E A V Y   C O M P A R I S O N
+====================================
+GCC std::sort                : 2.09258 secs
+HPX sort                     : 1.83383 secs
+
+GCC std::stable_sort         : 2.83864 secs
+HPX  stable_sort             : 2.22892 secs
+
+TBB parallel_sort            : 0.534752 secs
+HPX tr1::parallel_sort       : 0.433769 secs
+HPX parallel_sort            : 0.487857 secs
+
+TBB parallel stable sort     : 0.817399 secs
+HPX parallel stable sort     : 0.849965 secs
+HPX sample sort              : 0.736171 secs
+
+
+  L I G H T   C O M P A R I S O N 
+=======================================
+GCC std::sort                : 1.45487 secs
+HPX sort                     : 1.42989 secs
+
+GCC std::stable_sort         : 2.61524 secs
+HPX  stable_sort             : 1.8462 secs
+
+TBB parallel_sort            : 0.471152 secs
+HPX tr1::parallel_sort       : 0.3896 secs
+HPX parallel_sort            : 0.435696 secs
+
+TBB parallel stable sort     : 0.73162 secs
+HPX parallel stable sort     : 0.787419 secs
+HPX sample sort              : 0.63329 secs
+
+
+3125000 elements of size 256 randomly filled 
+=============================================
+
+  H E A V Y   C O M P A R I S O N
+====================================
+GCC std::sort                : 1.47963 secs
+HPX sort                     : 1.46861 secs
+
+GCC std::stable_sort         : 2.49858 secs
+HPX  stable_sort             : 1.90743 secs
+
+TBB parallel_sort            : 0.439718 secs
+HPX tr1::parallel_sort       : 0.394152 secs
+HPX parallel_sort            : 0.450641 secs
+
+TBB parallel stable sort     : 0.760943 secs
+HPX parallel stable sort     : 0.799024 secs
+HPX sample sort              : 0.64447 secs
+
+
+  L I G H T   C O M P A R I S O N 
+=======================================
+GCC std::sort                : 1.04243 secs
+HPX sort                     : 1.05095 secs
+
+GCC std::stable_sort         : 2.4425 secs
+HPX  stable_sort             : 1.6778 secs
+
+TBB parallel_sort            : 0.370537 secs
+HPX tr1::parallel_sort       : 0.359533 secs
+HPX parallel_sort            : 0.417489 secs
+
+TBB parallel stable sort     : 0.734163 secs
+HPX parallel stable sort     : 0.725782 secs
+HPX sample sort              : 0.664722 secs
+
+
+1562500 elements of size 512 randomly filled 
+=============================================
+
+  H E A V Y   C O M P A R I S O N
+====================================
+GCC std::sort                : 2.25914 secs
+HPX sort                     : 2.21181 secs
+
+GCC std::stable_sort         : 2.69855 secs
+HPX  stable_sort             : 2.29027 secs
+
+TBB parallel_sort            : 0.547796 secs
+HPX tr1::parallel_sort       : 0.444853 secs
+HPX parallel_sort            : 0.600206 secs
+
+TBB parallel stable sort     : 0.801792 secs
+HPX parallel stable sort     : 0.882202 secs
+HPX sample sort              : 0.724445 secs
+
+
+  L I G H T   C O M P A R I S O N 
+=======================================
+GCC std::sort                : 1.01165 secs
+HPX sort                     : 0.940796 secs
+
+GCC std::stable_sort         : 2.50147 secs
+HPX  stable_sort             : 1.68217 secs
+
+TBB parallel_sort            : 0.364049 secs
+HPX tr1::parallel_sort       : 0.343097 secs
+HPX parallel_sort            : 0.391673 secs
+
+TBB parallel stable sort     : 0.684558 secs
+HPX parallel stable sort     : 0.744336 secs
+HPX sample sort              : 0.611427 secs
+
+

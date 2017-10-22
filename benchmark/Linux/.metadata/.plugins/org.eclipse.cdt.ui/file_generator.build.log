@@ -1,0 +1,28 @@
+11:50:35 **** Build of configuration Debug for project file_generator ****
+make all 
+Building file: /home/francisco/Code/HPX_sort/benchmark/Linux/file_generator.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I/home/francisco/Code/HPX_sort/benchmark/include -I/home/francisco/Code/HPX_sort/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"file_generator.d" -MT"file_generator.d" -o "file_generator.o" "/home/francisco/Code/HPX_sort/benchmark/Linux/file_generator.cpp"
+In file included from /home/francisco/Code/HPX_sort/benchmark/Linux/file_generator.cpp:18:0:
+/home/francisco/Code/HPX_sort/include/hpx/parallel/algorithms/tr1/detail/util/file_vector.hpp:191:12: warning: ‘int hpx::parallel::tr1::detail::util::write_file_string(const std::vector<std::__cxx11::basic_string<char> >&, const string&)’ defined but not used [-Wunused-function]
+ static int write_file_string (const std::vector<std::string> & V,
+            ^~~~~~~~~~~~~~~~~
+/home/francisco/Code/HPX_sort/include/hpx/parallel/algorithms/tr1/detail/util/file_vector.hpp:146:12: warning: ‘int hpx::parallel::tr1::detail::util::fill_vector_string(const string&, std::vector<std::__cxx11::basic_string<char> >&, size_t)’ defined but not used [-Wunused-function]
+ static int fill_vector_string (const std::string & filename,
+            ^~~~~~~~~~~~~~~~~~
+/home/francisco/Code/HPX_sort/include/hpx/parallel/algorithms/tr1/detail/util/file_vector.hpp:117:12: warning: ‘int hpx::parallel::tr1::detail::util::write_file_uint64(const std::vector<long unsigned int>&, const string&)’ defined but not used [-Wunused-function]
+ static int write_file_uint64 (const std::vector<uint64_t> & V,
+            ^~~~~~~~~~~~~~~~~
+/home/francisco/Code/HPX_sort/include/hpx/parallel/algorithms/tr1/detail/util/file_vector.hpp:75:12: warning: ‘int hpx::parallel::tr1::detail::util::fill_vector_uint64(const string&, std::vector<long unsigned int>&, size_t)’ defined but not used [-Wunused-function]
+ static int fill_vector_uint64(const std::string & filename,
+            ^~~~~~~~~~~~~~~~~~
+Finished building: /home/francisco/Code/HPX_sort/benchmark/Linux/file_generator.cpp
+ 
+Building target: file_generator
+Invoking: GCC C++ Linker
+g++ -L/usr/local/lib -o "file_generator"  ./file_generator.o   -ldl -lhpx
+Finished building target: file_generator
+ 
+
+11:50:36 Build Finished (took 678ms)
+

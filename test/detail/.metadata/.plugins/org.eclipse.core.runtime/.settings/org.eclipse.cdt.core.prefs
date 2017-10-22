@@ -1,0 +1,4 @@
+eclipse.preferences.version=1
+indexer/indexerId=org.eclipse.cdt.core.nullindexer
+indexer/updatePolicy=0
+org.eclipse.cdt.core.showSourceRootsAtTopLevelOfProject=true
